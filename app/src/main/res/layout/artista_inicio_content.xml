@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/artista_inicio_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.appshow.showup.activitys.ArtistaInicioActivity"
+    tools:showIn="@layout/artista_inicio_app_bar">
+
+    <!--<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.3">
+
+                <RelativeLayout
+                    android:id="@+id/artista_inicio_content_relativeLayout_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/artista_inicio_content_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/temp_evento1"
+                        android:scaleType="centerCrop"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/artista_inicio_content_textview_tempo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_above="@+id/artista_inicio_content_textview_nome"
+                            android:text="EM 2H"
+                            android:textColor="#ffffff"
+                            android:textSize="10pt"/>
+
+                        <TextView
+                            android:id="@+id/artista_inicio_content_textview_nome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="Vozes das Quintas"
+                            android:textColor="#ffffff"
+                            android:textSize="6pt"/>
+
+                        <Button
+                            android:id="@+id/artista_inicio_content_button"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/seta_maior" />
+
+                    </RelativeLayout>
+
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.6">
+
+                <org.lucasr.twowayview.TwoWayView
+                    android:id="@+id/artista_inicio_content_twoWayView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TwoWayView"
+                    android:drawSelectorOnTop="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/artista_inicio_content_tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabPaddingStart="26dp"
+                    app:tabPaddingEnd="26dp"
+                    app:tabIndicatorHeight="1dp"
+                    app:tabMode="scrollable"
+                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/artista_inicio_content_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    <!--</ScrollView>-->
+</LinearLayout>

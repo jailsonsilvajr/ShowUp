@@ -24,6 +24,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import br.com.appshow.showup.entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import org.lucasr.twowayview.TwoWayView;
@@ -47,6 +49,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
     private EventosProximos eventosProximos;
     private EventosBuscados eventosBuscados;
     private Artista artista;
+    private Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,10 @@ public class ArtistaInicioActivity extends AppCompatActivity
 
         getSupportActionBar().setTitle("INÍCIO");
 
+        Intent intent = getIntent();
+        this.user = intent.getParcelableExtra("paramsUsuario");
+        this.artista = user.getArtista();
+
         //----------------------------------------------------------------------------//
 
         //--(1) Fazer consulta(as) ao banco de dados para popular eventosIndicados, eventosProximos, eventosBuscados e artista:
@@ -74,7 +81,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
         this.eventosIndicados = new EventosIndicados(popularEventos());
         this.eventosProximos = new EventosProximos(popularEventos());
         this.eventosBuscados = new EventosBuscados(popularEventos());
-        this.artista = new Artista("Joey Tribbiani");
+        //this.artista = new Artista("Joey Tribbiani");
         //--Fim de (1)
 
         //--(2) Configurando a TwoWayView:

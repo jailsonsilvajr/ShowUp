@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_inicio_activity" />
+
+        <ImageView
+            android:id="@+id/login_content_imageview_marca"
+            android:src="@drawable/marca"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+
+            android:id="@+id/login_content_textview_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_content_imageview_marca"
+            android:hint="Email"
+            android:textColorHint="@color/textColorPrimary"
+            android:textColor="@color/textColorPrimary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:background="@drawable/borda_edittext"/>
+
+        <EditText
+
+            android:id="@+id/login_content_textview_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_content_textview_email"
+            android:hint="Senha"
+            android:textColorHint="@color/textColorPrimary"
+            android:textColor="@color/textColorPrimary"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:background="@drawable/borda_edittext"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <Button
+            android:id="@+id/login_content_button_entrar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorButtonRed"
+            android:text="ENTRAR"
+            android:textColor="@color/textColorSecundary"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+</LinearLayout>

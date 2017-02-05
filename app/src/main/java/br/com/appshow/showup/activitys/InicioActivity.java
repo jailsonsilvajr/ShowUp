@@ -33,7 +33,7 @@ public class InicioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //open_login_activity();
+                open_login_activity();
             }
         });
     }

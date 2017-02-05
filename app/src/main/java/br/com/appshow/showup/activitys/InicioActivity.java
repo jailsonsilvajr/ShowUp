@@ -24,7 +24,7 @@ public class InicioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //open_cadastro_activity();
+                open_cadastro_activity();
             }
         });
 

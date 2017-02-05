@@ -28,6 +28,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.CadastroActivity"
+            android:theme="@style/ThemeNoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.ArtistaInicioActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

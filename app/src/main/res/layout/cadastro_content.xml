@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VOCÊ É:"
+            android:textColor="@color/textColorPrimary"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_edittext"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp">
+
+            <ImageView
+                android:id="@+id/cadastro_content_imageview_artista"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/cadastro_content_image_artista"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ARTISTA"
+                android:textColor="@color/textColorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/cadastro_content_imageview_artista"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_edittext"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp">
+
+            <ImageView
+                android:id="@+id/cadastro_content_imageview_contratante"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/cadastro_content_image_contratante"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONTRATANTE"
+                android:textColor="@color/textColorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/cadastro_content_imageview_contratante"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

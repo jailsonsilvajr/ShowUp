@@ -24,27 +24,27 @@ public class InicioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                open_cadastro_activity();
+                //open_cadastro_activity();
             }
         });
 
         TextView inicio_content_textView_login = (TextView) findViewById(R.id.inicio_content_textView_login);
-        inicio_content_textView_cadastro.setOnClickListener(new View.OnClickListener() {
+        inicio_content_textView_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                open_login_activity();
+                //open_login_activity();
             }
         });
     }
 
-    public void open_login_activity(){
+    public void open_cadastro_activity(){
 
         Intent activity_cadastro = new Intent(this, CadastroActivity.class);
         startActivity(activity_cadastro);
     }
 
-    public void open_cadastro_activity(){
+    public void open_login_activity(){
 
         Intent activity_login = new Intent(this, LoginActivity.class);
         startActivity(activity_login);

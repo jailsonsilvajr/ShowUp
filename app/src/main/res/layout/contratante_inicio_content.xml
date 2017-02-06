@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contratante_inicio_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.appshow.showup.activitys.ContratanteInicioActivity"
+    tools:showIn="@layout/contratante_inicio_app_bar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <RelativeLayout
+                android:id="@+id/contratante_inicio_content_relativeLayout_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/contratante_inicio_content_imageview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/temp_evento1"
+                    android:scaleType="centerCrop"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/contratante_inicio_content_textview_nome_artista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_above="@+id/contratante_inicio_content_textview_estilo_artista"
+                        android:text="BANDA A3"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="10pt"/>
+
+                    <TextView
+                        android:id="@+id/contratante_inicio_content_textview_estilo_artista"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        android:text="Rock'n Roll"
+                        android:textColor="@color/textColorPrimary"
+                        android:textSize="6pt"/>
+
+                    <Button
+                        android:id="@+id/contratante_inicio_content_button"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/seta_maior" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1.3">
+
+            <org.lucasr.twowayview.TwoWayView
+                android:id="@+id/contratante_inicio_content_twoWayView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TwoWayView"
+                android:drawSelectorOnTop="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="26dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/icon_criar_evento"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CRIAR EVENTO"
+                        android:textSize="8pt"
+                        android:textColor="@color/textColorPrimary"
+                        android:layout_centerVertical="true"/>
+
+                    <ImageView
+                        android:id="@+id/contratante_inicio_content_button_criar_evento"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/seta_menor"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/icon_evento_urgente"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EVENTO URGENTE"
+                        android:textSize="8pt"
+                        android:textColor="@color/textColorPrimary"
+                        android:layout_centerVertical="true"/>
+
+                    <ImageView
+                        android:id="@+id/contratante_inicio_content_button_evento_urgente"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/seta_menor"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/icon_meus_eventos"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MEUS EVENTOS"
+                        android:textSize="8pt"
+                        android:textColor="@color/textColorPrimary"
+                        android:layout_centerVertical="true"/>
+
+                    <ImageView
+                        android:id="@+id/contratante_inicio_content_button_meus_eventos"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/seta_menor"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

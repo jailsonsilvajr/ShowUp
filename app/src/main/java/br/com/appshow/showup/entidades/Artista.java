@@ -9,7 +9,9 @@ import android.os.Parcelable;
 
 public class Artista implements Parcelable{
 
+    private String cod;
     private String nome;
+    private String estilo;
 
     public Artista(String nome){
 
@@ -24,8 +26,26 @@ public class Artista implements Parcelable{
         this.nome = nome;
     }
 
+    public String getCod() {
+        return cod;
+    }
+
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
+
+    public String getEstilo() {
+        return estilo;
+    }
+
+    public void setEstilo(String estilo) {
+        this.estilo = estilo;
+    }
+
     protected Artista(Parcel in) {
         nome = in.readString();
+        cod = in.readString();
+        estilo = in.readString();
     }
 
     public static final Creator<Artista> CREATOR = new Creator<Artista>() {
@@ -49,5 +69,7 @@ public class Artista implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nome);
+        dest.writeString(cod);
+        dest.writeString(estilo);
     }
 }

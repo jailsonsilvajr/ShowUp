@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Artista;
+import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Usuario;
 
 /**
@@ -46,17 +47,21 @@ public class LoginActivity extends AppCompatActivity {
         //Mandar email e senha para o banco de dados.
         //O Banco retornar um objeto do tipo Usuario ou null.
         Artista artista = new Artista("Joey Tribbiani"); //Artista para teste!!
-        Usuario user = new Usuario(artista, null);
+        Contratante contratante = new Contratante("Eike Batista");
+        Usuario user = new Usuario(artista, contratante);
         if(user != null){
 
-            if(user.getArtista() != null){
+            //if(user.getArtista() != null){
+            if(getEmail().equals("artista@email.com")){ //Remover esse if depois!!!
 
                 Intent artista_inicial_activity = new Intent(this, ArtistaInicioActivity.class);
                 artista_inicial_activity.putExtra("paramsUsuario", user);
                 startActivity(artista_inicial_activity);
-            }else{
+            }else if(getEmail().equals("contratante@email.com")){ //Remover esse if depois!!!
 
-                //Abrir tela inicial de contratante
+                Intent contratante_inicial_activity = new Intent(this, ContratanteInicioActivity.class);
+                contratante_inicial_activity.putExtra("paramsUsuario", user);
+                startActivity(contratante_inicial_activity);
             }
         }else{
 

@@ -48,16 +48,15 @@ public class LoginActivity extends AppCompatActivity {
         //O Banco retornar um objeto do tipo Usuario ou null.
         Artista artista = new Artista("Joey Tribbiani"); //Artista para teste!!
         Contratante contratante = new Contratante("Eike Batista");
-        Usuario user = new Usuario(artista, contratante);
+        Usuario user = new Usuario(null, contratante);
         if(user != null){
 
-            //if(user.getArtista() != null){
-            if(getEmail().equals("artista@email.com")){ //Remover esse if depois!!!
+            if(user.getArtista() != null){
 
                 Intent artista_inicial_activity = new Intent(this, ArtistaInicioActivity.class);
                 artista_inicial_activity.putExtra("paramsUsuario", user);
                 startActivity(artista_inicial_activity);
-            }else if(getEmail().equals("contratante@email.com")){ //Remover esse if depois!!!
+            } else {
 
                 Intent contratante_inicial_activity = new Intent(this, ContratanteInicioActivity.class);
                 contratante_inicial_activity.putExtra("paramsUsuario", user);

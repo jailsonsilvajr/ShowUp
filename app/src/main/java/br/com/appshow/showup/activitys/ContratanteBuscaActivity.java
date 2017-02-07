@@ -158,9 +158,9 @@ public class ContratanteBuscaActivity extends AppCompatActivity
 
     public void open_activity_resultado_busca(){
 
-        //Intent activity_resultado_busca = new Intent(this, ContratanteResultadoBuscaActivity.class);
-        //activity_resultado_busca.putExtra("paramsContratante", this.contratante);
-        //startActivity(activity_resultado_busca);
+        Intent activity_resultado_busca = new Intent(this, ContratanteResultadoBuscaActivity.class);
+        activity_resultado_busca.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_resultado_busca);
     }
 
     public void open_activity_configuracao(){

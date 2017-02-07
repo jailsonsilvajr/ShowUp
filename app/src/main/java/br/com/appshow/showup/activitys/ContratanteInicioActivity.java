@@ -176,7 +176,12 @@ public class ContratanteInicioActivity extends AppCompatActivity
         startActivity(activity_artista);
     }
 
-    public void open_activity_criar_evento(){}
+    public void open_activity_criar_evento(){
+
+        Intent activity_criar_evento = new Intent(this, ContratanteCriarEventoActivity.class);
+        activity_criar_evento.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_criar_evento);
+    }
 
     public void open_activity_evento_urgente(){}
 

@@ -41,7 +41,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
-            android:background="@drawable/borda_edittext"/>
+            android:background="@drawable/borda_edittext_transparent"/>
 
         <EditText
 
@@ -60,7 +60,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="56dp"
             android:layout_marginRight="56dp"
-            android:background="@drawable/borda_edittext"/>
+            android:background="@drawable/borda_edittext_transparent"/>
 
     </RelativeLayout>
 

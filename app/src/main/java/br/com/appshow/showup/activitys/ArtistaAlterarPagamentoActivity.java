@@ -77,14 +77,19 @@ public class ArtistaAlterarPagamentoActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                open_activity_alterar_conta();
+                open_activity_alterar_pagamento();
             }
         });
     }
 
-    public void open_activity_configuracao(){}
+    public void open_activity_configuracao(){
 
-    public void open_activity_alterar_conta(){}
+        Intent activity_configura = new Intent(this, ArtistaConfiguracoesActivity.class);
+        activity_configura.putExtra("paramsArtista", this.artista);
+        startActivity(activity_configura);
+    }
+
+    public void open_activity_alterar_pagamento(){}
 
     @Override
     public void onBackPressed() {

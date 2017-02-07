@@ -67,7 +67,7 @@ public class ContratanteContaActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                open_activity_conta();
+                open_activity_configuracao();
             }
         });
         //--Fim de (1)
@@ -116,9 +116,19 @@ public class ContratanteContaActivity extends AppCompatActivity
         Toast.makeText(this, "Assinatura Cancelada", Toast.LENGTH_SHORT).show();
     }
 
-    public void open_activity_alterar_pagamento(){}
+    public void open_activity_alterar_pagamento(){
 
-    public void open_activity_conta(){}
+        Intent activity_alterar_pagamento = new Intent(this, ContratanteAlterarPagamentoActivity.class);
+        activity_alterar_pagamento.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_alterar_pagamento);
+    }
+
+    public void open_activity_configuracao(){
+
+        Intent activity_configuracoes = new Intent(this, ContratanteConfiguracoesActivity.class);
+        activity_configuracoes.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_configuracoes);
+    }
 
     @Override
     public void onBackPressed() {

@@ -58,6 +58,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.ContratanteAlterarPagamentoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.LoginActivity"
             android:theme="@style/ThemeNoActionBar">
         </activity>

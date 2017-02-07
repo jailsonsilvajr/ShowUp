@@ -198,9 +198,9 @@ public class ContratanteInicioActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.contratante_inicio_menu_action_buscar) {
 
-            //Intent activity_busca = new Intent(this, ArtistaBuscaActivity.class);
-            //activity_busca.putExtra("paramsArtista", this.artista);
-            //startActivity(activity_busca);
+            Intent activity_busca = new Intent(this, ContratanteBuscaActivity.class);
+            activity_busca.putExtra("paramsContratante", this.contratante);
+            startActivity(activity_busca);
             return true;
         } if (id == R.id.contratante_inicio_drawer_menu_nav_pagina_inicial) {
             return true;

@@ -28,6 +28,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.ContratanteBuscaActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.LoginActivity"
             android:theme="@style/ThemeNoActionBar">
         </activity>

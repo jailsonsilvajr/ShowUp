@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/artista_busca_content"
+    android:id="@+id/contratante_busca_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.com.appshow.showup.activitys.ArtistaBuscaActivity"
-    tools:showIn="@layout/artista_busca_app_bar">
+    tools:context="br.com.appshow.showup.activitys.ContratanteBuscaActivity"
+    tools:showIn="@layout/contratante_busca_app_bar">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ENCONTRE EVENTOS"
+                android:text="ENCONTRE ARTISTAS"
                 android:textColor="@color/textColorPrimary"
                 android:textSize="18dp"/>
 
@@ -44,7 +44,7 @@
                 android:background="@drawable/busca_background_spinner">
 
                 <Spinner
-                    android:id="@+id/artista_busca_content_spinner_cidade"
+                    android:id="@+id/contratante_busca_content_spinner_cidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Faixa de Pagamento:"
+                android:text="Gênero:"
                 android:textColor="@color/textColorPrimary"/>
 
             <RelativeLayout
@@ -78,7 +78,7 @@
                 android:background="@drawable/busca_background_spinner">
 
                 <Spinner
-                    android:id="@+id/artista_busca_content_spinner_pagamento"
+                    android:id="@+id/contratante_busca_content_spinner_genero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -104,20 +104,20 @@
                 android:layout_marginTop="20dp">
 
                 <TextView
-                    android:id="@+id/artista_busca_content_textview_data"
+                    android:id="@+id/contratante_busca_content_textview_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Data:"
                     android:textColor="@color/textColorPrimary"/>
 
                 <DatePicker
-                    android:id="@+id/artista_busca_content_datepicker"
+                    android:id="@+id/contratante_busca_content_datepicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:datePickerMode="spinner"
                     android:calendarViewShown="false"
-                    android:layout_below="@+id/artista_busca_content_textview_data">
+                    android:layout_below="@+id/contratante_busca_content_textview_data">
 
                 </DatePicker>
             </RelativeLayout>
@@ -129,7 +129,7 @@
             android:layout_weight="8">
 
             <Button
-                android:id="@+id/artista_busca_content_button"
+                android:id="@+id/contratante_busca_content_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorButtonBlue"

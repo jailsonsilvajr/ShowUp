@@ -163,7 +163,13 @@ public class ContratanteInicioActivity extends AppCompatActivity
 
     public void open_activity_configuracao(){}
 
-    public void open_activity_artista(int position){}
+    public void open_activity_artista(int position){
+
+        Intent activity_artista = new Intent(this, ContratanteArtistaActivity.class);
+        activity_artista.putExtra("paramsContratante", this.contratante);
+        activity_artista.putExtra("paramsArtista", this.artistasProximos.getArtistaByIndex(position));
+        startActivity(activity_artista);
+    }
 
     public void open_activity_criar_evento(){}
 
@@ -328,6 +334,26 @@ public class ContratanteInicioActivity extends AppCompatActivity
         artista7.setEstilo("estilo7");
         artista8.setEstilo("estilo8");
         artista9.setEstilo("estilo9");
+
+        artista1.setSite("www.artista1.net");
+        artista2.setSite("www.artista2.net");
+        artista3.setSite("www.artista3.net");
+        artista4.setSite("www.artista4.net");
+        artista5.setSite("www.artista5.net");
+        artista6.setSite("www.artista6.net");
+        artista7.setSite("www.artista7.net");
+        artista8.setSite("www.artista8.net");
+        artista9.setSite("www.artista9.net");
+
+        artista1.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista2.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista3.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista4.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista5.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista6.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista7.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista8.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
+        artista9.setDescricao("Descrição"+"\n"+"Descrição"+"\n"+"Descrição.");
 
         array.add(artista1);
         array.add(artista2);

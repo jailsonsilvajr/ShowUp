@@ -12,6 +12,8 @@ public class Artista implements Parcelable{
     private String cod;
     private String nome;
     private String estilo;
+    private String site;
+    private String descricao;
 
     public Artista(String nome){
 
@@ -42,10 +44,28 @@ public class Artista implements Parcelable{
         this.estilo = estilo;
     }
 
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     protected Artista(Parcel in) {
         nome = in.readString();
         cod = in.readString();
         estilo = in.readString();
+        site = in.readString();
+        descricao = in.readString();
     }
 
     public static final Creator<Artista> CREATOR = new Creator<Artista>() {
@@ -71,5 +91,7 @@ public class Artista implements Parcelable{
         dest.writeString(nome);
         dest.writeString(cod);
         dest.writeString(estilo);
+        dest.writeString(site);
+        dest.writeString(descricao);
     }
 }

@@ -89,7 +89,12 @@ public class ContratanteConfiguracoesActivity extends AppCompatActivity
         startActivity(activity_configuracoes);
     }
 
-    public void open_activity_conta(){}
+    public void open_activity_conta(){
+
+        Intent activity_conta = new Intent(this, ContratanteContaActivity.class);
+        activity_conta.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_conta);
+    }
 
     @Override
     public void onBackPressed() {

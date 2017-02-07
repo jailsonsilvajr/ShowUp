@@ -66,7 +66,7 @@ public class ContratanteArtistaActivity extends AppCompatActivity
 
         contratante_artista_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
         contratante_artista_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
-        contratante_artista_nav_header_textview_nome.setText(this.artista.getNome());
+        contratante_artista_nav_header_textview_nome.setText(this.contratante.getNome());
         contratante_artista_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +103,12 @@ public class ContratanteArtistaActivity extends AppCompatActivity
 
     public void contatar(){}
 
-    public void open_activity_configuracao(){}
+    public void open_activity_configuracao(){
+
+        Intent activity_configuracoes = new Intent(this, ContratanteConfiguracoesActivity.class);
+        activity_configuracoes.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_configuracoes);
+    }
 
     @Override
     public void onBackPressed() {

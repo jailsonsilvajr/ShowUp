@@ -100,9 +100,9 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
 
     public void open_activity_configuracao(){
 
-        //Intent activity_configuracoes = new Intent(this, ContratanteConfiguracoesActivity.class);
-        //activity_configuracoes.putExtra("paramsContratante", this.contratante);
-        //startActivity(activity_configuracoes);
+        Intent activity_configuracoes = new Intent(this, ContratanteConfiguracoesActivity.class);
+        activity_configuracoes.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_configuracoes);
     }
 
     public void open_activity_artista(int position){

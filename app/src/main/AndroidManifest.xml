@@ -46,6 +46,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.ContratanteConfiguracoesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.LoginActivity"
             android:theme="@style/ThemeNoActionBar">
         </activity>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contratante_alterar_perfil_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.appshow.showup.activitys.ContratanteAlterarPerfilActivity"
+    tools:showIn="@layout/contratante_alterar_perfil_app_bar"
+    android:background="@color/colorPrimaryDark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.8">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contratante_alterar_perfil_image_perfil"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/temp_foto_perfil"/>
+
+        <TextView
+            android:id="@+id/contratante_alterar_perfil_textview_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Alterar Foto"
+            android:textColor="@color/textColorSecundary"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_nome"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_email"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="E-mail"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_cpf_cnpj"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CPF/CNPJ"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_cep"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CEP"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_nascimento"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Data de Nascimento"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_celular"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número do Celular"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.1">
+
+        <Button
+            android:id="@+id/contratante_alterar_perfil_content_button_alterar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorButtonRed"
+            android:text="ALTERAR"
+            android:textColor="@color/textColorSecundary"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+</LinearLayout>

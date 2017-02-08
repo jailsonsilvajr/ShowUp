@@ -95,7 +95,21 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
                 open_activity_configuracao();
             }
         });
+        contratante_meus_eventos_nav_header_image_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                open_activity_alterar_perfil();
+            }
+        });
         //--Fim de (2)
+    }
+
+    public void open_activity_alterar_perfil(){
+
+        Intent activity_alterar_perfil = new Intent(this, ContratanteAlterarPerfilActivity.class);
+        activity_alterar_perfil.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_alterar_perfil);
     }
 
     public void open_activity_evento(int position){

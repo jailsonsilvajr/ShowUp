@@ -185,7 +185,12 @@ public class ContratanteInicioActivity extends AppCompatActivity
 
     public void open_activity_evento_urgente(){}
 
-    public void open_activity_meus_eventos(){}
+    public void open_activity_meus_eventos(){
+
+        Intent activity_meus_eventos = new Intent(this, ContratanteMeusEventosActivity.class);
+        activity_meus_eventos.putExtra("paramsContratante", this.contratante);
+        startActivity(activity_meus_eventos);
+    }
 
     @Override
     public void onBackPressed() {

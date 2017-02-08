@@ -76,6 +76,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.ContratanteMeusEventosActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.LoginActivity"
             android:theme="@style/ThemeNoActionBar">
         </activity>

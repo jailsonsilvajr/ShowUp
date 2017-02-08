@@ -70,6 +70,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.ContratanteFavoritosActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.LoginActivity"
             android:theme="@style/ThemeNoActionBar">
         </activity>

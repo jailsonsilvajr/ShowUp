@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,33 +30,33 @@ import br.com.appshow.showup.entidades.Contratante;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by jailson on 07/02/17.
+ * Created by jailson on 08/02/17.
  */
 
-public class ContratanteResultadoBuscaActivity extends AppCompatActivity
+public class ContratanteFavoritosActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Contratante contratante;
-    private ArrayList<Artista> artistasEncontrados;
+    private ArrayList<Artista> artistasFavoritos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contratante_resultado_busca_activity);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.contratante_resultado_busca_toolbar);
+        setContentView(R.layout.contratante_favoritos_activity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.contratante_favoritos_toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_resultado_busca_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_favoritos_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.contratante_resultado_busca_nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.contratante_favoritos_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportActionBar().setTitle("DESCUBRA");
+        getSupportActionBar().setTitle("FAVORITOS");
 
         Intent intent = getIntent();
         this.contratante = intent.getParcelableExtra("paramsContratante");
@@ -63,8 +64,8 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
         //----------------------------------------------------------------------------//
 
         //--(1) Configurando listview de artistas:
-        ListView contratante_resultado_busca_content_listview_artista = (ListView) findViewById(R.id.contratante_resultado_busca_content_listview_artista);
-        contratante_resultado_busca_content_listview_artista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView contratante_favoritos_content_listview_artista = (ListView) findViewById(R.id.contratante_favoritos_content_listview_artista);
+        contratante_favoritos_content_listview_artista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -72,22 +73,22 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
             }
         });
 
-        this.artistasEncontrados = popularArtistas();//Metodo TEMPORÁRIO!!!
-        AdapterList adapterList = new AdapterList(this, this.artistasEncontrados);
-        contratante_resultado_busca_content_listview_artista.setAdapter(adapterList);
+        this.artistasFavoritos = popularArtistas();//Metodo TEMPORÁRIO!!!
+        AdapterList adapterList = new AdapterList(this, this.artistasFavoritos);
+        contratante_favoritos_content_listview_artista.setAdapter(adapterList);
         //--Fim de (1)
 
         //--(2) Configurando menu lateral:
         View hView =  navigationView.getHeaderView(0);
-        ImageView contratante_resultado_busca_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_resultado_busca_nav_header_image_background);
-        Button contratante_resultado_busca_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_resultado_busca_nav_header_button_configuracao);
-        CircleImageView contratante_resultado_busca_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_resultado_busca_nav_header_image_perfil);
-        TextView contratante_resultado_busca_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_resultado_busca_nav_header_textview_nome);
+        ImageView contratante_favoritos_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_favoritos_nav_header_image_background);
+        Button contratante_favoritos_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_favoritos_nav_header_button_configuracao);
+        CircleImageView contratante_favoritos_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_favoritos_nav_header_image_perfil);
+        TextView contratante_favoritos_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_favoritos_nav_header_textview_nome);
 
-        contratante_resultado_busca_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        contratante_resultado_busca_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
-        contratante_resultado_busca_nav_header_textview_nome.setText(this.contratante.getNome());
-        contratante_resultado_busca_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
+        contratante_favoritos_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
+        contratante_favoritos_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
+        contratante_favoritos_nav_header_textview_nome.setText(this.contratante.getNome());
+        contratante_favoritos_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -95,7 +96,14 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
             }
         });
         //--Fim de (2)
+    }
 
+    public void open_activity_artista(int position){
+
+        Intent activity_artista = new Intent(this, ContratanteArtistaActivity.class);
+        activity_artista.putExtra("paramsContratante", this.contratante);
+        activity_artista.putExtra("paramsArtista", this.artistasFavoritos.get(position));
+        startActivity(activity_artista);
     }
 
     public void open_activity_configuracao(){
@@ -105,17 +113,9 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
         startActivity(activity_configuracoes);
     }
 
-    public void open_activity_artista(int position){
-
-        Intent activity_artista = new Intent(this, ContratanteArtistaActivity.class);
-        activity_artista.putExtra("paramsContratante", this.contratante);
-        activity_artista.putExtra("paramsArtista", this.artistasEncontrados.get(position));
-        startActivity(activity_artista);
-    }
-
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_resultado_busca_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_favoritos_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -137,15 +137,15 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.contratante_resultado_busca_drawer_menu_nav_pagina_inicial) {
+        if (id == R.id.contratante_favoritos_drawer_menu_nav_pagina_inicial) {
             return true;
-        } if (id == R.id.contratante_resultado_busca_drawer_menu_nav_mensagens) {
+        } if (id == R.id.contratante_favoritos_drawer_menu_nav_mensagens) {
             return true;
-        } if (id == R.id.contratante_resultado_busca_drawer_menu_nav_eventos) {
+        } if (id == R.id.contratante_favoritos_drawer_menu_nav_eventos) {
             return true;
-        } if (id == R.id.contratante_resultado_busca_drawer_menu_nav_favoritos) {
+        } if (id == R.id.contratante_favoritos_drawer_menu_nav_favoritos) {
             return true;
-        } if (id == R.id.contratante_resultado_busca_drawer_menu_nav_sair) {
+        } if (id == R.id.contratante_favoritos_drawer_menu_nav_sair) {
             this.finish();
             return true;
         }
@@ -159,22 +159,19 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.contratante_resultado_busca_drawer_menu_nav_pagina_inicial) {
+        if (id == R.id.contratante_favoritos_drawer_menu_nav_pagina_inicial) {
 
-        } else if (id == R.id.contratante_resultado_busca_drawer_menu_nav_mensagens) {
+        } else if (id == R.id.contratante_favoritos_drawer_menu_nav_mensagens) {
 
-        } else if (id == R.id.contratante_resultado_busca_drawer_menu_nav_eventos) {
+        } else if (id == R.id.contratante_favoritos_drawer_menu_nav_eventos) {
 
-        } else if (id == R.id.contratante_resultado_busca_drawer_menu_nav_favoritos) {
+        } else if (id == R.id.contratante_favoritos_drawer_menu_nav_favoritos) {
 
-            Intent activity_favoritos = new Intent(this, ContratanteFavoritosActivity.class);
-            activity_favoritos.putExtra("paramsContratante", this.contratante);
-            startActivity(activity_favoritos);
-        } else if (id == R.id.contratante_resultado_busca_drawer_menu_nav_sair) {
+        } else if (id == R.id.contratante_favoritos_drawer_menu_nav_sair) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_resultado_busca_drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_favoritos_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -210,18 +207,18 @@ public class ContratanteResultadoBuscaActivity extends AppCompatActivity
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get view for row item
-            View rowView = mInflater.inflate(R.layout.contratante_resultado_busca_list_item_listview, parent, false);
+            View rowView = mInflater.inflate(R.layout.contratante_favoritos_list_item_listview, parent, false);
 
-            TextView contratante_resultado_busca_list_item_textview_nome_artista = (TextView) rowView.findViewById(R.id.contratante_resultado_busca_list_item_textview_nome_artista);
-            TextView contratante_resultado_busca_list_item_textview_genero_artista = (TextView) rowView.findViewById(R.id.contratante_resultado_busca_list_item_textview_genero_artista);
-            ImageView contratante_resultado_busca_list_item_image_artista = (ImageView) rowView.findViewById(R.id.contratante_resultado_busca_list_item_image_artista);
-            ImageView contratante_resultado_busca_list_item_button_artista = (ImageView) rowView.findViewById(R.id.contratante_resultado_busca_list_item_button_artista);
+            TextView contratante_favoritos_list_item_textview_nome_artista = (TextView) rowView.findViewById(R.id.contratante_favoritos_list_item_textview_nome_artista);
+            TextView contratante_favoritos_list_item_textview_genero_artista = (TextView) rowView.findViewById(R.id.contratante_favoritos_list_item_textview_genero_artista);
+            ImageView contratante_favoritos_list_item_image_artista = (ImageView) rowView.findViewById(R.id.contratante_favoritos_list_item_image_artista);
+            ImageView contratante_favoritos_list_item_button_artista = (ImageView) rowView.findViewById(R.id.contratante_favoritos_list_item_button_artista);
 
             Artista artista = (Artista) getItem(position);
-            contratante_resultado_busca_list_item_textview_nome_artista.setText(artista.getNome());
-            contratante_resultado_busca_list_item_textview_genero_artista.setText(artista.getEstilo());
-            contratante_resultado_busca_list_item_image_artista.setImageResource(R.drawable.temp_evento3);
-            contratante_resultado_busca_list_item_button_artista.setImageResource(R.drawable.seta_menor);
+            contratante_favoritos_list_item_textview_nome_artista.setText(artista.getNome());
+            contratante_favoritos_list_item_textview_genero_artista.setText(artista.getEstilo());
+            contratante_favoritos_list_item_image_artista.setImageResource(R.drawable.temp_evento3);
+            contratante_favoritos_list_item_button_artista.setImageResource(R.drawable.seta_menor);
 
         /*Picasso.with(mContext) //Context
                 .load("") //URL/FILE

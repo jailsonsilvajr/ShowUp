@@ -184,6 +184,10 @@ public class ContratanteContaActivity extends AppCompatActivity
 
         } else if (id == R.id.contratante_conta_drawer_menu_nav_favoritos) {
 
+            Intent activity_favoritos = new Intent(this, ContratanteFavoritosActivity.class);
+            activity_favoritos.putExtra("paramsContratante", this.contratante);
+            startActivity(activity_favoritos);
+
         } else if (id == R.id.contratante_conta_drawer_menu_nav_sair) {
 
         }

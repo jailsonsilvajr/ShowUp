@@ -9,7 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.com.appshow.showup.activitys.ArtistaConfiguracoesActivity"
     tools:showIn="@layout/artista_configuracoes_app_bar"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimaryDark">
 
     <LinearLayout
         android:layout_width="match_parent"

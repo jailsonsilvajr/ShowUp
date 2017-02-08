@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contratante_evento_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.appshow.showup.activitys.ContratanteEventoActivity"
+    tools:showIn="@layout/contratante_evento_app_bar">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/colorPrimaryDark">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/temp_evento1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_textview_nome_local"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Clube Dallas"
+                    android:textSize="9pt"
+                    android:textColor="@color/textColorPrimary"/>
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_textview_endereco_local"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Via blablabla Nº 20"
+                    android:textSize="5pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+                <View
+                    android:layout_marginTop="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLineGray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="DESCRIÇÃO"
+                    android:textSize="7pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_textview_descricao_evento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="fndiopHFUIPADHFUipadIUFDAIFNIADNFIABNFIbaIFBAIBFNiabnifnabfiabdfiabifbaifbiabfihsbaifbsiabfisabfilsabfklsabfklbsalkfbasklbfklsabfklbsaklfbsaklbfklsabfklsabkflbsahkfsabfsabkflsbakflbsaklfbskalbfklsabfklsabfabsfklsabkflbasfksabfklsabfklasbfklsabkflbaslfbkaslbfklasbfklsabfklasbflsablf."
+                    android:textSize="6pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+                <View
+                    android:layout_marginTop="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLineGray"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="EQUIPAMENTOS DISPONÍVEIS"
+                    android:textSize="7pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ListView
+                            android:id="@+id/contratante_evento_content_listview_equipamentos1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </ListView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ListView
+                            android:id="@+id/contratante_evento_content_listview_equipamentos2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </ListView>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_marginTop="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorLineGray"/>
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_nome_evento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="FESTA A FANTASIA"
+                    android:textSize="10pt"
+                    android:textColor="@color/textColorPrimary"/>
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_data_evento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DIA: 18/01"
+                    android:textSize="7pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_hora_evento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="HORA: 22H - 02H"
+                    android:textSize="7pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+                <TextView
+                    android:id="@+id/contratante_evento_content_requisitos_evento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="jdksaojdosajfosaofsjafjsanlfnasnfjksnajkfnsibqBFYHISADHBASHKFLBKJSALBFKLSABKJFLSBAKLFBSAKLBF."
+                    android:textSize="6pt"
+                    android:textColor="@color/textColorSecundary"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="58dp">
+
+                <Button
+                    android:id="@+id/contratante_evento_content_button_candidatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="MODIFICAR"
+                    android:textSize="20dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:background="@color/colorButtonRed"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

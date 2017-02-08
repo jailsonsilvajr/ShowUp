@@ -100,10 +100,10 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
 
     public void open_activity_evento(int position){
 
-        //Intent activity_artista = new Intent(this, ContratanteEventoActivity.class);
-        //activity_artista.putExtra("paramsContratante", this.contratante);
-        //activity_artista.putExtra("paramsArtista", this.meusEventos.get(position));
-        //startActivity(activity_artista);
+        Intent activity_artista = new Intent(this, ContratanteEventoActivity.class);
+        activity_artista.putExtra("paramsContratante", this.contratante);
+        activity_artista.putExtra("paramsEvento", this.meusEventos.get(position));
+        startActivity(activity_artista);
     }
 
     public void open_activity_configuracao(){
@@ -232,26 +232,108 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
 
     public ArrayList<Evento> popularEventos(){
 
-        ArrayList<Evento> array = new ArrayList<Evento>();
+        ArrayList<Evento> eventos = new ArrayList<Evento>();
 
         Evento evento1 = new Evento();
         Evento evento2 = new Evento();
         Evento evento3 = new Evento();
         Evento evento4 = new Evento();
         Evento evento5 = new Evento();
+        Evento evento6 = new Evento();
+        Evento evento7 = new Evento();
+        Evento evento8 = new Evento();
+        Evento evento9 = new Evento();
 
-        evento1.setNomeEvento("Evento1");
-        evento2.setNomeEvento("Evento2");
-        evento3.setNomeEvento("Evento3");
-        evento4.setNomeEvento("Evento4");
-        evento5.setNomeEvento("Evento5");
+        evento1.setCod("1"); evento2.setCod("2"); evento3.setCod("3"); evento4.setCod("4"); evento5.setCod("5");
+        evento6.setCod("6"); evento7.setCod("7"); evento8.setCod("8"); evento9.setCod("9");
 
-        array.add(evento1);
-        array.add(evento2);
-        array.add(evento3);
-        array.add(evento4);
-        array.add(evento5);
+        evento1.setNomeLocal("Cais do Alfândega");
+        evento2.setNomeLocal("Preto Velho");
+        evento3.setNomeLocal("Espaço Cultural Xinxim da Baiana");
+        evento4.setNomeLocal("Roof Tebas");
+        evento5.setNomeLocal("Preto Velho");
+        evento6.setNomeLocal("Sétima Arte");
+        evento7.setNomeLocal("Centro de Convenções");
+        evento8.setNomeLocal("Centro de Convenções");
+        evento9.setNomeLocal("Arena Liquidi Sky");
 
-        return array;
+        evento1.setEnderecoLocal("Cais da Alfândega, 50030-100, Recife");
+        evento2.setEnderecoLocal("Rua Bispo Coutinho, 681, Alto da Sé, Olinda");
+        evento3.setEnderecoLocal("Avenida Sigismundo Gonçalves, 742, 53010-240, Olinda");
+        evento4.setEnderecoLocal("Rua da Concórdia, 943 - São José, 50020-050, Recife");
+        evento5.setEnderecoLocal("Rua do Farol, 218, Olinda - PE, 53120-390, Brasil");
+        evento6.setEnderecoLocal("Rua Capitao Lima, 195, 50040-080, Recife");
+        evento7.setEnderecoLocal("Olinda");
+        evento8.setEnderecoLocal("Avenida Professor Andrade Bezerra, S/N - Salgadinho/Olinda-PE");
+        evento8.setEnderecoLocal("R. Cataguáses, 2 - Guabiraba, 100000, Recife");
+
+        evento1.setDescricao("A 22ª edição do Festival Rec-Beat, vai acontecer no Cais da Alfândega, entre 25 e 28 de fevereiro, durante o carnaval.");
+        evento2.setDescricao("Enquanto o dia 25 de fevereiro não chega, já estamos ansiosos e preparando nossa tradicional Prévia, a concentração marca o início das comemorações dos 10 anos do bloco.");
+        evento3.setDescricao("O carnaval tá na porta, batendo, tocando a campanhia, já fantasiado, pronto para os braços de Momo. Pra celecrar essa chegada a Doce Libido de fevereiro vem se manifestar no salão! Não gressive não!!! Tá chegando a hora de envernizar a noite toda e sair da pista brilhando, joiada, linda pra cair no carnaval.");
+        evento4.setDescricao("ESSE BREGA TÁ MASSA, TÁ PEGANDO FOGO...\n" +
+                "É nele que eu vou desandar de novo!\n" +
+                "\n" +
+                "A bregalize já deu onda... e nesse passo envolvente pra ninguém ficar parado, a gente volta num clima brega astral de carnaval!");
+        evento5.setDescricao("Temos o prazer de convidar todos os amigos, familiares, foliões e o mundo todo para curtir nossos 10 anos de carnaval.\n" +
+                "É felicidade demais!");
+        evento6.setDescricao("E quem disse que em Recife não tem pré carnaval bebean? Em fevereiro vai rolar a FREAKS reunindo um time de Djs de peso e um publico close nesse carnaval !! Vai rolar muito pop , indie\\ rock, black music , funk e o melhor VAI SER OPEN BAR !!!");
+        evento7.setDescricao("A maior prévia de carnaval do Brasil, já esta com sua nova edição, Olinda Beer 2017, confirmada. O evento irá ocorrer no centro de convenções de Pernambuco no dia 19 de fevereiro.");
+        evento8.setDescricao("Uma das prévias mais tradicionais e irreverentes do carnaval, vem este ano com nova data (10 de fevereiro).");
+        evento9.setDescricao("Esqueça tudo o que você sabe sobre carnaval: A Liquid Sky vai te levar a um novo conceito!");
+
+        evento1.setNomeEvento("Festival Rec-Beat 2017");
+        evento2.setNomeEvento("Prévia - Esses Boy Tão Muito Doido");
+        evento3.setNomeEvento("Doce Libido");
+        evento4.setNomeEvento("Bregalize");
+        evento5.setNomeEvento("Esses Boy Tão Muito Doido");
+        evento6.setNomeEvento("Freaks! Carnaval Edition");
+        evento7.setNomeEvento("Olinda Beer");
+        evento8.setNomeEvento("Enquanto isso na Sala da Justiça");
+        evento9.setNomeEvento("Liquid Sky");
+
+        evento1.setData("25/02");
+        evento2.setData("04/02");
+        evento3.setData("03/02");
+        evento4.setData("03/02");
+        evento5.setData("25/02");
+        evento6.setData("11/02");
+        evento7.setData("19/02");
+        evento8.setData("10/02");
+        evento9.setData("18/02");
+
+        evento1.setHorario("19:30H - 01:30");
+        evento2.setHorario("10:00H - 16:20H");
+        evento3.setHorario("22:00H - 05:00H");
+        evento4.setHorario("22:00H - 06:00H");
+        evento5.setHorario("09:00H - 15:00H");
+        evento6.setHorario("23:00H - 05:00H");
+        evento7.setHorario("09:00H - 22:00H");
+        evento8.setHorario("22:00H - 05:00H");
+        evento9.setHorario("22:00H - 16:00H");
+
+        evento1.setTempoEvento("EM 9H");
+        evento2.setTempoEvento("EM 3H");
+        evento3.setTempoEvento("EM 1H");
+        evento4.setTempoEvento("EM 2H");
+        evento5.setTempoEvento("EM 8H");
+        evento6.setTempoEvento("EM 5H");
+        evento7.setTempoEvento("EM 7H");
+        evento8.setTempoEvento("EM 4H");
+        evento9.setTempoEvento("EM 6H");
+
+        evento1.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento2.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento3.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento4.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento5.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento6.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento7.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento8.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento9.setRequisito("Requisitos...\n"+"Requisitos...");
+
+        eventos.add(evento3); eventos.add(evento4); eventos.add(evento2); eventos.add(evento8); eventos.add(evento6);
+        eventos.add(evento9); eventos.add(evento7); eventos.add(evento5); eventos.add(evento1);
+
+        return eventos;
     }
 }

@@ -147,6 +147,9 @@ public class ArtistaContaActivity extends AppCompatActivity
 
         } else if (id == R.id.artista_conta_drawer_menu_nav_promova) {
 
+            Intent activity_promovase = new Intent(this, ArtistaPromovaSeActivity.class);
+            activity_promovase.putExtra("paramsArtista", this.artista);
+            startActivity(activity_promovase);
         } else if (id == R.id.artista_conta_drawer_menu_nav_historico) {
 
         } else if (id == R.id.artista_conta_drawer_menu_nav_sair) {

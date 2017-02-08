@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/artista_promovase_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.appshow.showup.activitys.ArtistaPromovaSeActivity"
+    tools:showIn="@layout/artista_promovase_app_bar"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GANHE DESTAQUE NO APLICATIVO"
+                android:textAlignment="center"
+                android:textColor="@color/textColorSecundary"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="E ATRAIA MAIS CONTRATANTES"
+                android:textAlignment="center"
+                android:textColor="@color/textColorSecundary"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1 MÊS DE DESTAQUE"
+                android:textAlignment="center"
+                android:textColor="@color/textColorSecundary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="R$ 9,90"
+                android:textAlignment="center"
+                android:textColor="@color/textColorSecundary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <Button
+            android:id="@+id/artista_promovase_content_button_promover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="PROMOVER"
+            android:textSize="20dp"
+            android:textColor="@color/textColorSecundary"
+            android:background="@color/colorButtonRed"/>
+    </RelativeLayout>
+
+</LinearLayout>

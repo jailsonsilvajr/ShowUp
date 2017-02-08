@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         //O Banco retornar um objeto do tipo Usuario ou null.
         Artista artista = new Artista("Joey Tribbiani"); //Artista para teste!!
         Contratante contratante = new Contratante("Eike Batista");
-        Usuario user = new Usuario(null, contratante);
+        Usuario user = new Usuario(artista, null);
         if(user != null){
 
             if(user.getArtista() != null){

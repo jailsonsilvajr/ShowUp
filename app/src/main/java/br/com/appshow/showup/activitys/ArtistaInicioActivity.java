@@ -2,6 +2,9 @@ package br.com.appshow.showup.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -24,13 +27,19 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import br.com.appshow.showup.conexao.Conectar;
+import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import org.lucasr.twowayview.TwoWayView;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Artista;
@@ -50,6 +59,9 @@ public class ArtistaInicioActivity extends AppCompatActivity
     private EventosBuscados eventosBuscados;
     private Artista artista;
     private Usuario user;
+
+    String url = "";
+    String parametros = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +89,20 @@ public class ArtistaInicioActivity extends AppCompatActivity
         //----------------------------------------------------------------------------//
 
         //--(1) Fazer consulta(as) ao banco de dados para popular eventosIndicados, eventosProximos, eventosBuscados e artista:
+        /*ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
 
+            url = "http://192.241.244.47/showup/obter_evento_app_artista.php?";
+            parametros = "id_contratante=" + this.artista.getCod();
+            new SolicitarDados().execute(url);
+        }else{
+
+            Toast.makeText(this, "Nenhuma conexão foi encontrada!", Toast.LENGTH_SHORT).show();
+        }*/
         this.eventosIndicados = new EventosIndicados(popularEventos());
         this.eventosProximos = new EventosProximos(popularEventos());
         this.eventosBuscados = new EventosBuscados(popularEventos());
-        //this.artista = new Artista("Joey Tribbiani");
         //--Fim de (1)
 
         //--(2) Configurando a TwoWayView:
@@ -102,7 +123,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
 
         AdapterTwoWayView adapterTwoWayView = new AdapterTwoWayView(this, subArrayEventosProximos);
         artista_inicio_content_twoWayView.setAdapter(adapterTwoWayView);
-        //--Fim de (2)
+        //--Fim de (2)*/
 
         //--(3) Configurando o button seta:
         Button artista_inicio_content_button = (Button) findViewById(R.id.artista_inicio_content_button);
@@ -317,11 +338,11 @@ public class ArtistaInicioActivity extends AppCompatActivity
             Evento evento = (Evento) getItem(position);
             artista_inicio_list_item_twowayview_tempo.setText(evento.getTempoEvento());
             artista_inicio_list_item_twowayview_nome.setText(evento.getNomeEvento());
-            artista_inicio_list_item_twowayview_image.setImageResource(R.drawable.temp_evento2);
+            artista_inicio_list_item_twowayview_image.setImageResource(R.drawable.temp_evento1);
 
             /*Picasso.with(mContext) //Context
-                .load("") //URL/FILE
-                .into(proxEventoImageView);//an ImageView Object to show the loaded image;*/
+                .load(evento.getUrl_imagem()) //URL/FILE
+                .into(artista_inicio_list_item_twowayview_image);//an ImageView Object to show the loaded image;*/
 
             return rowView;
         }
@@ -343,9 +364,6 @@ public class ArtistaInicioActivity extends AppCompatActivity
             switch (position) {
                 case 0:{
                     FragmentoIndicados newFrame = new FragmentoIndicados();
-                    //Bundle data = new Bundle();
-                    //data.putParcelable("paramsArtista", artista);
-                    //newFrame.setArguments(data);
                     newFrame.setArrayListEventos(getArrayListEvento("INDICADOS"));
                     newFrame.setArtista(artista);
                     return newFrame;
@@ -373,6 +391,96 @@ public class ArtistaInicioActivity extends AppCompatActivity
             return mNumOfTabs;
         }
     }
+
+    /*private class SolicitarDados extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            StringTokenizer str = new StringTokenizer(result);
+            ArrayList<Evento> eventos = new ArrayList<Evento>();
+            while(str.hasMoreTokens()){
+
+                Evento evento = new Evento();
+                evento.setCod(str.nextToken());
+                evento.setNomeEvento(str.nextToken());
+                evento.setTempoEvento(str.nextToken());
+                evento.setNomeLocal(str.nextToken());
+                evento.setEnderecoLocal(str.nextToken());
+                evento.setDescricao(str.nextToken());
+                evento.setData(str.nextToken());
+                evento.setHorario(str.nextToken());
+                evento.setRequisito(str.nextToken());
+                evento.setUrl_imagem(str.nextToken());
+                eventos.add(evento);
+            }
+            eventosIndicados = new EventosIndicados(eventos);
+            eventosProximos = new EventosProximos(eventos);
+            eventosBuscados = new EventosBuscados(eventos);
+
+            TwoWayView artista_inicio_content_twoWayView = (TwoWayView) findViewById(R.id.artista_inicio_content_twoWayView);
+            artista_inicio_content_twoWayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    open_activity_evento(i+1);//Para retirar o primeiro evento que já aparece como principal
+                }
+            });
+
+            ArrayList<Evento> subArrayEventosProximos = new ArrayList<Evento>(); //Para retirar o primeiro evento que já aparece como principal
+            for(int i = 1; i < eventosProximos.getArrayEvento().size(); i++){
+
+                subArrayEventosProximos.add(eventosProximos.getArrayEvento().get(i));
+            }
+
+            AdapterTwoWayView adapterTwoWayView = new AdapterTwoWayView(ArtistaInicioActivity.this, subArrayEventosProximos);
+            artista_inicio_content_twoWayView.setAdapter(adapterTwoWayView);
+
+            final TabLayout artista_inicio_content_tabLayout = (TabLayout) findViewById(R.id.artista_inicio_content_tabLayout);
+            final ViewPager artista_inicio_content_viewpager = (ViewPager) findViewById(R.id.artista_inicio_content_viewpager);
+
+            artista_inicio_content_tabLayout.addTab(artista_inicio_content_tabLayout.newTab().setText("INDICADOS"));
+            artista_inicio_content_tabLayout.addTab(artista_inicio_content_tabLayout.newTab().setText("PRÓXIMOS"));
+            artista_inicio_content_tabLayout.addTab(artista_inicio_content_tabLayout.newTab().setText("BUSCAS RECENTES"));
+
+            artista_inicio_content_viewpager.setAdapter(new PagerAdapter(getSupportFragmentManager(), artista_inicio_content_tabLayout.getTabCount()));
+            artista_inicio_content_viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(artista_inicio_content_tabLayout));
+
+            artista_inicio_content_tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+
+                    artista_inicio_content_viewpager.setCurrentItem(tab.getPosition());
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+
+            ImageView artista_inicio_content_imageview = (ImageView) findViewById(R.id.artista_inicio_content_imageview);
+            TextView artista_inicio_content_textview_tempo = (TextView) findViewById(R.id.artista_inicio_content_textview_tempo);
+            TextView artista_inicio_content_textview_nome = (TextView) findViewById(R.id.artista_inicio_content_textview_nome);
+
+            //artista_inicio_content_imageview.setImageResource(R.drawable.temp_evento1);
+            artista_inicio_content_textview_tempo.setText(eventosProximos.getEventoByIndex(0).getTempoEvento());
+            artista_inicio_content_textview_nome.setText(eventosProximos.getEventoByIndex(0).getNomeEvento());
+            Picasso.with(ArtistaInicioActivity.this) //Context
+                    .load(eventosProximos.getEventoByIndex(0).getUrl_imagem()) //URL/FILE
+                    .into(artista_inicio_content_imageview);
+        }
+    }*/
 
     public ArrayList<Evento> popularEventos(){
 

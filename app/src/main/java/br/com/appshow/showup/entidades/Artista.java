@@ -15,9 +15,9 @@ public class Artista implements Parcelable{
     private String site;
     private String descricao;
 
-    public Artista(String nome){
+    public Artista(String cod){
 
-        this.nome = nome;
+        this.cod = cod;
     }
 
     public String getNome() {
@@ -61,8 +61,8 @@ public class Artista implements Parcelable{
     }
 
     protected Artista(Parcel in) {
-        nome = in.readString();
         cod = in.readString();
+        nome = in.readString();
         estilo = in.readString();
         site = in.readString();
         descricao = in.readString();
@@ -88,8 +88,8 @@ public class Artista implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(nome);
         dest.writeString(cod);
+        dest.writeString(nome);
         dest.writeString(estilo);
         dest.writeString(site);
         dest.writeString(descricao);

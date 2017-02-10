@@ -18,6 +18,7 @@ public class Evento implements Parcelable {
     private String data;
     private String horario;
     private String requisito;
+    private String url_imagem;
 
     public Evento(){}
 
@@ -31,6 +32,7 @@ public class Evento implements Parcelable {
         data = in.readString();
         horario = in.readString();
         requisito = in.readString();
+        url_imagem = in.readString();
     }
 
     public static final Creator<Evento> CREATOR = new Creator<Evento>() {
@@ -62,6 +64,7 @@ public class Evento implements Parcelable {
         dest.writeString(data);
         dest.writeString(horario);
         dest.writeString(requisito);
+        dest.writeString(url_imagem);
     }
 
     public String getCod(){
@@ -138,5 +141,13 @@ public class Evento implements Parcelable {
 
     public void setRequisito(String requisito) {
         this.requisito = requisito;
+    }
+
+    public String getUrl_imagem() {
+        return url_imagem;
+    }
+
+    public void setUrl_imagem(String url_imagem) {
+        this.url_imagem = url_imagem;
     }
 }

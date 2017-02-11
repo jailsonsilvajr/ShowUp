@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Evento;
@@ -82,6 +84,7 @@ public class ContratanteEventoActivity extends AppCompatActivity
         //--Fim de (1)
 
         //--(2) Configurar as view:
+        ImageView contratante_evento_content_imageview_imagem = (ImageView) findViewById(R.id.contratante_evento_content_imageview_imagem);
         TextView contratante_evento_content_textview_nome_local = (TextView) findViewById(R.id.contratante_evento_content_textview_nome_local);
         TextView contratante_evento_content_textview_endereco_local = (TextView) findViewById(R.id.contratante_evento_content_textview_endereco_local);
         TextView contratante_evento_content_textview_descricao_evento = (TextView) findViewById(R.id.contratante_evento_content_textview_descricao_evento);
@@ -90,13 +93,17 @@ public class ContratanteEventoActivity extends AppCompatActivity
         TextView contratante_evento_content_hora_evento = (TextView) findViewById(R.id.contratante_evento_content_hora_evento);
         TextView contratante_evento_content_requisitos_evento = (TextView) findViewById(R.id.contratante_evento_content_requisitos_evento);
 
-        contratante_evento_content_textview_nome_local.setText(this.evento.getNomeLocal());
-        contratante_evento_content_textview_endereco_local.setText(this.evento.getEnderecoLocal());
+        contratante_evento_content_textview_nome_local.setText(this.evento.getLocal());
+        contratante_evento_content_textview_endereco_local.setText(this.evento.getEndereco());
         contratante_evento_content_textview_descricao_evento.setText(this.evento.getDescricao());
-        contratante_evento_content_nome_evento.setText(this.evento.getNomeEvento());
+        contratante_evento_content_nome_evento.setText(this.evento.getNome());
         contratante_evento_content_data_evento.setText(this.evento.getData());
         contratante_evento_content_hora_evento.setText(this.evento.getHorario());
         contratante_evento_content_requisitos_evento.setText(this.evento.getRequisito());
+
+        Picasso.with(ContratanteEventoActivity.this)
+                .load(this.evento.getUrl_imagem_principal())
+                .into(contratante_evento_content_imageview_imagem);
         //--Fim de (2)
     }
 

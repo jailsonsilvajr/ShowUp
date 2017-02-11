@@ -25,6 +25,7 @@
                 android:layout_height="200dp">
 
                 <ImageView
+                    android:id="@+id/contratante_evento_content_imageview_imagem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"

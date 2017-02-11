@@ -116,8 +116,8 @@ public class FragmentoProximos extends Fragment {
             ImageView artista_inicio_list_item_tablayout_button_evento = (ImageView) rowView.findViewById(R.id.artista_inicio_list_item_tablayout_button_evento);
 
             Evento evento = (Evento) getItem(position);
-            artista_inicio_list_item_tablayout_textview_nome_evento.setText(evento.getNomeEvento());
-            artista_inicio_list_item_tablayout_textview_local_evento.setText(evento.getNomeLocal());
+            artista_inicio_list_item_tablayout_textview_nome_evento.setText(evento.getNome());
+            artista_inicio_list_item_tablayout_textview_local_evento.setText(evento.getLocal());
             artista_inicio_list_item_tablayout_image_evento.setImageResource(R.drawable.temp_evento3);
             if(!this.comSeta){
 

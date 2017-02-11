@@ -38,7 +38,7 @@ public class EventosBuscados {
 
         for(int i = 0; i < this.eventosBuscados.size(); i++){
 
-            if(this.eventosBuscados.get(i).getCod() == codigo) return i;
+            if(this.eventosBuscados.get(i).getId_evento() == codigo) return i;
         }
         return -1;
     }

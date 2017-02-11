@@ -38,7 +38,7 @@ public class EventosProximos {
 
         for(int i = 0; i < this.eventosProximos.size(); i++){
 
-            if(this.eventosProximos.get(i).getCod() == codigo) return i;
+            if(this.eventosProximos.get(i).getId_evento() == codigo) return i;
         }
         return -1;
     }

@@ -2,6 +2,9 @@ package br.com.appshow.showup.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,13 +23,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
+import br.com.appshow.showup.conexao.Conectar;
 import br.com.appshow.showup.entidades.Artista;
 import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Evento;
+import br.com.appshow.showup.entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -38,6 +50,9 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
 
     private Contratante contratante;
     private ArrayList<Evento> meusEventos;
+
+    String url = "";
+    String parametros = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +78,21 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
 
         //----------------------------------------------------------------------------//
 
-        //--(1) Configurando listview de eventos:
+        //--(1) Configurar listview de eventos:
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+
+            url = "http://192.241.244.47/showup/obter_evento_app_contratante.php?";
+            parametros = "id_contratante=" + this.contratante.getCod();
+            new SolicitarDados().execute(url);
+        }else{
+
+            Toast.makeText(this, "Nenhuma conexão foi encontrada!", Toast.LENGTH_SHORT).show();
+        }
+        //--Fim de (1)
+
+         /*//--(1) Configurando listview de eventos:
         ListView contratante_eventos_content_listview_evento = (ListView) findViewById(R.id.contratante_meus_eventos_content_listview_evento);
         contratante_eventos_content_listview_evento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -76,7 +105,7 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         this.meusEventos = popularEventos();//Metodo TEMPORÁRIO!!!
         AdapterList adapterList = new AdapterList(this, this.meusEventos);
         contratante_eventos_content_listview_evento.setAdapter(adapterList);
-        //--Fim de (1)
+        //--Fim de (1)*/
 
         //--(2) Configurando menu lateral:
         View hView =  navigationView.getHeaderView(0);
@@ -232,19 +261,69 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
             ImageView contratante_meus_eventos_list_item_button_evento = (ImageView) rowView.findViewById(R.id.contratante_meus_eventos_list_item_button_evento);
 
             Evento evento = (Evento) getItem(position);
-            contratante_meus_eventos_list_item_textview_nome_evento.setText(evento.getNomeEvento());
-            contratante_meus_eventos_list_item_image_evento.setImageResource(R.drawable.temp_evento3);
+            contratante_meus_eventos_list_item_textview_nome_evento.setText(evento.getNome());
             contratante_meus_eventos_list_item_button_evento.setImageResource(R.drawable.seta_menor);
 
-        /*Picasso.with(mContext) //Context
-                .load("") //URL/FILE
-                .into(proxEventoImageView);//an ImageView Object to show the loaded image;*/
+            Picasso.with(mContext) //Context
+                .load(evento.getUrl_imagem_redonda()) //URL/FILE
+                .into(contratante_meus_eventos_list_item_image_evento);//an ImageView Object to show the loaded image;*/
 
             return rowView;
         }
     }
 
-    public ArrayList<Evento> popularEventos(){
+    private class SolicitarDados extends AsyncTask<String, Void, String> {
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            ListView contratante_eventos_content_listview_evento = (ListView) findViewById(R.id.contratante_meus_eventos_content_listview_evento);
+            contratante_eventos_content_listview_evento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    open_activity_evento(i);
+                }
+            });
+
+            Gson gson = new Gson();
+            Evento[] eventos_array = gson.fromJson(result, Evento[].class);
+
+            List eventos_lista = Arrays.asList(eventos_array);
+            meusEventos = new ArrayList(eventos_lista);
+
+            AdapterList adapterList = new AdapterList(ContratanteMeusEventosActivity.this, meusEventos);
+            contratante_eventos_content_listview_evento.setAdapter(adapterList);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*public ArrayList<Evento> popularEventos(){
 
         ArrayList<Evento> eventos = new ArrayList<Evento>();
 
@@ -349,5 +428,5 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         eventos.add(evento9); eventos.add(evento7); eventos.add(evento5); eventos.add(evento1);
 
         return eventos;
-    }
+    }*/
 }

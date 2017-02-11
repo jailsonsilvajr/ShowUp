@@ -83,10 +83,10 @@ public class ArtistaEventoActivity extends AppCompatActivity
         TextView artista_evento_content_hora_evento = (TextView) findViewById(R.id.artista_evento_content_hora_evento);
         TextView artista_evento_content_requisitos_evento = (TextView) findViewById(R.id.artista_evento_content_requisitos_evento);
 
-        artista_evento_content_textview_nome_local.setText(this.evento.getNomeLocal());
-        artista_evento_content_textview_endereco_local.setText(this.evento.getEnderecoLocal());
+        artista_evento_content_textview_nome_local.setText(this.evento.getNome());
+        artista_evento_content_textview_endereco_local.setText(this.evento.getEndereco());
         artista_evento_content_textview_descricao_evento.setText(this.evento.getDescricao());
-        artista_evento_content_nome_evento.setText(this.evento.getNomeEvento());
+        artista_evento_content_nome_evento.setText(this.evento.getNome());
         artista_evento_content_data_evento.setText(this.evento.getData());
         artista_evento_content_hora_evento.setText(this.evento.getHorario());
         artista_evento_content_requisitos_evento.setText(this.evento.getRequisito());

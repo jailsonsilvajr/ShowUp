@@ -216,8 +216,8 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
             ImageView artista_resultado_busca_list_item_button_evento = (ImageView) rowView.findViewById(R.id.artista_resultado_busca_list_item_button_evento);
 
             Evento evento = (Evento) getItem(position);
-            artista_resultado_busca_list_item_textview_nome_evento.setText(evento.getNomeEvento());
-            artista_resultado_busca_list_item_textview_local_evento.setText(evento.getNomeLocal());
+            artista_resultado_busca_list_item_textview_nome_evento.setText(evento.getNome());
+            artista_resultado_busca_list_item_textview_local_evento.setText(evento.getLocal());
             artista_resultado_busca_list_item_image_evento.setImageResource(R.drawable.temp_evento3);
             artista_resultado_busca_list_item_button_evento.setImageResource(R.drawable.seta_menor);
 
@@ -243,28 +243,28 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         Evento evento8 = new Evento();
         Evento evento9 = new Evento();
 
-        evento1.setCod("1"); evento2.setCod("2"); evento3.setCod("3"); evento4.setCod("4"); evento5.setCod("5");
-        evento6.setCod("6"); evento7.setCod("7"); evento8.setCod("8"); evento9.setCod("9");
+        evento1.setId_evento("1"); evento2.setId_evento("2"); evento3.setId_evento("3"); evento4.setId_evento("4"); evento5.setId_evento("5");
+        evento6.setId_evento("6"); evento7.setId_evento("7"); evento8.setId_evento("8"); evento9.setId_evento("9");
 
-        evento1.setNomeLocal("Cais do Alfândega");
-        evento2.setNomeLocal("Preto Velho");
-        evento3.setNomeLocal("Espaço Cultural Xinxim da Baiana");
-        evento4.setNomeLocal("Roof Tebas");
-        evento5.setNomeLocal("Preto Velho");
-        evento6.setNomeLocal("Sétima Arte");
-        evento7.setNomeLocal("Centro de Convenções");
-        evento8.setNomeLocal("Centro de Convenções");
-        evento9.setNomeLocal("Arena Liquidi Sky");
+        evento1.setLocal("Cais do Alfândega");
+        evento2.setLocal("Preto Velho");
+        evento3.setLocal("Espaço Cultural Xinxim da Baiana");
+        evento4.setLocal("Roof Tebas");
+        evento5.setLocal("Preto Velho");
+        evento6.setLocal("Sétima Arte");
+        evento7.setLocal("Centro de Convenções");
+        evento8.setLocal("Centro de Convenções");
+        evento9.setLocal("Arena Liquidi Sky");
 
-        evento1.setEnderecoLocal("Cais da Alfândega, 50030-100, Recife");
-        evento2.setEnderecoLocal("Rua Bispo Coutinho, 681, Alto da Sé, Olinda");
-        evento3.setEnderecoLocal("Avenida Sigismundo Gonçalves, 742, 53010-240, Olinda");
-        evento4.setEnderecoLocal("Rua da Concórdia, 943 - São José, 50020-050, Recife");
-        evento5.setEnderecoLocal("Rua do Farol, 218, Olinda - PE, 53120-390, Brasil");
-        evento6.setEnderecoLocal("Rua Capitao Lima, 195, 50040-080, Recife");
-        evento7.setEnderecoLocal("Olinda");
-        evento8.setEnderecoLocal("Avenida Professor Andrade Bezerra, S/N - Salgadinho/Olinda-PE");
-        evento8.setEnderecoLocal("R. Cataguáses, 2 - Guabiraba, 100000, Recife");
+        evento1.setEndereco("Cais da Alfândega, 50030-100, Recife");
+        evento2.setEndereco("Rua Bispo Coutinho, 681, Alto da Sé, Olinda");
+        evento3.setEndereco("Avenida Sigismundo Gonçalves, 742, 53010-240, Olinda");
+        evento4.setEndereco("Rua da Concórdia, 943 - São José, 50020-050, Recife");
+        evento5.setEndereco("Rua do Farol, 218, Olinda - PE, 53120-390, Brasil");
+        evento6.setEndereco("Rua Capitao Lima, 195, 50040-080, Recife");
+        evento7.setEndereco("Olinda");
+        evento8.setEndereco("Avenida Professor Andrade Bezerra, S/N - Salgadinho/Olinda-PE");
+        evento8.setEndereco("R. Cataguáses, 2 - Guabiraba, 100000, Recife");
 
         evento1.setDescricao("A 22ª edição do Festival Rec-Beat, vai acontecer no Cais da Alfândega, entre 25 e 28 de fevereiro, durante o carnaval.");
         evento2.setDescricao("Enquanto o dia 25 de fevereiro não chega, já estamos ansiosos e preparando nossa tradicional Prévia, a concentração marca o início das comemorações dos 10 anos do bloco.");
@@ -280,15 +280,15 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         evento8.setDescricao("Uma das prévias mais tradicionais e irreverentes do carnaval, vem este ano com nova data (10 de fevereiro).");
         evento9.setDescricao("Esqueça tudo o que você sabe sobre carnaval: A Liquid Sky vai te levar a um novo conceito!");
 
-        evento1.setNomeEvento("Festival Rec-Beat 2017");
-        evento2.setNomeEvento("Prévia - Esses Boy Tão Muito Doido");
-        evento3.setNomeEvento("Doce Libido");
-        evento4.setNomeEvento("Bregalize");
-        evento5.setNomeEvento("Esses Boy Tão Muito Doido");
-        evento6.setNomeEvento("Freaks! Carnaval Edition");
-        evento7.setNomeEvento("Olinda Beer");
-        evento8.setNomeEvento("Enquanto isso na Sala da Justiça");
-        evento9.setNomeEvento("Liquid Sky");
+        evento1.setNome("Festival Rec-Beat 2017");
+        evento2.setNome("Prévia - Esses Boy Tão Muito Doido");
+        evento3.setNome("Doce Libido");
+        evento4.setNome("Bregalize");
+        evento5.setNome("Esses Boy Tão Muito Doido");
+        evento6.setNome("Freaks! Carnaval Edition");
+        evento7.setNome("Olinda Beer");
+        evento8.setNome("Enquanto isso na Sala da Justiça");
+        evento9.setNome("Liquid Sky");
 
         evento1.setData("25/02");
         evento2.setData("04/02");
@@ -310,15 +310,15 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         evento8.setHorario("22:00H - 05:00H");
         evento9.setHorario("22:00H - 16:00H");
 
-        evento1.setTempoEvento("EM 9H");
-        evento2.setTempoEvento("EM 3H");
-        evento3.setTempoEvento("EM 1H");
-        evento4.setTempoEvento("EM 2H");
-        evento5.setTempoEvento("EM 8H");
-        evento6.setTempoEvento("EM 5H");
-        evento7.setTempoEvento("EM 7H");
-        evento8.setTempoEvento("EM 4H");
-        evento9.setTempoEvento("EM 6H");
+        evento1.setTempo("EM 9H");
+        evento2.setTempo("EM 3H");
+        evento3.setTempo("EM 1H");
+        evento4.setTempo("EM 2H");
+        evento5.setTempo("EM 8H");
+        evento6.setTempo("EM 5H");
+        evento7.setTempo("EM 7H");
+        evento8.setTempo("EM 4H");
+        evento9.setTempo("EM 6H");
 
         evento1.setRequisito("Requisitos...\n"+"Requisitos...");
         evento2.setRequisito("Requisitos...\n"+"Requisitos...");

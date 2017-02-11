@@ -9,30 +9,34 @@ import android.os.Parcelable;
 
 public class Evento implements Parcelable {
 
-    private String codigo;
-    private String nomeEvento;
-    private String tempoEvento;
-    private String nomeLocal;
-    private String enderecoLocal;
+    private String id_evento;
+    private String nome;
+    private String tempo;
+    private String local;
+    private String endereco;
     private String descricao;
     private String data;
     private String horario;
     private String requisito;
-    private String url_imagem;
+    private String url_imagem_principal;
+    private String url_imagem_secundaria;
+    private String url_imagem_redonda;
 
     public Evento(){}
 
     protected Evento(Parcel in) {
-        codigo = in.readString();
-        nomeEvento = in.readString();
-        tempoEvento = in.readString();
-        nomeLocal = in.readString();
-        enderecoLocal = in.readString();
+        id_evento = in.readString();
+        nome = in.readString();
+        tempo = in.readString();
+        local = in.readString();
+        endereco = in.readString();
         descricao = in.readString();
         data = in.readString();
         horario = in.readString();
         requisito = in.readString();
-        url_imagem = in.readString();
+        url_imagem_principal = in.readString();
+        url_imagem_secundaria = in.readString();
+        url_imagem_redonda = in.readString();
     }
 
     public static final Creator<Evento> CREATOR = new Creator<Evento>() {
@@ -55,60 +59,58 @@ public class Evento implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(codigo);
-        dest.writeString(nomeEvento);
-        dest.writeString(tempoEvento);
-        dest.writeString(nomeLocal);
-        dest.writeString(enderecoLocal);
+        dest.writeString(id_evento);
+        dest.writeString(nome);
+        dest.writeString(tempo);
+        dest.writeString(local);
+        dest.writeString(endereco);
         dest.writeString(descricao);
         dest.writeString(data);
         dest.writeString(horario);
         dest.writeString(requisito);
-        dest.writeString(url_imagem);
+        dest.writeString(url_imagem_principal);
+        dest.writeString(url_imagem_secundaria);
+        dest.writeString(url_imagem_redonda);
     }
 
-    public String getCod(){
-
-        return this.codigo;
+    public String getId_evento() {
+        return id_evento;
     }
 
-    public void setCod(String codigo){
-
-        this.codigo = codigo;
+    public void setId_evento(String id_evento) {
+        this.id_evento = id_evento;
     }
 
-    public String getNomeEvento(){
-
-        return this.nomeEvento;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEvento(String nomeEvento) {
-        this.nomeEvento = nomeEvento;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getTempoEvento(){
-
-        return this.tempoEvento;
+    public String getTempo() {
+        return tempo;
     }
 
-    public void setTempoEvento(String tempoEvento) {
-        this.tempoEvento = tempoEvento;
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
     }
 
-    public String getNomeLocal() {
-        return nomeLocal;
+    public String getLocal() {
+        return local;
     }
 
-    public void setNomeLocal(String nomeLocal) {
-        this.nomeLocal = nomeLocal;
+    public void setLocal(String local) {
+        this.local = local;
     }
 
-    public String getEnderecoLocal() {
-        return enderecoLocal;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecoLocal(String enderecoLocal) {
-        this.enderecoLocal = enderecoLocal;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getDescricao() {
@@ -143,11 +145,27 @@ public class Evento implements Parcelable {
         this.requisito = requisito;
     }
 
-    public String getUrl_imagem() {
-        return url_imagem;
+    public String getUrl_imagem_principal() {
+        return url_imagem_principal;
     }
 
-    public void setUrl_imagem(String url_imagem) {
-        this.url_imagem = url_imagem;
+    public void setUrl_imagem_principal(String url_imagem_principal) {
+        this.url_imagem_principal = url_imagem_principal;
+    }
+
+    public String getUrl_imagem_secundaria() {
+        return url_imagem_secundaria;
+    }
+
+    public void setUrl_imagem_secundaria(String url_imagem_secundaria) {
+        this.url_imagem_secundaria = url_imagem_secundaria;
+    }
+
+    public String getUrl_imagem_redonda() {
+        return url_imagem_redonda;
+    }
+
+    public void setUrl_imagem_redonda(String url_imagem_redonda) {
+        this.url_imagem_redonda = url_imagem_redonda;
     }
 }

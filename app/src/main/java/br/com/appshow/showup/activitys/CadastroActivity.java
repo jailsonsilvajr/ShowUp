@@ -39,7 +39,11 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
-    public void open_cadastro_artista(){}
+    public void open_cadastro_artista(){
+
+        Intent activity_cadastro_artista = new Intent(this, CadastroArtistaActivity.class);
+        startActivity(activity_cadastro_artista);
+    }
 
     public void open_cadastro_contratante(){
 

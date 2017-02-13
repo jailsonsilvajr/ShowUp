@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.StringTokenizer;
+
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.conexao.Conectar;
 
@@ -88,10 +90,13 @@ public class CadastroContratanteActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result){
 
-            if(result.equals("cadastro_erro3")){
+            StringTokenizer str = new StringTokenizer(result);
+            String token = str.nextToken();
+
+            if(token.equals("cadastro_erro3")){
 
                 Toast.makeText(CadastroContratanteActivity.this, "E-mail já cadastrado!", Toast.LENGTH_SHORT).show();
-            }else if(result.equals("cadastro_erro1") || result.equals("cadastro_erro2")){
+            }else if(token.equals("cadastro_erro1") || token.equals("cadastro_erro2")){
 
                 Toast.makeText(CadastroContratanteActivity.this, "Erro: Tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
             }else{

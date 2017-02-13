@@ -1,6 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <!--<Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="FACEBOOK"
+            android:textColor="@android:color/black"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="GOOGLE"
+            android:textColor="@android:color/black"/>
+
+        <EditText
+            android:id="@+id/cadastro_artista_content_edittext_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:textColorHint="@color/textColorTertiary"
+            android:textColor="@color/textColorTertiary"
+            android:maxLines="1"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/borda_edittext"/>-->
+
+        <EditText
+            android:id="@+id/cadastro_artista_content_edittext_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="E-mail"
+            android:textColorHint="@color/textColorTertiary"
+            android:textColor="@color/textColorTertiary"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/borda_edittext"/>
+
+        <EditText
+            android:id="@+id/cadastro_artista_content_edittext_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Senha"
+            android:textColorHint="@color/textColorTertiary"
+            android:textColor="@color/textColorTertiary"
+            android:maxLines="1"
+            android:inputType="textVisiblePassword"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/borda_edittext"/>
+
+        <EditText
+            android:id="@+id/cadastro_artista_content_edittext_senha2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repetir Senha"
+            android:textColorHint="@color/textColorTertiary"
+            android:textColor="@color/textColorTertiary"
+            android:maxLines="1"
+            android:inputType="textVisiblePassword"
+            android:paddingLeft="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/borda_edittext"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <Button
+            android:id="@+id/cadastro_artista_content_button_enviar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ENVIAR"
+            android:textSize="20dp"
+            android:textColor="@color/textColorPrimary"
+            android:background="@color/colorButtonRed"/>
+
+    </LinearLayout>
 </LinearLayout>

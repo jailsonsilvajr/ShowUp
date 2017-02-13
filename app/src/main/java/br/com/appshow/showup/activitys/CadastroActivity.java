@@ -1,5 +1,6 @@
 package br.com.appshow.showup.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -40,5 +41,9 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void open_cadastro_artista(){}
 
-    public void open_cadastro_contratante(){}
+    public void open_cadastro_contratante(){
+
+        Intent activity_cadastro_contratante = new Intent(this, CadastroContratanteActivity.class);
+        startActivity(activity_cadastro_contratante);
+    }
 }

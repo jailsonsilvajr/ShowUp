@@ -109,6 +109,12 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".activitys.CadastroContratanteActivity"
+            android:theme="@style/ThemeNoActionBar">
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activitys.ArtistaInicioActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

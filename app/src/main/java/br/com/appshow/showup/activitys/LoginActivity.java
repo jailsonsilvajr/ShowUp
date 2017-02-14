@@ -12,7 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
@@ -85,19 +91,27 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result){
 
             StringTokenizer str = new StringTokenizer(result);
-            String token1 = str.nextToken();
+            String token = str.nextToken();
 
-            if(token1.equals("conexao_erro")){
+            //Toast.makeText(LoginActivity.this, token+"-"+token2, Toast.LENGTH_SHORT).show();
+
+            if(token.equals("conexao_erro")){
 
                 Toast.makeText(LoginActivity.this, "Servidor Offline!", Toast.LENGTH_SHORT).show();
-            }else if(token1.equals("login_erro")){
+            }else if(token.equals("login_erro")){
 
                 Toast.makeText(LoginActivity.this, "Login e/ou Senha incorreto(s)!", Toast.LENGTH_SHORT).show();
             }else{
 
-                if(token1.equals("artista")){
+                String token2 = str.nextToken();
+                if(token.equals("artista")){
 
-                    Artista artista = new Artista(str.nextToken());
+                    url = "http://192.241.244.47/showup/logar_artista_app.php?";
+                    parametros = "id_artista=" + token2;
+                    new SolicitarDadosArtista().execute(url);
+
+                    /*Gson gson = new Gson();
+                    Artista artista = gson.fromJson(, Artista.class);
                     artista.setNome(str.nextToken());
                     artista.setEstilo(str.nextToken());
                     artista.setSite(str.nextToken());
@@ -106,9 +120,15 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent artista_inicial_activity = new Intent(LoginActivity.this, ArtistaInicioActivity.class);
                     artista_inicial_activity.putExtra("paramsUsuario", user);
-                    startActivity(artista_inicial_activity);
+                    startActivity(artista_inicial_activity);*/
                 }else{
 
+                    url = "http://192.241.244.47/showup/logar_contratante_app.php?";
+                    parametros = "id_contratante=" + token2;
+                    new SolicitarDadosContratante().execute(url);
+
+                    /*Gson gson = new Gson();
+                    Contratante contratante = gson.fromJson(str.nextToken(), Contratante.class);
                     Contratante contratante = new Contratante(str.nextToken());
                     contratante.setNome(str.nextToken());
                     contratante.setEmail(str.nextToken());
@@ -120,8 +140,69 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent contratante_inicial_activity = new Intent(LoginActivity.this, ContratanteInicioActivity.class);
                     contratante_inicial_activity.putExtra("paramsUsuario", user);
-                    startActivity(contratante_inicial_activity);
+                    startActivity(contratante_inicial_activity);*/
                 }
+            }
+        }
+    }
+
+    private class SolicitarDadosArtista extends AsyncTask<String, Void, String>{
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            if(result.equals("login_erro")){
+
+                Toast.makeText(LoginActivity.this, "Erro: Tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
+            }else{
+
+                //Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                Gson gson = new Gson();
+                Artista[] artista_array = gson.fromJson(result, Artista[].class);
+
+                List artista_lista = Arrays.asList(artista_array);
+                ArrayList<Artista> artista = new ArrayList(artista_lista);
+
+
+                Usuario user = new Usuario(artista.get(0), null);
+
+                Intent artista_inicial_activity = new Intent(LoginActivity.this, ArtistaInicioActivity.class);
+                artista_inicial_activity.putExtra("paramsUsuario", user);
+                startActivity(artista_inicial_activity);
+            }
+        }
+    }
+
+    private class SolicitarDadosContratante extends AsyncTask<String, Void, String>{
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            if(result.equals("login_erro")){
+
+                Toast.makeText(LoginActivity.this, "Erro: Tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
+            }else{
+
+                //Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                Gson gson = new Gson();
+                Contratante[] contratante_array = gson.fromJson(result, Contratante[].class);
+
+                List contratante_lista = Arrays.asList(contratante_array);
+                ArrayList<Contratante> contratante = new ArrayList(contratante_lista);
+
+                Usuario user = new Usuario(null, contratante.get(0));
+
+                Intent contratante_inicial_activity = new Intent(LoginActivity.this, ContratanteInicioActivity.class);
+                contratante_inicial_activity.putExtra("paramsUsuario", user);
+                startActivity(contratante_inicial_activity);
             }
         }
     }

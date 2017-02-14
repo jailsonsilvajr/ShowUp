@@ -338,25 +338,35 @@ public class ContratanteInicioActivity extends AppCompatActivity
 
         ArrayList<Artista> array = new ArrayList<Artista>();
 
-        Artista artista1 = new Artista("Artista1");
-        Artista artista2 = new Artista("Artista2");
-        Artista artista3 = new Artista("Artista3");
-        Artista artista4 = new Artista("Artista4");
-        Artista artista5 = new Artista("Artista5");
-        Artista artista6 = new Artista("Artista6");
-        Artista artista7 = new Artista("Artista7");
-        Artista artista8 = new Artista("Artista8");
-        Artista artista9 = new Artista("Artista9");
+        Artista artista1 = new Artista();
+        Artista artista2 = new Artista();
+        Artista artista3 = new Artista();
+        Artista artista4 = new Artista();
+        Artista artista5 = new Artista();
+        Artista artista6 = new Artista();
+        Artista artista7 = new Artista();
+        Artista artista8 = new Artista();
+        Artista artista9 = new Artista();
 
-        artista1.setCod("codigo1");
-        artista2.setCod("codigo2");
-        artista3.setCod("codigo3");
-        artista4.setCod("codigo4");
-        artista5.setCod("codigo5");
-        artista6.setCod("codigo6");
-        artista7.setCod("codigo7");
-        artista8.setCod("codigo8");
-        artista9.setCod("codigo9");
+        artista1.setNome("Artista1");
+        artista2.setNome("Artista2");
+        artista3.setNome("Artista3");
+        artista4.setNome("Artista4");
+        artista5.setNome("Artista5");
+        artista6.setNome("Artista6");
+        artista7.setNome("Artista7");
+        artista8.setNome("Artista8");
+        artista9.setNome("Artista9");
+
+        artista1.setId_artista("codigo1");
+        artista2.setId_artista("codigo2");
+        artista3.setId_artista("codigo3");
+        artista4.setId_artista("codigo4");
+        artista5.setId_artista("codigo5");
+        artista6.setId_artista("codigo6");
+        artista7.setId_artista("codigo7");
+        artista8.setId_artista("codigo8");
+        artista9.setId_artista("codigo9");
 
         artista1.setEstilo("estilo1");
         artista2.setEstilo("estilo2");

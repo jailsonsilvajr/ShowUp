@@ -9,15 +9,20 @@ import android.os.Parcelable;
 
 public class Artista implements Parcelable{
 
-    private String cod;
+    private String id_artista;
     private String nome;
     private String estilo;
     private String site;
     private String descricao;
 
-    public Artista(String cod){
+    public Artista(){}
 
-        this.cod = cod;
+    public String getId_artista() {
+        return id_artista;
+    }
+
+    public void setId_artista(String id_artista) {
+        this.id_artista = id_artista;
     }
 
     public String getNome() {
@@ -26,14 +31,6 @@ public class Artista implements Parcelable{
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCod() {
-        return cod;
-    }
-
-    public void setCod(String cod) {
-        this.cod = cod;
     }
 
     public String getEstilo() {
@@ -61,7 +58,7 @@ public class Artista implements Parcelable{
     }
 
     protected Artista(Parcel in) {
-        cod = in.readString();
+        id_artista = in.readString();
         nome = in.readString();
         estilo = in.readString();
         site = in.readString();
@@ -88,7 +85,7 @@ public class Artista implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(cod);
+        dest.writeString(id_artista);
         dest.writeString(nome);
         dest.writeString(estilo);
         dest.writeString(site);

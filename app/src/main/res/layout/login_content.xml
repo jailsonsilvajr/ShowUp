@@ -34,7 +34,7 @@
             android:textColorHint="@color/textColorPrimary"
             android:textColor="@color/textColorPrimary"
             android:maxLines="1"
-            android:inputType="text"
+            android:inputType="textEmailAddress"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"

@@ -245,7 +245,7 @@ public class ContratanteFavoritosActivity extends AppCompatActivity
 
         ArrayList<Artista> array = new ArrayList<Artista>();
 
-        Artista artista1 = new Artista("Artista1");
+        /*Artista artista1 = new Artista("Artista1");
         Artista artista2 = new Artista("Artista2");
         Artista artista3 = new Artista("Artista3");
         Artista artista4 = new Artista("Artista4");
@@ -303,7 +303,7 @@ public class ContratanteFavoritosActivity extends AppCompatActivity
         array.add(artista6);
         array.add(artista7);
         array.add(artista8);
-        array.add(artista9);
+        array.add(artista9);*/
 
         return array;
     }

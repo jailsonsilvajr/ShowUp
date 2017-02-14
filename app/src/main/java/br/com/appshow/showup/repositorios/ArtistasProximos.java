@@ -39,7 +39,7 @@ public class ArtistasProximos {
 
         for(int i = 0; i < this.artistasProximos.size(); i++){
 
-            if(this.artistasProximos.get(i).getCod() == codigo) return i;
+            if(this.artistasProximos.get(i).getId_artista() == codigo) return i;
         }
         return -1;
     }

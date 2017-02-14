@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Artista;
 import br.com.appshow.showup.entidades.Contratante;
-import br.com.appshow.showup.entidades.Evento;
 import br.com.appshow.showup.entidades.Usuario;
 import br.com.appshow.showup.repositorios.ArtistasProximos;
 import de.hdodenhof.circleimageview.CircleImageView;

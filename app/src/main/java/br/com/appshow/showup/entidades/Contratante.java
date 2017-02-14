@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class Contratante implements Parcelable{
 
-    private String cod;
+    private String id_contratante;
     private String nome;
     private String email;
     private String cpf_cnpj;
@@ -19,9 +19,14 @@ public class Contratante implements Parcelable{
     private String nascimento; //TROCAR DE STRING PARA DATE!!
     private String numero_celular;
 
-    public Contratante(String cod){
+    public Contratante(){}
 
-        this.cod = cod;
+    public String getId_contratante() {
+        return id_contratante;
+    }
+
+    public void setId_contratante(String id_contratante) {
+        this.id_contratante = id_contratante;
     }
 
     public String getNome() {
@@ -72,17 +77,9 @@ public class Contratante implements Parcelable{
         this.numero_celular = numero_celular;
     }
 
-    public String getCod() {
-        return cod;
-    }
-
-    public void setCod(String cod) {
-        this.cod = cod;
-    }
-
     protected Contratante(Parcel in) {
 
-        this.cod = in.readString();
+        this.id_contratante = in.readString();
         this.nome = in.readString();
         this.email = in.readString();
         this.cpf_cnpj = in.readString();
@@ -112,7 +109,7 @@ public class Contratante implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-        dest.writeString(cod);
+        dest.writeString(id_contratante);
         dest.writeString(nome);
         dest.writeString(email);
         dest.writeString(cpf_cnpj);

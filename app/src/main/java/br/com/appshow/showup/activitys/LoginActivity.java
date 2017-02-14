@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -109,38 +107,11 @@ public class LoginActivity extends AppCompatActivity {
                     url = "http://192.241.244.47/showup/logar_artista_app.php?";
                     parametros = "id_artista=" + token2;
                     new SolicitarDadosArtista().execute(url);
-
-                    /*Gson gson = new Gson();
-                    Artista artista = gson.fromJson(, Artista.class);
-                    artista.setNome(str.nextToken());
-                    artista.setEstilo(str.nextToken());
-                    artista.setSite(str.nextToken());
-                    artista.setDescricao(str.nextToken());
-                    Usuario user = new Usuario(artista, null);
-
-                    Intent artista_inicial_activity = new Intent(LoginActivity.this, ArtistaInicioActivity.class);
-                    artista_inicial_activity.putExtra("paramsUsuario", user);
-                    startActivity(artista_inicial_activity);*/
                 }else{
 
                     url = "http://192.241.244.47/showup/logar_contratante_app.php?";
                     parametros = "id_contratante=" + token2;
                     new SolicitarDadosContratante().execute(url);
-
-                    /*Gson gson = new Gson();
-                    Contratante contratante = gson.fromJson(str.nextToken(), Contratante.class);
-                    Contratante contratante = new Contratante(str.nextToken());
-                    contratante.setNome(str.nextToken());
-                    contratante.setEmail(str.nextToken());
-                    contratante.setCpf_cnpj(str.nextToken());
-                    contratante.setCep(str.nextToken());
-                    contratante.setNascimento(str.nextToken());
-                    contratante.setNumero_celular(str.nextToken());
-                    Usuario user = new Usuario(null, contratante);
-
-                    Intent contratante_inicial_activity = new Intent(LoginActivity.this, ContratanteInicioActivity.class);
-                    contratante_inicial_activity.putExtra("paramsUsuario", user);
-                    startActivity(contratante_inicial_activity);*/
                 }
             }
         }

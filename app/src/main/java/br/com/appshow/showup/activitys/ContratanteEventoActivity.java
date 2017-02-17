@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Evento;
@@ -91,6 +93,7 @@ public class ContratanteEventoActivity extends AppCompatActivity
         TextView contratante_evento_content_nome_evento = (TextView) findViewById(R.id.contratante_evento_content_nome_evento);
         TextView contratante_evento_content_data_evento = (TextView) findViewById(R.id.contratante_evento_content_data_evento);
         TextView contratante_evento_content_hora_evento = (TextView) findViewById(R.id.contratante_evento_content_hora_evento);
+        //FALTA CONFIGURAR OS EQUIPAMENTOS!!!!
         TextView contratante_evento_content_requisitos_evento = (TextView) findViewById(R.id.contratante_evento_content_requisitos_evento);
 
         contratante_evento_content_textview_nome_local.setText(this.evento.getLocal());

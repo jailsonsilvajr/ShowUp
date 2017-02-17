@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,6 @@
             android:layout_centerHorizontal="true" />
 
         <EditText
-
             android:id="@+id/login_content_textview_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +43,6 @@
             android:background="@drawable/borda_edittext_transparent"/>
 
         <EditText
-
             android:id="@+id/login_content_textview_senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,6 +60,20 @@
             android:layout_marginRight="56dp"
             android:background="@drawable/borda_edittext_transparent"/>
 
+        <RelativeLayout
+            android:id="@+id/login_content_layout_progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/login_content_textview_senha">
+
+            <ProgressBar
+                android:id="@+id/contratante_criar_evento_content_progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -78,5 +90,4 @@
             android:textColor="@color/textColorSecundary"
             android:textSize="20dp" />
     </RelativeLayout>
-
 </LinearLayout>

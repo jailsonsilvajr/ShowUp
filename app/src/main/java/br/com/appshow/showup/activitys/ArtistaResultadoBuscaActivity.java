@@ -256,7 +256,7 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         evento8.setLocal("Centro de Convenções");
         evento9.setLocal("Arena Liquidi Sky");
 
-        evento1.setEndereco("Cais da Alfândega, 50030-100, Recife");
+        /*evento1.setEndereco("Cais da Alfândega, 50030-100, Recife");
         evento2.setEndereco("Rua Bispo Coutinho, 681, Alto da Sé, Olinda");
         evento3.setEndereco("Avenida Sigismundo Gonçalves, 742, 53010-240, Olinda");
         evento4.setEndereco("Rua da Concórdia, 943 - São José, 50020-050, Recife");
@@ -264,7 +264,7 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         evento6.setEndereco("Rua Capitao Lima, 195, 50040-080, Recife");
         evento7.setEndereco("Olinda");
         evento8.setEndereco("Avenida Professor Andrade Bezerra, S/N - Salgadinho/Olinda-PE");
-        evento8.setEndereco("R. Cataguáses, 2 - Guabiraba, 100000, Recife");
+        evento8.setEndereco("R. Cataguáses, 2 - Guabiraba, 100000, Recife");*/
 
         evento1.setDescricao("A 22ª edição do Festival Rec-Beat, vai acontecer no Cais da Alfândega, entre 25 e 28 de fevereiro, durante o carnaval.");
         evento2.setDescricao("Enquanto o dia 25 de fevereiro não chega, já estamos ansiosos e preparando nossa tradicional Prévia, a concentração marca o início das comemorações dos 10 anos do bloco.");
@@ -290,7 +290,7 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         evento8.setNome("Enquanto isso na Sala da Justiça");
         evento9.setNome("Liquid Sky");
 
-        evento1.setData("25/02");
+        /*evento1.setData("25/02");
         evento2.setData("04/02");
         evento3.setData("03/02");
         evento4.setData("03/02");
@@ -318,7 +318,7 @@ public class ArtistaResultadoBuscaActivity extends AppCompatActivity
         evento6.setTempo("EM 5H");
         evento7.setTempo("EM 7H");
         evento8.setTempo("EM 4H");
-        evento9.setTempo("EM 6H");
+        evento9.setTempo("EM 6H");*/
 
         evento1.setRequisito("Requisitos...\n"+"Requisitos...");
         evento2.setRequisito("Requisitos...\n"+"Requisitos...");

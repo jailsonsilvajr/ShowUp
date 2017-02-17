@@ -38,7 +38,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import org.lucasr.twowayview.TwoWayView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
@@ -188,12 +191,48 @@ public class ArtistaInicioActivity extends AppCompatActivity
         //--Fim de (5)
 
         //--(6) Configurar evento principal/mais próximo:
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        Date data_atual = calendar.getTime();
+
+        //String data = dateFormat.format(data_atual);
+        //String hora = horaFormat.format(data_atual);
+
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+        int mes = calendar.get(Calendar.MONTH) + 1;
+        int ano = calendar.get(Calendar.YEAR);
+        int hora = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+
+        Evento evento = this.eventosProximos.getEventoByIndex(0);
+        int dia_evento = Integer.parseInt(evento.getDia());
+        int mes_evento = Integer.parseInt(evento.getMes());
+        int ano_evento = Integer.parseInt(evento.getAno());
+        int hora_evento = Integer.parseInt(evento.getHorario_inicio().substring(0, 2));
+        int min_evento = Integer.parseInt(evento.getHorario_inicio().substring(3, 5));
+
+        String tempo;
+        if(dia == dia_evento){
+
+            tempo = "EM " + (hora_evento - hora) + "H";
+        }else if(mes_evento == mes){
+
+            tempo = "EM " + (dia_evento - dia) + "D";
+        }else if(ano_evento == ano){
+
+            tempo = "EM " + (mes_evento - mes) + "M";
+        }else{
+
+            mes_evento = mes_evento + 12;
+            tempo = "EM " + (mes - mes_evento) + "M";
+        }
         ImageView artista_inicio_content_imageview = (ImageView) findViewById(R.id.artista_inicio_content_imageview);
         TextView artista_inicio_content_textview_tempo = (TextView) findViewById(R.id.artista_inicio_content_textview_tempo);
         TextView artista_inicio_content_textview_nome = (TextView) findViewById(R.id.artista_inicio_content_textview_nome);
 
         artista_inicio_content_imageview.setImageResource(R.drawable.temp_evento1);
-        artista_inicio_content_textview_tempo.setText(this.eventosProximos.getEventoByIndex(0).getTempo());
+        artista_inicio_content_textview_tempo.setText(tempo);
         artista_inicio_content_textview_nome.setText(this.eventosProximos.getEventoByIndex(0).getNome());
         //--Fim de (6)
     }
@@ -336,7 +375,46 @@ public class ArtistaInicioActivity extends AppCompatActivity
             ImageView artista_inicio_list_item_twowayview_image = (ImageView) rowView.findViewById(R.id.artista_inicio_list_item_twowayview_image);
 
             Evento evento = (Evento) getItem(position);
-            artista_inicio_list_item_twowayview_tempo.setText(evento.getTempo());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm:ss");
+            Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            Date data_atual = calendar.getTime();
+
+            //String data = dateFormat.format(data_atual);
+            //String hora = horaFormat.format(data_atual);
+
+            int dia = calendar.get(Calendar.DAY_OF_MONTH);
+            int mes = calendar.get(Calendar.MONTH) + 1;
+            int ano = calendar.get(Calendar.YEAR);
+            int hora = calendar.get(Calendar.HOUR_OF_DAY);
+            int min = calendar.get(Calendar.MINUTE);
+
+            int dia_evento = Integer.parseInt(evento.getDia());
+            int mes_evento = Integer.parseInt(evento.getMes());
+            int ano_evento = Integer.parseInt(evento.getAno());
+            int hora_evento = Integer.parseInt(evento.getHorario_inicio().substring(0, 2));
+            int min_evento = Integer.parseInt(evento.getHorario_inicio().substring(3, 5));
+
+            String tempo;
+            if(dia == dia_evento){
+
+                tempo = "EM " + (hora_evento - hora) + "H";
+            }else if(mes_evento == mes){
+
+                tempo = "EM " + (dia_evento - dia) + "D";
+            }else if(ano_evento == ano){
+
+                tempo = "EM " + (mes_evento - mes) + "M";
+            }else{
+
+                mes_evento = mes_evento + 12;
+                tempo = "EM " + (mes - mes_evento) + "M";
+            }
+
+            artista_inicio_list_item_twowayview_tempo.setText(tempo);
             artista_inicio_list_item_twowayview_nome.setText(evento.getNome());
             artista_inicio_list_item_twowayview_image.setImageResource(R.drawable.temp_evento1);
 
@@ -509,15 +587,55 @@ public class ArtistaInicioActivity extends AppCompatActivity
         evento8.setNome("Centro de Convenções");
         evento9.setNome("Arena Liquidi Sky");
 
-        evento1.setEndereco("Cais da Alfândega, 50030-100, Recife");
-        evento2.setEndereco("Rua Bispo Coutinho, 681, Alto da Sé, Olinda");
-        evento3.setEndereco("Avenida Sigismundo Gonçalves, 742, 53010-240, Olinda");
-        evento4.setEndereco("Rua da Concórdia, 943 - São José, 50020-050, Recife");
-        evento5.setEndereco("Rua do Farol, 218, Olinda - PE, 53120-390, Brasil");
-        evento6.setEndereco("Rua Capitao Lima, 195, 50040-080, Recife");
-        evento7.setEndereco("Olinda");
-        evento8.setEndereco("Avenida Professor Andrade Bezerra, S/N - Salgadinho/Olinda-PE");
-        evento8.setEndereco("R. Cataguáses, 2 - Guabiraba, 100000, Recife");
+        evento1.setEstado("Pernambuco");
+        evento2.setEstado("Pernambuco");
+        evento3.setEstado("Pernambuco");
+        evento4.setEstado("Pernambuco");
+        evento5.setEstado("Pernambuco");
+        evento6.setEstado("Pernambuco");
+        evento7.setEstado("Pernambuco");
+        evento8.setEstado("Pernambuco");
+        evento9.setEstado("Pernambuco");
+
+        evento1.setCidade("Recife");
+        evento2.setCidade("Olinda");
+        evento3.setCidade("Olinda");
+        evento4.setCidade("Recife");
+        evento5.setCidade("Olinda");
+        evento6.setCidade("Recife");
+        evento7.setCidade("Olinda");
+        evento8.setCidade("Olinda");
+        evento9.setCidade("Recife");
+
+        evento1.setBairro("Cais da Alfândega");
+        evento2.setBairro("Alto da Sé");
+        evento3.setBairro("Bairro");
+        evento4.setBairro("São José");
+        evento5.setBairro("Bairro");
+        evento6.setBairro("Bairro");
+        evento7.setBairro("Bairro");
+        evento8.setBairro("Salgadinho");
+        evento9.setBairro("Guabiraba");
+
+        evento1.setRua("Cais da Alfândega");
+        evento2.setRua("Rua Bispo Coutinho");
+        evento3.setRua("Avenida Sigismundo Gonçalves");
+        evento4.setRua("Rua da Concórdia");
+        evento5.setRua("Rua do Farol");
+        evento6.setRua("Rua Capitao Lima");
+        evento7.setRua("Rua");
+        evento8.setRua("Avenida Professor Andrade Bezerra");
+        evento9.setRua("R. Cataguáses");
+
+        evento1.setNumero("s/n");
+        evento2.setNumero("681");
+        evento3.setNumero("742");
+        evento4.setNumero("943");
+        evento5.setNumero("218");
+        evento6.setNumero("195");
+        evento7.setNumero("s/n");
+        evento8.setNumero("s/n");
+        evento9.setNumero("100000");
 
         evento1.setDescricao("A 22ª edição do Festival Rec-Beat, vai acontecer no Cais da Alfândega, entre 25 e 28 de fevereiro, durante o carnaval.");
         evento2.setDescricao("Enquanto o dia 25 de fevereiro não chega, já estamos ansiosos e preparando nossa tradicional Prévia, a concentração marca o início das comemorações dos 10 anos do bloco.");
@@ -543,35 +661,55 @@ public class ArtistaInicioActivity extends AppCompatActivity
         evento8.setNome("Enquanto isso na Sala da Justiça");
         evento9.setNome("Liquid Sky");
 
-        evento1.setData("25/02");
-        evento2.setData("04/02");
-        evento3.setData("03/02");
-        evento4.setData("03/02");
-        evento5.setData("25/02");
-        evento6.setData("11/02");
-        evento7.setData("19/02");
-        evento8.setData("10/02");
-        evento9.setData("18/02");
+        evento1.setDia("16");
+        evento2.setDia("04");
+        evento3.setDia("03");
+        evento4.setDia("16");
+        evento5.setDia("25");
+        evento6.setDia("11");
+        evento7.setDia("19");
+        evento8.setDia("10");
+        evento9.setDia("18");
 
-        evento1.setHorario("19:30H - 01:30");
-        evento2.setHorario("10:00H - 16:20H");
-        evento3.setHorario("22:00H - 05:00H");
-        evento4.setHorario("22:00H - 06:00H");
-        evento5.setHorario("09:00H - 15:00H");
-        evento6.setHorario("23:00H - 05:00H");
-        evento7.setHorario("09:00H - 22:00H");
-        evento8.setHorario("22:00H - 05:00H");
-        evento9.setHorario("22:00H - 16:00H");
+        evento1.setMes("02");
+        evento2.setMes("03");
+        evento3.setMes("03");
+        evento4.setMes("02");
+        evento5.setMes("02");
+        evento6.setMes("03");
+        evento7.setMes("02");
+        evento8.setMes("03");
+        evento9.setMes("02");
 
-        evento1.setTempo("EM 9H");
-        evento2.setTempo("EM 3H");
-        evento3.setTempo("EM 1H");
-        evento4.setTempo("EM 2H");
-        evento5.setTempo("EM 8H");
-        evento6.setTempo("EM 5H");
-        evento7.setTempo("EM 7H");
-        evento8.setTempo("EM 4H");
-        evento9.setTempo("EM 6H");
+        evento1.setAno("2017");
+        evento2.setAno("2018");
+        evento3.setAno("2017");
+        evento4.setAno("2017");
+        evento5.setAno("2017");
+        evento6.setAno("2017");
+        evento7.setAno("2017");
+        evento8.setAno("2017");
+        evento9.setAno("2017");
+
+        evento1.setHorario_inicio("19:30");
+        evento2.setHorario_inicio("10:00");
+        evento3.setHorario_inicio("22:25");
+        evento4.setHorario_inicio("18:00");
+        evento5.setHorario_inicio("09:00");
+        evento6.setHorario_inicio("23:00");
+        evento7.setHorario_inicio("09:00");
+        evento8.setHorario_inicio("22:00");
+        evento9.setHorario_inicio("22:00");
+
+        evento1.setHorario_fim("01:30");
+        evento2.setHorario_fim("16:20");
+        evento3.setHorario_fim("05:00");
+        evento4.setHorario_fim("01:00");
+        evento5.setHorario_fim("15:00");
+        evento6.setHorario_fim("05:00");
+        evento7.setHorario_fim("22:00");
+        evento8.setHorario_fim("05:00");
+        evento9.setHorario_fim("16:00");
 
         evento1.setRequisito("Requisitos...\n"+"Requisitos...");
         evento2.setRequisito("Requisitos...\n"+"Requisitos...");

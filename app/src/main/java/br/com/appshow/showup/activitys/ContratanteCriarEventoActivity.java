@@ -1,6 +1,11 @@
 package br.com.appshow.showup.activitys;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,15 +16,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import br.com.appshow.showup.R;
+import br.com.appshow.showup.conexao.Conectar;
 import br.com.appshow.showup.entidades.Contratante;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,15 +48,27 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Contratante contratante;
-    private String nome_evento;
-    private String nome_local_evento;
-    private String endereco_evento;
-    private String data_evento;
-    private String inicio_evento;
-    private String termino_evento;
-    private String descricao_evento;
-    private String equipamentos_evento;
-    private String procura_evento;
+    private String nome;
+    private String local;
+    private String estado;
+    private String cidade;
+    private String bairro;
+    private String rua;
+    private String numero;
+    private String descricao;
+    private String data;
+    private String horario_inicio;
+    private String horario_fim;
+    private String equipamentos;
+    private String requisitos;
+    private String imagem_principal;
+    private String imagem_secundaria;
+    private String imagem_redonda;
+    Spinner spinner_estado;
+    Spinner spinner_cidade;
+
+    String url;
+    String parametros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,43 +121,113 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         //--Fim de (1)
 
         //--(2) Configurando views:
-        final EditText contratante_criar_evento_edittext_nome_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_nome_evento);
-        final EditText contratante_criar_evento_edittext_local_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_local_evento);
-        final EditText contratante_criar_evento_edittext_endereco_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_endereco_evento);
-        final EditText contratante_criar_evento_edittext_data_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_data_evento);
-        final EditText contratante_criar_evento_edittext_inicio_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_inicio_evento);
-        final EditText contratante_criar_evento_edittext_termino_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_termino_evento);
-        final EditText contratante_criar_evento_edittext_descricao_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_descricao_evento);
-        final EditText contratante_criar_evento_edittext_equipamentos_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_equipamentos_evento);
-        final EditText contratante_criar_evento_edittext_procura_evento = (EditText) findViewById(R.id.contratante_criar_evento_edittext_procura_evento);
+        final EditText contratante_criar_evento_edittext_nome = (EditText) findViewById(R.id.contratante_criar_evento_edittext_nome);
+        final EditText contratante_criar_evento_edittext_local = (EditText) findViewById(R.id.contratante_criar_evento_edittext_local);
+        final Spinner contratante_criar_evento_spinner_estado = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_estado);
+        final Spinner contratante_criar_evento_spinner_cidade = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_cidade);
+        final EditText contratante_criar_evento_edittext_bairro = (EditText) findViewById(R.id.contratante_criar_evento_edittext_bairro);
+        final EditText contratante_criar_evento_edittext_rua = (EditText) findViewById(R.id.contratante_criar_evento_edittext_rua);
+        final EditText contratante_criar_evento_edittext_numero = (EditText) findViewById(R.id.contratante_criar_evento_edittext_numero);
+        final EditText contratante_criar_evento_edittext_descricao = (EditText) findViewById(R.id.contratante_criar_evento_edittext_descricao);
+        final EditText contratante_criar_evento_edittext_data = (EditText) findViewById(R.id.contratante_criar_evento_edittext_data);
+        final EditText contratante_criar_evento_edittext_horario_inicio = (EditText) findViewById(R.id.contratante_criar_evento_edittext_horario_inicio);
+        final EditText contratante_criar_evento_edittext_horario_fim = (EditText) findViewById(R.id.contratante_criar_evento_edittext_horario_fim);
+        final EditText contratante_criar_evento_edittext_equipamentos = (EditText) findViewById(R.id.contratante_criar_evento_edittext_equipamentos);
+        final EditText contratante_criar_evento_edittext_requisitos = (EditText) findViewById(R.id.contratante_criar_evento_edittext_requisitos);
         Button contratante_criar_evento_button_criar = (Button) findViewById(R.id.contratante_criar_evento_button_criar);
 
         contratante_criar_evento_button_criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                nome_evento = contratante_criar_evento_edittext_nome_evento.getText().toString();
-                nome_local_evento = contratante_criar_evento_edittext_local_evento.getText().toString();
-                endereco_evento = contratante_criar_evento_edittext_endereco_evento.getText().toString();
-                data_evento = contratante_criar_evento_edittext_data_evento.getText().toString();
-                inicio_evento = contratante_criar_evento_edittext_inicio_evento.getText().toString();
-                termino_evento = contratante_criar_evento_edittext_termino_evento.getText().toString();
-                descricao_evento = contratante_criar_evento_edittext_descricao_evento.getText().toString();
-                equipamentos_evento = contratante_criar_evento_edittext_equipamentos_evento.getText().toString();
-                procura_evento = contratante_criar_evento_edittext_procura_evento.getText().toString();
+                nome = contratante_criar_evento_edittext_nome.getText().toString();
+                local = contratante_criar_evento_edittext_local.getText().toString();
+                bairro = contratante_criar_evento_edittext_bairro.getText().toString();
+                rua = contratante_criar_evento_edittext_rua.getText().toString();
+                numero = contratante_criar_evento_edittext_numero.getText().toString();
+                descricao = contratante_criar_evento_edittext_descricao.getText().toString();
+                data = contratante_criar_evento_edittext_data.getText().toString();
+                horario_inicio = contratante_criar_evento_edittext_horario_inicio.getText().toString();
+                horario_fim = contratante_criar_evento_edittext_horario_fim.getText().toString();
+                equipamentos = contratante_criar_evento_edittext_equipamentos.getText().toString();
+                requisitos = contratante_criar_evento_edittext_requisitos.getText().toString();
 
-                showToast();//temporário
+                //showToast();//temporário
+
+                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()){
+
+                    url = "http://192.241.244.47/showup/criar_evento.php?";
+                    parametros = "id_contratante=" + contratante.getId_contratante() +
+                                 "&nome=" + nome + "&local=" + local + "&estado=" + estado +
+                                 "&cidade=" + cidade + "&bairro=" + bairro + "&rua=" + rua +
+                                 "&numero=" + numero + "&descricao=" + descricao + "&horario_inicio=" + horario_inicio +
+                                 "&horario_fim=" + horario_fim + "&equipamentos=" + equipamentos + "&requisito=" + requisitos +
+                                 "&url_imagem_principal=" + "http://192.241.244.47/showup/img_eventos/img_evento1_principal.png" +
+                                 "&url_imagem_secundaria=" + "http://192.241.244.47/showup/img_eventos/img_evento1_secundaria.png" +
+                                 "&url_imagem_redonda=" + "http://192.241.244.47/showup/img_eventos/img_evento1_redonda.png";
+                    new CriarEvento().execute(url);
+                }else{}
             }
         });
         //--Fim de (2)
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+
+            url = "http://192.241.244.47/showup/json/estados-cidades.json";
+            parametros = "";
+            new SolicitarDados().execute(url);
+        }else{}
     }
 
-    public void showToast(){ //temporário
+    public void conf_spinner(JSONObject jsonObjetoEstado){
 
-        Toast.makeText(this, nome_evento+"\n"+nome_local_evento+"\n"+endereco_evento+"\n"+
-                data_evento+"\n"+inicio_evento+"\n"+termino_evento+"\n"+descricao_evento+"\n"+
-                equipamentos_evento+"\n"+procura_evento, Toast.LENGTH_LONG).show();
+        final List<String> cidades = new ArrayList<String>();
+        cidades.add("Cidade:");
+
+        if(jsonObjetoEstado!= null ){
+
+            try{
+
+                JSONArray jsonArrayCidades = jsonObjetoEstado.getJSONArray("cidades");
+                for(int i = 0; i < jsonArrayCidades.length(); i++){
+
+                    cidades.add(jsonArrayCidades.getString(i));
+                }
+            }catch(JSONException e){
+
+                //Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+        spinner_cidade = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_cidade);
+        ArrayAdapter<String> adapter_cidade = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cidades);
+        adapter_cidade.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_cidade.setAdapter(adapter_cidade);
+        spinner_cidade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.textColorTertiary));
+                if(position == 0) cidade = null;
+                else cidade = cidades.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
+
+    /*public void showToast(){ //temporário
+
+        Toast.makeText(this, nome+"\n"+local+"\n"+estado+"\n"+cidade+"\n"+bairro+"\n"+rua+"\n"+
+                numero+"\n"+descricao+"\n"+data+"\n"+horario_inicio+"\n"+horario_fim+"\n"+
+                equipamentos+"\n"+requisitos, Toast.LENGTH_LONG).show();
+    }*/
 
     public void open_activity_alterar_perfil(){
 
@@ -209,5 +308,110 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_criar_evento_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class SolicitarDados extends AsyncTask<String, Void, String> {
+
+        RelativeLayout contratante_criar_evento_content_layout_progressBar = (RelativeLayout) findViewById(R.id.contratante_criar_evento_content_layout_progressBar);
+        LinearLayout contratante_criar_evento_content_layout_principal = (LinearLayout) findViewById(R.id.contratante_criar_evento_content_layout_principal);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            contratante_criar_evento_content_layout_progressBar.setVisibility(View.VISIBLE);
+            contratante_criar_evento_content_layout_principal.setVisibility(View.GONE);
+        }
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            //Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
+
+            final List<String> estados = new ArrayList<String>();
+            estados.add("Estado:");
+            if(!result.equals("conexao_erro")){
+
+                try{
+
+                    JSONObject jsonObject = new JSONObject(result);
+                    final JSONArray jsonArrayEstado = jsonObject.getJSONArray("estados");
+                    for(int i = 0; i < jsonArrayEstado.length(); i++){
+
+                        JSONObject jsonObjectEstado = (JSONObject) jsonArrayEstado.get(i);
+                        estados.add(jsonObjectEstado.getString("nome"));
+                    }
+                    spinner_estado = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_estado);
+                    ArrayAdapter<String> adapter_estado = new ArrayAdapter<String>(ContratanteCriarEventoActivity.this, android.R.layout.simple_spinner_item, estados);
+                    adapter_estado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_estado.setAdapter(adapter_estado);
+                    spinner_estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                            ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.textColorTertiary));
+                            try{
+
+                                if(position == 0) estado = null;
+                                else estado = estados.get(position);
+
+                                JSONObject jsonObjectEstado;
+                                if(position != 0) jsonObjectEstado = jsonArrayEstado.getJSONObject(position-1);
+                                else jsonObjectEstado = null;
+                                conf_spinner(jsonObjectEstado);
+                            }catch (Exception e){}
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                }catch (Exception e){
+
+                    //Toast.makeText(MainActivity.this, "ERRO", Toast.LENGTH_LONG).show();
+                }
+            }else{
+
+                Toast.makeText(ContratanteCriarEventoActivity.this, "ERRO", Toast.LENGTH_LONG).show();
+            }
+            contratante_criar_evento_content_layout_progressBar.setVisibility(View.GONE);
+            contratante_criar_evento_content_layout_principal.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private class CriarEvento extends AsyncTask<String, Void, String> {
+
+        //RelativeLayout contratante_criar_evento_content_layout_progressBar = (RelativeLayout) findViewById(R.id.contratante_criar_evento_content_layout_progressBar);
+        //LinearLayout contratante_criar_evento_content_layout_principal = (LinearLayout) findViewById(R.id.contratante_criar_evento_content_layout_principal);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //contratante_criar_evento_content_layout_progressBar.setVisibility(View.VISIBLE);
+            //contratante_criar_evento_content_layout_principal.setVisibility(View.GONE);
+        }
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            //Toast.makeText(ContratanteCriarEventoActivity.this, result, Toast.LENGTH_LONG).show();
+
+            if(result.equals("inserir_ok")) Toast.makeText(ContratanteCriarEventoActivity.this, "EVENTO CRIADO!", Toast.LENGTH_LONG).show();
+            else{
+
+                Toast.makeText(ContratanteCriarEventoActivity.this, "TENTE NOVAMENTE!", Toast.LENGTH_LONG).show();
+            }
+
+            //contratante_criar_evento_content_layout_progressBar.setVisibility(View.GONE);
+            //contratante_criar_evento_content_layout_principal.setVisibility(View.VISIBLE);
+        }
     }
 }

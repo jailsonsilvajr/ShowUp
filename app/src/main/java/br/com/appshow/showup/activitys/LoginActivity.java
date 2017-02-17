@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,11 +39,16 @@ public class LoginActivity extends AppCompatActivity {
     String url = "";
     String parametros = "";
 
+    RelativeLayout login_content_layout_progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_content);
+
+        login_content_layout_progressBar = (RelativeLayout) findViewById(R.id.login_content_layout_progressBar);
+        login_content_layout_progressBar.setVisibility(View.GONE);
 
         Button login_content_button_entrar = (Button) findViewById(R.id.login_content_button_entrar);
         login_content_button_entrar.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +88,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private class SolicitarDados extends AsyncTask<String, Void, String>{
 
+        RelativeLayout login_content_layout_progressBar = (RelativeLayout) findViewById(R.id.login_content_layout_progressBar);
+        //LinearLayout login_content_layout_principal = (LinearLayout) findViewById(R.id.login_content_layout_principal);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            login_content_layout_progressBar.setVisibility(View.VISIBLE);
+            //login_content_layout_principal.setVisibility(View.GONE);
+        }
+
         protected String doInBackground(String... urls){
 
             return Conectar.postDados(urls[0], parametros);
@@ -114,6 +131,8 @@ public class LoginActivity extends AppCompatActivity {
                     new SolicitarDadosContratante().execute(url);
                 }
             }
+            login_content_layout_progressBar.setVisibility(View.GONE);
+            //login_content_layout_principal.setVisibility(View.VISIBLE);
         }
     }
 

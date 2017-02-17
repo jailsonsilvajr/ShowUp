@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,193 +15,293 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_nome_evento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nome do Evento"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="1"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_local_evento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Local"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="1"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_endereco_evento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="EndereÃ§o"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="1"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_data_evento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Data"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="1"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/contratante_criar_evento_edittext_inicio_evento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="InÃ­cio"
-                    android:textColorHint="@color/textColorTertiary"
-                    android:textColor="@color/textColorTertiary"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/borda_edittext"/>
-
-                <EditText
-                    android:id="@+id/contratante_criar_evento_edittext_termino_evento"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="TÃ©rmino"
-                    android:textColorHint="@color/textColorTertiary"
-                    android:textColor="@color/textColorTertiary"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="16dp"
-                    android:background="@drawable/borda_edittext"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_descricao_evento"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:hint="DescriÃ§Ã£o do Evento"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="10"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_equipamentos_evento"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:hint="Equipamentos DisponÃ­veis"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="20"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <EditText
-                android:id="@+id/contratante_criar_evento_edittext_procura_evento"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:hint="O que procura?"
-                android:textColorHint="@color/textColorTertiary"
-                android:textColor="@color/textColorTertiary"
-                android:maxLines="10"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/borda_edittext"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fotos do Evento e Estabelecimento"
-                android:textColor="@color/textColorPrimary"
-                android:layout_margin="16dp"/>
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="58dp">
+                android:id="@+id/contratante_criar_evento_content_layout_progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="510dp">
 
-                <Button
-                    android:id="@+id/contratante_criar_evento_button_criar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="CRIAR"
-                    android:textSize="20dp"
-                    android:textColor="@color/textColorPrimary"
-                    android:background="@color/colorButtonBlue"/>
+                <ProgressBar
+                    android:id="@+id/contratante_criar_evento_content_progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/contratante_criar_evento_content_layout_principal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_nome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_local"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Local"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingRight="6dp"
+                    android:background="@drawable/borda_edittext">
+
+                    <Spinner
+                        android:id="@+id/contratante_criar_evento_spinner_estado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingRight="6dp"
+                    android:background="@drawable/borda_edittext">
+
+                    <Spinner
+                        android:id="@+id/contratante_criar_evento_spinner_cidade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_bairro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Bairro"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_rua"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Rua"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_numero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Numero"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Data"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/contratante_criar_evento_edittext_horario_inicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Início"
+                        android:textColorHint="@color/textColorTertiary"
+                        android:textColor="@color/textColorTertiary"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/borda_edittext"/>
+
+                    <EditText
+                        android:id="@+id/contratante_criar_evento_edittext_horario_fim"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="Término"
+                        android:textColorHint="@color/textColorTertiary"
+                        android:textColor="@color/textColorTertiary"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/borda_edittext"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_descricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:hint="Descrição"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="10"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_equipamentos"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:hint="Equipamentos Disponíveis"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="20"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <EditText
+                    android:id="@+id/contratante_criar_evento_edittext_requisitos"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:hint="O que procura?"
+                    android:textColorHint="@color/textColorTertiary"
+                    android:textColor="@color/textColorTertiary"
+                    android:maxLines="10"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/borda_edittext"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fotos do Evento e Estabelecimento"
+                    android:textColor="@color/textColorPrimary"
+                    android:layout_margin="16dp"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="58dp">
+
+                    <Button
+                        android:id="@+id/contratante_criar_evento_button_criar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="CRIAR"
+                        android:textSize="20dp"
+                        android:textColor="@color/textColorPrimary"
+                        android:background="@color/colorButtonBlue"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
     </ScrollView>
 
 </LinearLayout>

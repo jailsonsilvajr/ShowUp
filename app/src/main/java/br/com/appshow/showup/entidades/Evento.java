@@ -11,12 +11,19 @@ public class Evento implements Parcelable {
 
     private String id_evento;
     private String nome;
-    private String tempo;
     private String local;
-    private String endereco;
+    private String estado;
+    private String cidade;
+    private String bairro;
+    private String rua;
+    private String numero;
     private String descricao;
-    private String data;
-    private String horario;
+    private String dia;
+    private String mes;
+    private String ano;
+    private String horario_inicio;
+    private String horario_fim;
+    private String equipamentos;
     private String requisito;
     private String url_imagem_principal;
     private String url_imagem_secundaria;
@@ -27,12 +34,19 @@ public class Evento implements Parcelable {
     protected Evento(Parcel in) {
         id_evento = in.readString();
         nome = in.readString();
-        tempo = in.readString();
         local = in.readString();
-        endereco = in.readString();
+        estado = in.readString();
+        cidade = in.readString();
+        bairro = in.readString();
+        rua = in.readString();
+        numero = in.readString();
         descricao = in.readString();
-        data = in.readString();
-        horario = in.readString();
+        dia = in.readString();
+        mes = in.readString();
+        ano = in.readString();
+        horario_inicio = in.readString();
+        horario_fim = in.readString();
+        equipamentos = in.readString();
         requisito = in.readString();
         url_imagem_principal = in.readString();
         url_imagem_secundaria = in.readString();
@@ -61,16 +75,38 @@ public class Evento implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id_evento);
         dest.writeString(nome);
-        dest.writeString(tempo);
         dest.writeString(local);
-        dest.writeString(endereco);
+        dest.writeString(estado);
+        dest.writeString(cidade);
+        dest.writeString(bairro);
+        dest.writeString(rua);
+        dest.writeString(numero);
         dest.writeString(descricao);
-        dest.writeString(data);
-        dest.writeString(horario);
+        dest.writeString(dia);
+        dest.writeString(mes);
+        dest.writeString(ano);
+        dest.writeString(horario_inicio);
+        dest.writeString(horario_fim);
+        dest.writeString(equipamentos);
         dest.writeString(requisito);
         dest.writeString(url_imagem_principal);
         dest.writeString(url_imagem_secundaria);
         dest.writeString(url_imagem_redonda);
+    }
+
+    public String getEndereco(){
+
+        return cidade + ", " + bairro + ", " + rua + ", " + numero;
+    }
+
+    public String getHorario(){
+
+        return "HORA: " + horario_inicio + "H às " + horario_fim + "H";
+    }
+
+    public String getData(){
+
+        return "DIA: " + dia + "/" + mes + "/" + ano;
     }
 
     public String getId_evento() {
@@ -89,14 +125,6 @@ public class Evento implements Parcelable {
         this.nome = nome;
     }
 
-    public String getTempo() {
-        return tempo;
-    }
-
-    public void setTempo(String tempo) {
-        this.tempo = tempo;
-    }
-
     public String getLocal() {
         return local;
     }
@@ -105,12 +133,44 @@ public class Evento implements Parcelable {
         this.local = local;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getDescricao() {
@@ -121,20 +181,52 @@ public class Evento implements Parcelable {
         this.descricao = descricao;
     }
 
-    public String getData() {
-        return data;
+    public String getDia() {
+        return dia;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
-    public String getHorario() {
-        return horario;
+    public String getMes() {
+        return mes;
     }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    public String getHorario_inicio() {
+        return horario_inicio;
+    }
+
+    public void setHorario_inicio(String horario_inicio) {
+        this.horario_inicio = horario_inicio;
+    }
+
+    public String getHorario_fim() {
+        return horario_fim;
+    }
+
+    public void setHorario_fim(String horario_fim) {
+        this.horario_fim = horario_fim;
+    }
+
+    public String getEquipamentos() {
+        return equipamentos;
+    }
+
+    public void setEquipamentos(String equipamentos) {
+        this.equipamentos = equipamentos;
     }
 
     public String getRequisito() {

@@ -25,7 +25,7 @@ public class Conectar {
 
             connection.setRequestMethod("POST");
 
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=iso-8859-1");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; utf-8");
             connection.setRequestProperty("Content-Lenght", "" + Integer.toString(parametrosUsuario.getBytes().length));
             connection.setRequestProperty("Content-Languege", "pt-BR");
 
@@ -40,7 +40,7 @@ public class Conectar {
 
             InputStream inputStream = connection.getInputStream();
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             String linha;
             StringBuffer resposta = new StringBuffer();
 
@@ -52,7 +52,7 @@ public class Conectar {
 
             bufferedReader.close();
             return resposta.toString();
-        }catch (Exception e){
+        }catch(Exception e){
 
             return "conexao_erro";
         }finally {

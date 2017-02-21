@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Contratante;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -61,8 +63,22 @@ public class ContratanteContaActivity extends AppCompatActivity
         TextView contratante_conta_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_conta_nav_header_textview_nome);
 
         contratante_conta_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        contratante_conta_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
-        contratante_conta_nav_header_textview_nome.setText(this.contratante.getNome());
+        if(contratante.getUrl_foto_perfil().equals("")){
+
+            contratante_conta_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
+        }else{
+
+            Picasso.with(this)
+                    .load(contratante.getUrl_foto_perfil())
+                    .into(contratante_conta_nav_header_image_perfil);
+        }
+        if(contratante.getNome().equals("")){
+
+            contratante_conta_nav_header_textview_nome.setText("Nome");
+        }else{
+
+            contratante_conta_nav_header_textview_nome.setText(this.contratante.getNome());
+        }
         contratante_conta_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

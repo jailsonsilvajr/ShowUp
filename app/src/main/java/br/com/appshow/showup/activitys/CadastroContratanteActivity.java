@@ -71,7 +71,7 @@ public class CadastroContratanteActivity extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if(networkInfo != null && networkInfo.isConnected()){
 
-                url = "http://192.241.244.47/showup/cadastrar_contratante_app.php?";
+                url = "https://showupbr.com/showup/cadastrar_contratante_app.php?";
                 parametros = "email=" + email + "&senha=" + senha;
                 new SolicitarDados().execute(url);
             }else{

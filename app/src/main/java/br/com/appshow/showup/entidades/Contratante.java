@@ -16,8 +16,10 @@ public class Contratante implements Parcelable{
     private String email;
     private String cpf_cnpj;
     private String cep;
-    private String nascimento; //TROCAR DE STRING PARA DATE!!
+    private String data_nascimento; //TROCAR DE STRING PARA DATE!!
     private String numero_celular;
+    private String url_foto_perfil;
+    private String patch_foto_perfil;
 
     public Contratante(){}
 
@@ -62,11 +64,11 @@ public class Contratante implements Parcelable{
     }
 
     public String getNascimento() {
-        return nascimento;
+        return data_nascimento;
     }
 
     public void setNascimento(String nascimento) {
-        this.nascimento = nascimento;
+        this.data_nascimento = nascimento;
     }
 
     public String getNumero_celular() {
@@ -77,6 +79,22 @@ public class Contratante implements Parcelable{
         this.numero_celular = numero_celular;
     }
 
+    public String getUrl_foto_perfil() {
+        return url_foto_perfil;
+    }
+
+    public void setUrl_foto_perfil(String url_foto_perfil) {
+        this.url_foto_perfil = url_foto_perfil;
+    }
+
+    public String getPatch_foto_perfil() {
+        return patch_foto_perfil;
+    }
+
+    public void setPatch_foto_perfil(String patch_foto_perfil) {
+        this.patch_foto_perfil = patch_foto_perfil;
+    }
+
     protected Contratante(Parcel in) {
 
         this.id_contratante = in.readString();
@@ -84,8 +102,10 @@ public class Contratante implements Parcelable{
         this.email = in.readString();
         this.cpf_cnpj = in.readString();
         this.cep = in.readString();
-        this.nascimento = in.readString();
+        this.data_nascimento = in.readString();
         this.numero_celular = in.readString();
+        this.url_foto_perfil = in.readString();
+        this.patch_foto_perfil = in.readString();
     }
 
     public static final Parcelable.Creator<Contratante> CREATOR = new Parcelable.Creator<Contratante>() {
@@ -114,7 +134,9 @@ public class Contratante implements Parcelable{
         dest.writeString(email);
         dest.writeString(cpf_cnpj);
         dest.writeString(cep);
-        dest.writeString(nascimento);
+        dest.writeString(data_nascimento);
         dest.writeString(numero_celular);
+        dest.writeString(url_foto_perfil);
+        dest.writeString(patch_foto_perfil);
     }
 }

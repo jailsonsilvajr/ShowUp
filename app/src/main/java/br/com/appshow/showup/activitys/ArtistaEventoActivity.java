@@ -63,7 +63,7 @@ public class ArtistaEventoActivity extends AppCompatActivity
         TextView artista_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.artista_evento_nav_header_textview_nome);
 
         artista_evento_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        artista_evento_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
+        artista_evento_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         artista_evento_nav_header_textview_nome.setText(this.artista.getNome());
         artista_evento_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if(networkInfo != null && networkInfo.isConnected()){
 
-                url = "http://192.241.244.47/showup/logar_app.php?";
+                url = "https://showupbr.com/showup/logar_app.php?";
                 parametros = "email=" + getEmail() + "&senha=" + getSenha();
                 new SolicitarDados().execute(url);
             }else{
@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
             StringTokenizer str = new StringTokenizer(result);
             String token = str.nextToken();
 
-            //Toast.makeText(LoginActivity.this, token+"-"+token2, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
 
             if(token.equals("conexao_erro")){
 
@@ -121,12 +121,12 @@ public class LoginActivity extends AppCompatActivity {
                 String token2 = str.nextToken();
                 if(token.equals("artista")){
 
-                    url = "http://192.241.244.47/showup/logar_artista_app.php?";
+                    url = "https://showupbr.com/showup/logar_artista_app.php?";
                     parametros = "id_artista=" + token2;
                     new SolicitarDadosArtista().execute(url);
                 }else{
 
-                    url = "http://192.241.244.47/showup/logar_contratante_app.php?";
+                    url = "https://showupbr.com/showup/logar_contratante_app.php?";
                     parametros = "id_contratante=" + token2;
                     new SolicitarDadosContratante().execute(url);
                 }
@@ -175,6 +175,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String result){
+
+            //Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
 
             if(result.equals("login_erro")){
 

@@ -80,7 +80,7 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()){
 
-            url = "http://192.241.244.47/showup/obter_evento_app_contratante.php?";
+            url = "https://showupbr.com/showup/obter_evento_app_contratante.php?";
             parametros = "id_contratante=" + this.contratante.getId_contratante();
             new SolicitarDados().execute(url);
         }else{
@@ -97,8 +97,22 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         TextView contratante_meus_eventos_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_meus_eventos_nav_header_textview_nome);
 
         contratante_meus_eventos_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        contratante_meus_eventos_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
-        contratante_meus_eventos_nav_header_textview_nome.setText(this.contratante.getNome());
+        if(contratante.getUrl_foto_perfil().equals("")){
+
+            contratante_meus_eventos_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
+        }else{
+
+            Picasso.with(this)
+                    .load(contratante.getUrl_foto_perfil())
+                    .into(contratante_meus_eventos_nav_header_image_perfil);
+        }
+        if(contratante.getNome().equals("")){
+
+            contratante_meus_eventos_nav_header_textview_nome.setText("Nome");
+        }else{
+
+            contratante_meus_eventos_nav_header_textview_nome.setText(this.contratante.getNome());
+        }
         contratante_meus_eventos_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

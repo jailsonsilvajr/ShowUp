@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Artista;
 import br.com.appshow.showup.entidades.Contratante;
@@ -65,8 +67,22 @@ public class ContratanteArtistaActivity extends AppCompatActivity
         TextView contratante_artista_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_artista_nav_header_textview_nome);
 
         contratante_artista_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        contratante_artista_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
-        contratante_artista_nav_header_textview_nome.setText(this.contratante.getNome());
+        if(contratante.getUrl_foto_perfil().equals("")){
+
+            contratante_artista_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
+        }else{
+
+            Picasso.with(this)
+                    .load(contratante.getUrl_foto_perfil())
+                    .into(contratante_artista_nav_header_image_perfil);
+        }
+        if(contratante.getNome().equals("")){
+
+            contratante_artista_nav_header_textview_nome.setText("Nome");
+        }else{
+
+            contratante_artista_nav_header_textview_nome.setText(this.contratante.getNome());
+        }
         contratante_artista_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

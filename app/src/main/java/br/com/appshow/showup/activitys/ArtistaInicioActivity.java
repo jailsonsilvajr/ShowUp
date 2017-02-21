@@ -2,9 +2,6 @@ package br.com.appshow.showup.activitys;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,12 +24,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
-import br.com.appshow.showup.conexao.Conectar;
-import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -42,7 +34,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Artista;
@@ -179,7 +170,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
         TextView artista_inicio_nav_header_textview_nome = (TextView) hView.findViewById(R.id.artista_inicio_nav_header_textview_nome);
 
         artista_inicio_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        artista_inicio_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
+        artista_inicio_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         artista_inicio_nav_header_textview_nome.setText(this.artista.getNome());
         artista_inicio_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override

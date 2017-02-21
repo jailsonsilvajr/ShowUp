@@ -2,7 +2,6 @@ package br.com.appshow.showup.activitys;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -27,12 +26,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.appshow.showup.R;
@@ -102,8 +102,22 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         TextView contratante_criar_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_criar_evento_nav_header_textview_nome);
 
         contratante_criar_evento_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        contratante_criar_evento_nav_header_image_perfil.setImageResource(R.drawable.temp_foto_perfil);
-        contratante_criar_evento_nav_header_textview_nome.setText(this.contratante.getNome());
+        if(contratante.getUrl_foto_perfil().equals("")){
+
+            contratante_criar_evento_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
+        }else{
+
+            Picasso.with(this)
+                    .load(contratante.getUrl_foto_perfil())
+                    .into(contratante_criar_evento_nav_header_image_perfil);
+        }
+        if(contratante.getNome().equals("")){
+
+            contratante_criar_evento_nav_header_textview_nome.setText("Nome");
+        }else{
+
+            contratante_criar_evento_nav_header_textview_nome.setText(this.contratante.getNome());
+        }
         contratante_criar_evento_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +172,7 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if(networkInfo != null && networkInfo.isConnected()){
 
-                    url = "http://192.241.244.47/showup/criar_evento.php?";
+                    url = "https://showupbr.com/showup/criar_evento.php?";
                     parametros = "id_contratante=" + contratante.getId_contratante() +
                                  "&nome=" + nome + "&local=" + local + "&estado=" + estado +
                                  "&cidade=" + cidade + "&bairro=" + bairro + "&rua=" + rua +

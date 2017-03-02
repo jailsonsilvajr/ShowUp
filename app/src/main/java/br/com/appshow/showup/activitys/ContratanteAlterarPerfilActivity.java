@@ -1,8 +1,13 @@
 package br.com.appshow.showup.activitys;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
@@ -17,15 +22,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
+import java.io.File;
 
 import br.com.appshow.showup.R;
+import br.com.appshow.showup.conexao.Conectar;
 import br.com.appshow.showup.entidades.Contratante;
+import br.com.appshow.showup.util.Image;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -51,6 +59,11 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
     private EditText contratante_alterar_perfil_content_edittext_celular;
     private Button contratante_alterar_perfil_content_button_alterar;
 
+    private static final int IMG_CAM = 1;
+    private static final int IMG_SDCARD = 2;
+    private Image image;
+
+
     //Código de requerimento da imagem
     private int PICK_IMAGE_REQUEST = 1;
 
@@ -59,6 +72,11 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
 
     //Bitmap to get image from gallery
     private Bitmap bitmap;
+
+    private String url;
+    private String parametros;
+
+    RelativeLayout contratante_alterar_parfil_app_bar_progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +99,10 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         this.contratante = intent.getParcelableExtra("paramsContratante");
+
+        image = new Image();
+        contratante_alterar_parfil_app_bar_progressBar = (RelativeLayout) findViewById(R.id.contratante_alterar_parfil_app_bar_progressBar);
+        contratante_alterar_parfil_app_bar_progressBar.setVisibility(View.GONE);
 
         //---------------------------------------------------------------------//
 
@@ -174,7 +196,48 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
 
     public void alterar_perfil(){
 
+        enableViews(false);
 
+        url = Conectar.url_servidor + "alterar_perfil_contratante_app.php?";
+        parametros = "id_contratante=" + contratante.getId_contratante();
+        parametros += "&name=" + contratante_alterar_perfil_content_edittext_nome.getText().toString();
+        parametros += "&email=" + contratante_alterar_perfil_content_edittext_email.getText().toString();
+        parametros += "&cpf_cnpj=" + contratante_alterar_perfil_content_edittext_cpf_cnpj.getText().toString();
+        parametros += "&cep=" + contratante_alterar_perfil_content_edittext_cep.getText().toString();
+        parametros += "&data=" + contratante_alterar_perfil_content_edittext_nascimento.getText().toString();
+        parametros += "&numero_celular=" + contratante_alterar_perfil_content_edittext_celular.getText().toString();
+        if(image.getBitmap() != null){
+
+            parametros += "&img_mime=" + image.getMime();
+            parametros += "&img_image=" + image.getBitmapBase64();
+        }else{
+
+            parametros += "&img_mime=" + "null";
+            parametros += "&img_image=" + "null";
+        }
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+
+            new AlterarDados().execute(url);
+        }else{
+
+            Toast.makeText(this, "Nenhuma conexão foi encontrada!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void enableViews(boolean enable){
+
+        contratante_alterar_perfil_content_image_perfil.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_nome.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_email.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_cpf_cnpj.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_cep.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_nascimento.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_celular.setEnabled(enable);
+        contratante_alterar_perfil_content_button_alterar.setEnabled(enable);
+        contratante_alterar_perfil_content_button_alterar.setText(enable ? "ALTERAR" : "ALTERANDO...");
     }
 
     public void open_activity_configuracao(){
@@ -197,6 +260,7 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.contratante_inicio, menu);
         return true;
     }
 
@@ -251,28 +315,79 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
         return true;
     }
 
-    //Metodo para escolher a foto de perfil
+    //Metodo para abrir galeria
     private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMG_SDCARD);
     }
 
-    //handling the image chooser activity result
+    // CALL IN CAM
+    /*public void callIntentImgCam(View view){
+        File file = new File(android.os.Environment.getExternalStorageDirectory(), "img.png");
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+        startActivityForResult(intent, IMG_CAM);
+    }*/
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                contratante_alterar_perfil_content_image_perfil.setImageBitmap(bitmap);
+        File file = null;
+        if(data != null && requestCode == IMG_SDCARD && resultCode == RESULT_OK){
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            Uri img = data.getData();
+            String[] cols = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(img, cols, null, null, null);
+            cursor.moveToFirst();
+
+            int indexCol = cursor.getColumnIndex(cols[0]);
+
+            String imgString = cursor.getString(indexCol);
+            cursor.close();
+
+            file = new File(imgString);
+            if(file != null){
+
+                image.setResizedBitmap(file, 180, 180);
+                image.setMimeFromImgPath(file.getPath());
             }
+        }
+        else if(requestCode == IMG_CAM && resultCode == RESULT_OK){
+            file = new File(android.os.Environment.getExternalStorageDirectory(), "img.png");
+            if(file != null){
+
+                image.setResizedBitmap(file, 300, 300);
+                image.setMimeFromImgPath(file.getPath());
+            }
+        }
+
+
+        if(image.getBitmap() != null){
+            contratante_alterar_perfil_content_image_perfil.setImageBitmap(image.getBitmap());
+        }
+    }
+
+    private class AlterarDados extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+            contratante_alterar_parfil_app_bar_progressBar.setVisibility(View.VISIBLE);
+        }
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            //Toast.makeText(ContratanteAlterarPerfilActivity.this, result, Toast.LENGTH_SHORT).show();
+            enableViews(true);
+            contratante_alterar_parfil_app_bar_progressBar.setVisibility(View.GONE);
         }
     }
 }

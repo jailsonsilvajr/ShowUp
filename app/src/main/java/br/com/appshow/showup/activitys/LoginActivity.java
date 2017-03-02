@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if(networkInfo != null && networkInfo.isConnected()){
 
-                url = "https://showupbr.com/showup/logar_app.php?";
+                url = Conectar.url_servidor + "logar_app.php?";
                 parametros = "email=" + getEmail() + "&senha=" + getSenha();
                 new SolicitarDados().execute(url);
             }else{
@@ -121,12 +121,12 @@ public class LoginActivity extends AppCompatActivity {
                 String token2 = str.nextToken();
                 if(token.equals("artista")){
 
-                    url = "https://showupbr.com/showup/logar_artista_app.php?";
+                    url = Conectar.url_servidor + "logar_artista_app.php?";
                     parametros = "id_artista=" + token2;
                     new SolicitarDadosArtista().execute(url);
                 }else{
 
-                    url = "https://showupbr.com/showup/logar_contratante_app.php?";
+                    url = Conectar.url_servidor + "logar_contratante_app.php?";
                     parametros = "id_contratante=" + token2;
                     new SolicitarDadosContratante().execute(url);
                 }
@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Erro: Tente novamente mais tarde!", Toast.LENGTH_SHORT).show();
             }else{
 
-                //Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
                 Gson gson = new Gson();
                 Contratante[] contratante_array = gson.fromJson(result, Contratante[].class);
 

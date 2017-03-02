@@ -25,6 +25,7 @@ public class CadastroArtistaActivity extends AppCompatActivity {
 
     private String url;
     private String parametros;
+    private String arq_php = "cadastrar_artista_app.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class CadastroArtistaActivity extends AppCompatActivity {
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if(networkInfo != null && networkInfo.isConnected()){
 
-                url = "https://showupbr.com/showup/cadastrar_artista_app.php?";
+                url = Conectar.url_servidor + arq_php + "?";
                 parametros = "email=" + email + "&senha=" + senha;
                 new SolicitarDados().execute(url);
             }else{

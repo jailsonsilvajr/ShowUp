@@ -13,6 +13,8 @@ import java.net.URL;
 
 public class Conectar {
 
+    public static String url_servidor = "https://showupbr.com/appdroid/showup/php/";
+
     public static String postDados(String urlUsuario, String parametrosUsuario){
 
         URL url;
@@ -25,7 +27,7 @@ public class Conectar {
 
             connection.setRequestMethod("POST");
 
-            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; utf-8");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=utf8");
             connection.setRequestProperty("Content-Lenght", "" + Integer.toString(parametrosUsuario.getBytes().length));
             connection.setRequestProperty("Content-Languege", "pt-BR");
 

@@ -31,6 +31,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.conexao.Conectar;
@@ -80,7 +81,7 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()){
 
-            url = "https://showupbr.com/showup/obter_evento_app_contratante.php?";
+            url = Conectar.url_servidor + "obter_evento_app_contratante.php?";
             parametros = "id_contratante=" + this.contratante.getId_contratante();
             new SolicitarDados().execute(url);
         }else{
@@ -277,23 +278,33 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
 
         protected void onPostExecute(String result){
 
-            ListView contratante_eventos_content_listview_evento = (ListView) findViewById(R.id.contratante_meus_eventos_content_listview_evento);
-            contratante_eventos_content_listview_evento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            //Toast.makeText(ContratanteMeusEventosActivity.this, result, Toast.LENGTH_SHORT).show();
+            StringTokenizer str = new StringTokenizer(result);
+            String token = str.nextToken();
 
-                    open_activity_evento(i);
-                }
-            });
+            if(token.equals("evento_erro")){
 
-            Gson gson = new Gson();
-            Evento[] eventos_array = gson.fromJson(result, Evento[].class);
+                Toast.makeText(ContratanteMeusEventosActivity.this, "Não há eventos!", Toast.LENGTH_SHORT).show();
+            }else{
 
-            List eventos_lista = Arrays.asList(eventos_array);
-            meusEventos = new ArrayList(eventos_lista);
+                ListView contratante_eventos_content_listview_evento = (ListView) findViewById(R.id.contratante_meus_eventos_content_listview_evento);
+                contratante_eventos_content_listview_evento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            AdapterList adapterList = new AdapterList(ContratanteMeusEventosActivity.this, meusEventos);
-            contratante_eventos_content_listview_evento.setAdapter(adapterList);
+                        open_activity_evento(i);
+                    }
+                });
+
+                Gson gson = new Gson();
+                Evento[] eventos_array = gson.fromJson(result, Evento[].class);
+
+                List eventos_lista = Arrays.asList(eventos_array);
+                meusEventos = new ArrayList(eventos_lista);
+
+                AdapterList adapterList = new AdapterList(ContratanteMeusEventosActivity.this, meusEventos);
+                contratante_eventos_content_listview_evento.setAdapter(adapterList);
+            }
         }
     }
 }

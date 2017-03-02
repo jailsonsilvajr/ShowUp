@@ -172,7 +172,7 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
                 if(networkInfo != null && networkInfo.isConnected()){
 
-                    url = "https://showupbr.com/showup/criar_evento.php?";
+                    url = Conectar.url_servidor + "criar_evento.php?";
                     parametros = "id_contratante=" + contratante.getId_contratante() +
                                  "&nome=" + nome + "&local=" + local + "&estado=" + estado +
                                  "&cidade=" + cidade + "&bairro=" + bairro + "&rua=" + rua +
@@ -191,7 +191,7 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()){
 
-            url = "http://192.241.244.47/showup/json/estados-cidades.json";
+            url = "https://showupbr.com/appdroid/showup/json/estados-cidades.json"; //COLOCAR ESSE ARQUIVO DENTRO DO PROJETO!!
             parametros = "";
             new SolicitarDados().execute(url);
         }else{}

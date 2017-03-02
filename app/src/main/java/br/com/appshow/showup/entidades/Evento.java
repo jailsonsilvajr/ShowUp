@@ -24,7 +24,7 @@ public class Evento implements Parcelable {
     private String horario_inicio;
     private String horario_fim;
     private String equipamentos;
-    private String requisito;
+    private String requisitos;
     private String url_imagem_principal;
     private String url_imagem_secundaria;
     private String url_imagem_redonda;
@@ -47,7 +47,7 @@ public class Evento implements Parcelable {
         horario_inicio = in.readString();
         horario_fim = in.readString();
         equipamentos = in.readString();
-        requisito = in.readString();
+        requisitos = in.readString();
         url_imagem_principal = in.readString();
         url_imagem_secundaria = in.readString();
         url_imagem_redonda = in.readString();
@@ -88,7 +88,7 @@ public class Evento implements Parcelable {
         dest.writeString(horario_inicio);
         dest.writeString(horario_fim);
         dest.writeString(equipamentos);
-        dest.writeString(requisito);
+        dest.writeString(requisitos);
         dest.writeString(url_imagem_principal);
         dest.writeString(url_imagem_secundaria);
         dest.writeString(url_imagem_redonda);
@@ -230,11 +230,11 @@ public class Evento implements Parcelable {
     }
 
     public String getRequisito() {
-        return requisito;
+        return requisitos;
     }
 
     public void setRequisito(String requisito) {
-        this.requisito = requisito;
+        this.requisitos = requisito;
     }
 
     public String getUrl_imagem_principal() {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -194,7 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Início"
+                        android:hint="InÃ­cio"
                         android:textColorHint="@color/textColorTertiary"
                         android:textColor="@color/textColorTertiary"
                         android:maxLines="1"
@@ -212,7 +212,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="Término"
+                        android:hint="TÃ©rmino"
                         android:textColorHint="@color/textColorTertiary"
                         android:textColor="@color/textColorTertiary"
                         android:maxLines="1"
@@ -230,7 +230,7 @@
                     android:id="@+id/contratante_criar_evento_edittext_descricao"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:hint="Descrição"
+                    android:hint="DescriÃ§Ã£o"
                     android:textColorHint="@color/textColorTertiary"
                     android:textColor="@color/textColorTertiary"
                     android:maxLines="10"
@@ -247,7 +247,7 @@
                     android:id="@+id/contratante_criar_evento_edittext_equipamentos"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:hint="Equipamentos Disponíveis"
+                    android:hint="Equipamentos DisponÃ­veis"
                     android:textColorHint="@color/textColorTertiary"
                     android:textColor="@color/textColorTertiary"
                     android:maxLines="20"
@@ -282,7 +282,74 @@
                     android:layout_height="wrap_content"
                     android:text="Fotos do Evento e Estabelecimento"
                     android:textColor="@color/textColorPrimary"
-                    android:layout_margin="16dp"/>
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="5dp">
+
+                        <ImageView
+                            android:id="@+id/contratante_criar_evento_content_imagem_evento1"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/camera"
+                            android:layout_weight="1"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp">
+
+                        <ImageView
+                            android:id="@+id/contratante_criar_evento_content_imagem_evento2"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/camera"
+                            android:layout_weight="1"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/contratante_criar_evento_content_imagem_evento3"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:src="@drawable/camera"
+                            android:layout_weight="1"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!--<RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="wrap_content"

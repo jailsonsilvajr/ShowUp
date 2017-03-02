@@ -2,10 +2,13 @@ package br.com.appshow.showup.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -32,12 +35,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.conexao.Conectar;
 import br.com.appshow.showup.entidades.Contratante;
+import br.com.appshow.showup.util.Image;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -70,6 +75,37 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
     String url;
     String parametros;
 
+    private static final int IMG_CAM = 1;
+    private static final int IMG_SDCARD = 2;
+    ArrayList<Image> images;
+    private Image image2;
+    private Image image3;
+
+    private int imageviewclick;
+
+    private ImageView contratante_criar_evento_content_imagem_evento1;
+    private ImageView contratante_criar_evento_content_imagem_evento2;
+    private ImageView contratante_criar_evento_content_imagem_evento3;
+    private EditText contratante_criar_evento_edittext_nome;
+    private EditText contratante_criar_evento_edittext_local;
+    private Spinner contratante_criar_evento_spinner_estado;
+    private Spinner contratante_criar_evento_spinner_cidade;
+    private EditText contratante_criar_evento_edittext_bairro;
+    private EditText contratante_criar_evento_edittext_rua;
+    private EditText contratante_criar_evento_edittext_numero;
+    private EditText contratante_criar_evento_edittext_descricao;
+    private EditText contratante_criar_evento_edittext_data;
+    private EditText contratante_criar_evento_edittext_horario_inicio;
+    private EditText contratante_criar_evento_edittext_horario_fim;
+    private EditText contratante_criar_evento_edittext_equipamentos;
+    private EditText contratante_criar_evento_edittext_requisitos;
+    private Button contratante_criar_evento_button_criar;
+
+    private ImageView contratante_criar_evento_nav_header_image_background;
+    private Button contratante_criar_evento_nav_header_button_configuracao;
+    private CircleImageView contratante_criar_evento_nav_header_image_perfil;
+    private TextView contratante_criar_evento_nav_header_textview_nome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -92,14 +128,21 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         Intent intent = getIntent();
         this.contratante = intent.getParcelableExtra("paramsContratante");
 
+        images = new ArrayList<Image>();
+        images.add(new Image());
+        images.add(new Image());
+        images.add(new Image());
+        image2 = new Image();
+        image3 = new Image();
+
         //---------------------------------------------------------------------//
 
         //--(1) Configurando menu lateral:
         View hView =  navigationView.getHeaderView(0);
-        ImageView contratante_criar_evento_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_criar_evento_nav_header_image_background);
-        Button contratante_criar_evento_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_criar_evento_nav_header_button_configuracao);
-        CircleImageView contratante_criar_evento_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_criar_evento_nav_header_image_perfil);
-        TextView contratante_criar_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_criar_evento_nav_header_textview_nome);
+        contratante_criar_evento_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_criar_evento_nav_header_image_background);
+        contratante_criar_evento_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_criar_evento_nav_header_button_configuracao);
+        contratante_criar_evento_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_criar_evento_nav_header_image_perfil);
+        contratante_criar_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_criar_evento_nav_header_textview_nome);
 
         contratante_criar_evento_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
         if(contratante.getUrl_foto_perfil().equals("")){
@@ -135,54 +178,55 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         //--Fim de (1)
 
         //--(2) Configurando views:
-        final EditText contratante_criar_evento_edittext_nome = (EditText) findViewById(R.id.contratante_criar_evento_edittext_nome);
-        final EditText contratante_criar_evento_edittext_local = (EditText) findViewById(R.id.contratante_criar_evento_edittext_local);
-        final Spinner contratante_criar_evento_spinner_estado = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_estado);
-        final Spinner contratante_criar_evento_spinner_cidade = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_cidade);
-        final EditText contratante_criar_evento_edittext_bairro = (EditText) findViewById(R.id.contratante_criar_evento_edittext_bairro);
-        final EditText contratante_criar_evento_edittext_rua = (EditText) findViewById(R.id.contratante_criar_evento_edittext_rua);
-        final EditText contratante_criar_evento_edittext_numero = (EditText) findViewById(R.id.contratante_criar_evento_edittext_numero);
-        final EditText contratante_criar_evento_edittext_descricao = (EditText) findViewById(R.id.contratante_criar_evento_edittext_descricao);
-        final EditText contratante_criar_evento_edittext_data = (EditText) findViewById(R.id.contratante_criar_evento_edittext_data);
-        final EditText contratante_criar_evento_edittext_horario_inicio = (EditText) findViewById(R.id.contratante_criar_evento_edittext_horario_inicio);
-        final EditText contratante_criar_evento_edittext_horario_fim = (EditText) findViewById(R.id.contratante_criar_evento_edittext_horario_fim);
-        final EditText contratante_criar_evento_edittext_equipamentos = (EditText) findViewById(R.id.contratante_criar_evento_edittext_equipamentos);
-        final EditText contratante_criar_evento_edittext_requisitos = (EditText) findViewById(R.id.contratante_criar_evento_edittext_requisitos);
-        Button contratante_criar_evento_button_criar = (Button) findViewById(R.id.contratante_criar_evento_button_criar);
+        contratante_criar_evento_edittext_nome = (EditText) findViewById(R.id.contratante_criar_evento_edittext_nome);
+        contratante_criar_evento_edittext_local = (EditText) findViewById(R.id.contratante_criar_evento_edittext_local);
+        contratante_criar_evento_spinner_estado = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_estado);
+        contratante_criar_evento_spinner_cidade = (Spinner) findViewById(R.id.contratante_criar_evento_spinner_cidade);
+        contratante_criar_evento_edittext_bairro = (EditText) findViewById(R.id.contratante_criar_evento_edittext_bairro);
+        contratante_criar_evento_edittext_rua = (EditText) findViewById(R.id.contratante_criar_evento_edittext_rua);
+        contratante_criar_evento_edittext_numero = (EditText) findViewById(R.id.contratante_criar_evento_edittext_numero);
+        contratante_criar_evento_edittext_descricao = (EditText) findViewById(R.id.contratante_criar_evento_edittext_descricao);
+        contratante_criar_evento_edittext_data = (EditText) findViewById(R.id.contratante_criar_evento_edittext_data);
+        contratante_criar_evento_edittext_horario_inicio = (EditText) findViewById(R.id.contratante_criar_evento_edittext_horario_inicio);
+        contratante_criar_evento_edittext_horario_fim = (EditText) findViewById(R.id.contratante_criar_evento_edittext_horario_fim);
+        contratante_criar_evento_edittext_equipamentos = (EditText) findViewById(R.id.contratante_criar_evento_edittext_equipamentos);
+        contratante_criar_evento_edittext_requisitos = (EditText) findViewById(R.id.contratante_criar_evento_edittext_requisitos);
+
+        contratante_criar_evento_content_imagem_evento1 = (ImageView) findViewById(R.id.contratante_criar_evento_content_imagem_evento1);
+        contratante_criar_evento_content_imagem_evento1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                imageviewclick = 1;
+                showFileChooser();
+            }
+        });
+        contratante_criar_evento_content_imagem_evento2 = (ImageView) findViewById(R.id.contratante_criar_evento_content_imagem_evento2);
+        contratante_criar_evento_content_imagem_evento2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                imageviewclick = 2;
+                showFileChooser();
+            }
+        });
+        contratante_criar_evento_content_imagem_evento3 = (ImageView) findViewById(R.id.contratante_criar_evento_content_imagem_evento3);
+        contratante_criar_evento_content_imagem_evento3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                imageviewclick = 3;
+                showFileChooser();
+            }
+        });
+
+        contratante_criar_evento_button_criar = (Button) findViewById(R.id.contratante_criar_evento_button_criar);
 
         contratante_criar_evento_button_criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                nome = contratante_criar_evento_edittext_nome.getText().toString();
-                local = contratante_criar_evento_edittext_local.getText().toString();
-                bairro = contratante_criar_evento_edittext_bairro.getText().toString();
-                rua = contratante_criar_evento_edittext_rua.getText().toString();
-                numero = contratante_criar_evento_edittext_numero.getText().toString();
-                descricao = contratante_criar_evento_edittext_descricao.getText().toString();
-                data = contratante_criar_evento_edittext_data.getText().toString();
-                horario_inicio = contratante_criar_evento_edittext_horario_inicio.getText().toString();
-                horario_fim = contratante_criar_evento_edittext_horario_fim.getText().toString();
-                equipamentos = contratante_criar_evento_edittext_equipamentos.getText().toString();
-                requisitos = contratante_criar_evento_edittext_requisitos.getText().toString();
-
-                //showToast();//temporário
-
-                ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()){
-
-                    url = Conectar.url_servidor + "criar_evento.php?";
-                    parametros = "id_contratante=" + contratante.getId_contratante() +
-                                 "&nome=" + nome + "&local=" + local + "&estado=" + estado +
-                                 "&cidade=" + cidade + "&bairro=" + bairro + "&rua=" + rua +
-                                 "&numero=" + numero + "&descricao=" + descricao + "&horario_inicio=" + horario_inicio +
-                                 "&horario_fim=" + horario_fim + "&equipamentos=" + equipamentos + "&requisito=" + requisitos +
-                                 "&url_imagem_principal=" + "http://192.241.244.47/showup/img_eventos/img_evento1_principal.png" +
-                                 "&url_imagem_secundaria=" + "http://192.241.244.47/showup/img_eventos/img_evento1_secundaria.png" +
-                                 "&url_imagem_redonda=" + "http://192.241.244.47/showup/img_eventos/img_evento1_redonda.png";
-                    new CriarEvento().execute(url);
-                }else{}
+                criar_evento();
             }
         });
         //--Fim de (2)
@@ -195,6 +239,69 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
             parametros = "";
             new SolicitarDados().execute(url);
         }else{}
+    }
+
+    public void enableViews(boolean enable){
+
+        contratante_criar_evento_button_criar.setText(enable ? "CRIAR" : "CRIANDO...");
+        contratante_criar_evento_button_criar.setEnabled(enable);
+    }
+
+    public void criar_evento(){
+
+        enableViews(false);
+
+        nome = contratante_criar_evento_edittext_nome.getText().toString();
+        local = contratante_criar_evento_edittext_local.getText().toString();
+        bairro = contratante_criar_evento_edittext_bairro.getText().toString();
+        rua = contratante_criar_evento_edittext_rua.getText().toString();
+        numero = contratante_criar_evento_edittext_numero.getText().toString();
+        descricao = contratante_criar_evento_edittext_descricao.getText().toString();
+        data = contratante_criar_evento_edittext_data.getText().toString();
+        horario_inicio = contratante_criar_evento_edittext_horario_inicio.getText().toString();
+        horario_fim = contratante_criar_evento_edittext_horario_fim.getText().toString();
+        equipamentos = contratante_criar_evento_edittext_equipamentos.getText().toString();
+        requisitos = contratante_criar_evento_edittext_requisitos.getText().toString();
+
+        url = Conectar.url_servidor + "criar_evento.php?";
+        parametros = "";
+        parametros = "id_contratante=" + contratante.getId_contratante();
+        parametros += "&nome=" + nome;
+        parametros += "&local=" + local;
+        parametros += "&estado=" + estado;
+        parametros += "&cidade=" + cidade;
+        parametros += "&bairro=" + bairro;
+        parametros += "&rua=" + rua;
+        parametros += "&numero=" + numero;
+        parametros += "&descricao=" + descricao;
+        parametros += "&data=" + data;
+        parametros += "&horario_inicio=" + horario_inicio;
+        parametros += "&horario_fim=" + horario_fim;
+        parametros += "&equipamentos=" + equipamentos;
+        parametros += "&requisitos=" + requisitos;
+
+        //Mandando apenas imagem1... depois conf pra mandar as outras!
+        if(images.get(0).getBitmap() != null && images.get(1).getBitmap() != null && images.get(2).getBitmap() != null){
+
+            parametros += "&img1_mime=" + images.get(0).getMime();
+            parametros += "&img1_image=" + images.get(0).getBitmapBase64();
+
+            parametros += "&img2_mime=" + images.get(1).getMime();
+            parametros += "&img2_image=" + images.get(1).getBitmapBase64();
+
+            parametros += "&img3_mime=" + images.get(2).getMime();
+            parametros += "&img3_image=" + images.get(2).getBitmapBase64();
+        }
+
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+
+            new CriarEvento().execute(url);
+        }else{
+
+            Toast.makeText(this, "Nenhuma conexão foi encontrada!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void conf_spinner(JSONObject jsonObjetoEstado){
@@ -324,6 +431,89 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         return true;
     }
 
+    //Metodo para abrir galeria
+    private void showFileChooser() {
+
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, IMG_SDCARD);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        File file = null;
+        if(data != null && requestCode == IMG_SDCARD && resultCode == RESULT_OK){
+
+            Uri img = data.getData();
+            String[] cols = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(img, cols, null, null, null);
+            cursor.moveToFirst();
+
+            int indexCol = cursor.getColumnIndex(cols[0]);
+
+            String imgString = cursor.getString(indexCol);
+            cursor.close();
+
+            file = new File(imgString);
+            if(file != null){
+
+                if(imageviewclick == 1){
+
+                    images.get(0).setResizedBitmap(file, 600, 180);
+                    images.get(0).setMimeFromImgPath(file.getPath());
+
+                    images.get(1).setResizedBitmap(file, 200, 180);
+                    images.get(1).setMimeFromImgPath(file.getPath());
+
+                    images.get(2).setResizedBitmap(file, 100, 180);
+                    images.get(2).setMimeFromImgPath(file.getPath());
+                }else if(imageviewclick == 2){
+
+                    image2.setResizedBitmap(file, 600, 180);
+                    image2.setMimeFromImgPath(file.getPath());
+                }else{
+
+                    image3.setResizedBitmap(file, 600, 180);
+                    image3.setMimeFromImgPath(file.getPath());
+                }
+            }
+        }
+        else if(requestCode == IMG_CAM && resultCode == RESULT_OK){
+            file = new File(android.os.Environment.getExternalStorageDirectory(), "img.png");
+            if(file != null){
+
+                /*images.get(0).setResizedBitmap(file, 600, 180);
+                images.get(0).setMimeFromImgPath(file.getPath());
+
+                images.get(1).setResizedBitmap(file, 200, 180);
+                images.get(1).setMimeFromImgPath(file.getPath());
+
+                images.get(2).setResizedBitmap(file, 100, 180);
+                images.get(2).setMimeFromImgPath(file.getPath());*/
+            }
+        }
+
+        if(imageviewclick == 1){
+
+            if(images.get(0).getBitmap() != null && images.get(1).getBitmap() != null && images.get(2).getBitmap() != null){
+
+                contratante_criar_evento_content_imagem_evento1.setImageBitmap(images.get(0).getBitmap());
+            }
+        }else if(imageviewclick == 2){
+
+            if(image2.getBitmap() != null){
+
+                contratante_criar_evento_content_imagem_evento2.setImageBitmap(image2.getBitmap());
+            }
+        }else{
+
+            if(image3.getBitmap() != null){
+
+                contratante_criar_evento_content_imagem_evento3.setImageBitmap(image3.getBitmap());
+            }
+        }
+    }
+
     private class SolicitarDados extends AsyncTask<String, Void, String> {
 
         RelativeLayout contratante_criar_evento_content_layout_progressBar = (RelativeLayout) findViewById(R.id.contratante_criar_evento_content_layout_progressBar);
@@ -417,12 +607,7 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         protected void onPostExecute(String result){
 
             //Toast.makeText(ContratanteCriarEventoActivity.this, result, Toast.LENGTH_LONG).show();
-
-            if(result.equals("inserir_ok")) Toast.makeText(ContratanteCriarEventoActivity.this, "EVENTO CRIADO!", Toast.LENGTH_LONG).show();
-            else{
-
-                Toast.makeText(ContratanteCriarEventoActivity.this, "TENTE NOVAMENTE!", Toast.LENGTH_LONG).show();
-            }
+            enableViews(true);
 
             //contratante_criar_evento_content_layout_progressBar.setVisibility(View.GONE);
             //contratante_criar_evento_content_layout_principal.setVisibility(View.VISIBLE);

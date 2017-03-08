@@ -145,7 +145,7 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         contratante_criar_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_criar_evento_nav_header_textview_nome);
 
         contratante_criar_evento_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        if(contratante.getUrl_foto_perfil().equals("")){
+        if(contratante.getUrl_foto_perfil() == null || contratante.getUrl_foto_perfil().equals("")){
 
             contratante_criar_evento_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         }else{
@@ -154,13 +154,10 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
                     .load(contratante.getUrl_foto_perfil())
                     .into(contratante_criar_evento_nav_header_image_perfil);
         }
-        if(contratante.getNome().equals("")){
 
-            contratante_criar_evento_nav_header_textview_nome.setText("Nome");
-        }else{
+        String nome_completo = this.contratante.getNome() + " " + this.contratante.getSobrenome();
+        contratante_criar_evento_nav_header_textview_nome.setText(nome_completo);
 
-            contratante_criar_evento_nav_header_textview_nome.setText(this.contratante.getNome());
-        }
         contratante_criar_evento_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -221,7 +218,6 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
         });
 
         contratante_criar_evento_button_criar = (Button) findViewById(R.id.contratante_criar_evento_button_criar);
-
         contratante_criar_evento_button_criar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -265,14 +261,19 @@ public class ContratanteCriarEventoActivity extends AppCompatActivity
 
         url = Conectar.url_servidor + "criar_evento.php?";
         parametros = "";
-        parametros = "id_contratante=" + contratante.getId_contratante();
-        parametros += "&nome=" + nome;
-        parametros += "&local=" + local;
+        parametros = "cpf=" + contratante.getCpf();
+
+        parametros += "&cep=" + "54515-580";
+        parametros += "&pais=" + "Brasil";
         parametros += "&estado=" + estado;
         parametros += "&cidade=" + cidade;
         parametros += "&bairro=" + bairro;
         parametros += "&rua=" + rua;
         parametros += "&numero=" + numero;
+        parametros += "&complemento=" + null;
+
+        parametros += "&nome=" + nome;
+        parametros += "&nome_local=" + local;
         parametros += "&descricao=" + descricao;
         parametros += "&data=" + data;
         parametros += "&horario_inicio=" + horario_inicio;

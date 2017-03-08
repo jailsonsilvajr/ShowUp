@@ -41,9 +41,27 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ContratanteInicioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Usuario user;
     private Contratante contratante;
     private ArtistasProximos artistasProximos;
+
+    private View hView;
+    private ImageView imageView_nav_header_background;
+    private Button button_nav_header_configuracao;
+    private CircleImageView circleImageView_nav_header_perfil;
+    private TextView textView_nav_header_nome;
+
+    private TwoWayView twoWayView;
+    private AdapterTwoWayView adapterTwoWayView;
+
+    private Button button_artista_principal;
+    private ImageView imageView_artista_principal;
+    private TextView textView_nome_artista_principal;
+    private TextView textView_estilo_artista_principal;
+
+    private ImageView button_criar_evento;
+    private ImageView button_evento_urgente;
+    private ImageView button_meus_eventos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,47 +83,51 @@ public class ContratanteInicioActivity extends AppCompatActivity
         getSupportActionBar().setTitle("INÍCIO");
 
         Intent intent = getIntent();
-        this.user = intent.getParcelableExtra("paramsUsuario");
-        this.contratante = user.getContratante();
+        this.contratante = intent.getParcelableExtra("paramsContratante");
 
         //----------------------------------------------------------------------------//
 
-        //--(0) Populando array de artisas:
+        //--(0) Populando array de artisas: FAZER UMA CHAMADA AO BD PARA ENCONTRAR OS ARTISTAS!!
         this.artistasProximos = new ArtistasProximos(popularArrayArtista());
         //--Fim de (0)
 
         //--(1) Configurando menu lateral:
-        View hView =  navigationView.getHeaderView(0);
-        ImageView contratante_inicio_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_inicio_nav_header_image_background);
-        Button contratante_inicio_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_inicio_nav_header_button_configuracao);
-        CircleImageView contratante_inicio_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_inicio_nav_header_image_perfil);
-        TextView contratante_inicio_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_inicio_nav_header_textview_nome);
+        hView =  navigationView.getHeaderView(0);
+        imageView_nav_header_background = (ImageView) hView.findViewById(R.id.contratante_inicio_nav_header_image_background);
+        button_nav_header_configuracao = (Button) hView.findViewById(R.id.contratante_inicio_nav_header_button_configuracao);
+        circleImageView_nav_header_perfil = (CircleImageView) hView.findViewById(R.id.contratante_inicio_nav_header_image_perfil);
+        textView_nav_header_nome = (TextView) hView.findViewById(R.id.contratante_inicio_nav_header_textview_nome);
 
-        contratante_inicio_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        if(contratante.getUrl_foto_perfil().equals("")){
-
-            contratante_inicio_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
+        //Setando imagem de background do menu lateral:
+        imageView_nav_header_background.setImageResource(R.drawable.temp_background_menu_lateral);
+        //Setando imagem do perfil:
+        if(contratante.getUrl_foto_perfil() == null){
+            //Imagem padrão do app
+            circleImageView_nav_header_perfil.setImageResource(R.drawable.foto_perfil);
         }else{
-
+            //Imagem do perfil do usuario
             Picasso.with(this)
                     .load(contratante.getUrl_foto_perfil())
-                    .into(contratante_inicio_nav_header_image_perfil);
+                    .into(circleImageView_nav_header_perfil);
         }
-        if(contratante.getNome().equals("")){
-
-            contratante_inicio_nav_header_textview_nome.setText("Nome");
+        //Setando nome do usuario:
+        if(contratante.getNome() == null){
+            //Nome padrão do app
+            textView_nav_header_nome.setText("Nome");
         }else{
-
-            contratante_inicio_nav_header_textview_nome.setText(this.contratante.getNome());
+            //Nome do usuario
+            textView_nav_header_nome.setText(this.contratante.getNome());
         }
-        contratante_inicio_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
+        //Atribuindo click ao botão de configuração do app:
+        button_nav_header_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 open_activity_configuracao();
             }
         });
-        contratante_inicio_nav_header_image_perfil.setOnClickListener(new View.OnClickListener() {
+        //Atribuindo click a imagem de perfil do usuario
+        circleImageView_nav_header_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -114,13 +136,13 @@ public class ContratanteInicioActivity extends AppCompatActivity
         });
         //--Fim de (1)
 
-        //--(2) Configurando a TwoWayView:
-        TwoWayView contratante_inicio_content_twoWayView = (TwoWayView) findViewById(R.id.contratante_inicio_content_twoWayView);
-        contratante_inicio_content_twoWayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //--(2) Configurando a TwoWayView (ListView lateral):
+        twoWayView = (TwoWayView) findViewById(R.id.contratante_inicio_content_twoWayView);
+        twoWayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                open_activity_artista(i+1);//Para retirar o primeiro artista que já aparece como principal
+                open_activity_artista(i+1);//(i+1) Para retirar o primeiro artista que já aparece como principal
             }
         });
 
@@ -130,52 +152,53 @@ public class ContratanteInicioActivity extends AppCompatActivity
             subArrayArtista.add(this.artistasProximos.getArrayArtista().get(i));
         }
 
-        AdapterTwoWayView adapterTwoWayView = new AdapterTwoWayView(this, subArrayArtista);
-        contratante_inicio_content_twoWayView.setAdapter(adapterTwoWayView);
+        adapterTwoWayView = new AdapterTwoWayView(this, subArrayArtista);
+        twoWayView.setAdapter(adapterTwoWayView);
         //--Fim de (2)
 
-        //--(3) Configurando o button seta:
-        Button contratante_inicio_content_button = (Button) findViewById(R.id.contratante_inicio_content_button);
-        contratante_inicio_content_button.setOnClickListener(new View.OnClickListener(){
+        //--(3) Configurando o button seta que acessa artista:
+        button_artista_principal = (Button) findViewById(R.id.contratante_inicio_content_button);
+        //Atribuindo click ao button:
+        button_artista_principal.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
 
-                open_activity_artista(0);
+                open_activity_artista(0);//0 é o artista na posição 0 do ArrayList de artistas
             }
         });
         //--Fim de (3)
 
         //--(4) Configurar artista principal/mais próximo:
-        ImageView contratante_inicio_content_imageview = (ImageView) findViewById(R.id.contratante_inicio_content_imageview);
-        TextView contratante_inicio_content_textview_nome_artista = (TextView) findViewById(R.id.contratante_inicio_content_textview_nome_artista);
-        TextView contratante_inicio_content_textview_estilo_artista = (TextView) findViewById(R.id.contratante_inicio_content_textview_estilo_artista);
+        imageView_artista_principal = (ImageView) findViewById(R.id.contratante_inicio_content_imageview);
+        textView_nome_artista_principal = (TextView) findViewById(R.id.contratante_inicio_content_textview_nome_artista);
+        textView_estilo_artista_principal = (TextView) findViewById(R.id.contratante_inicio_content_textview_estilo_artista);
 
-        contratante_inicio_content_imageview.setImageResource(R.drawable.temp_evento1);
-        contratante_inicio_content_textview_nome_artista.setText(this.artistasProximos.getArtistaByIndex(0).getNome());
-        contratante_inicio_content_textview_estilo_artista.setText(this.artistasProximos.getArtistaByIndex(0).getEstilo());
+        imageView_artista_principal.setImageResource(R.drawable.temp_evento1);
+        textView_nome_artista_principal.setText(this.artistasProximos.getArtistaByIndex(0).getNome());
+        textView_estilo_artista_principal.setText(this.artistasProximos.getArtistaByIndex(0).getEstilo());
         //--Fim de (4)
 
         //--Configurando buttons de criar evento, evento urgente e meus eventos:
-        ImageView contratante_inicio_content_button_criar_evento = (ImageView) findViewById(R.id.contratante_inicio_content_button_criar_evento);
-        ImageView contratante_inicio_content_button_evento_urgente = (ImageView) findViewById(R.id.contratante_inicio_content_button_evento_urgente);
-        ImageView contratante_inicio_content_button_meus_eventos = (ImageView) findViewById(R.id.contratante_inicio_content_button_meus_eventos);
-
-        contratante_inicio_content_button_criar_evento.setOnClickListener(new View.OnClickListener() {
+        button_criar_evento = (ImageView) findViewById(R.id.contratante_inicio_content_button_criar_evento);
+        button_evento_urgente = (ImageView) findViewById(R.id.contratante_inicio_content_button_evento_urgente);
+        button_meus_eventos = (ImageView) findViewById(R.id.contratante_inicio_content_button_meus_eventos);
+        //Atribuindo click aos buttons:
+        button_criar_evento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 open_activity_criar_evento();
             }
         });
-        contratante_inicio_content_button_evento_urgente.setOnClickListener(new View.OnClickListener() {
+        button_evento_urgente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 open_activity_evento_urgente();
             }
         });
-        contratante_inicio_content_button_meus_eventos.setOnClickListener(new View.OnClickListener() {
+        button_meus_eventos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -187,6 +210,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
     public void open_activity_alterar_perfil(){
 
         Intent activity_alterar_perfil = new Intent(this, ContratanteAlterarPerfilActivity.class);
+        //Preparando parametro para passar para activity seguinte:
         activity_alterar_perfil.putExtra("paramsContratante", this.contratante);
         startActivity(activity_alterar_perfil);
     }
@@ -194,6 +218,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
     public void open_activity_configuracao(){
 
         Intent activity_configuracoes = new Intent(this, ContratanteConfiguracoesActivity.class);
+        //Preparando parametro para passar para activity seguinte:
         activity_configuracoes.putExtra("paramsContratante", this.contratante);
         startActivity(activity_configuracoes);
     }
@@ -201,6 +226,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
     public void open_activity_artista(int position){
 
         Intent activity_artista = new Intent(this, ContratanteArtistaActivity.class);
+        //Preparando parametros para passar para activity seguinte:
         activity_artista.putExtra("paramsContratante", this.contratante);
         activity_artista.putExtra("paramsArtista", this.artistasProximos.getArtistaByIndex(position));
         startActivity(activity_artista);
@@ -209,6 +235,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
     public void open_activity_criar_evento(){
 
         Intent activity_criar_evento = new Intent(this, ContratanteCriarEventoActivity.class);
+        //Preparando parametro para passar para activity seguinte:
         activity_criar_evento.putExtra("paramsContratante", this.contratante);
         startActivity(activity_criar_evento);
     }
@@ -218,6 +245,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
     public void open_activity_meus_eventos(){
 
         Intent activity_meus_eventos = new Intent(this, ContratanteMeusEventosActivity.class);
+        //Preparando parametro para passar para activity seguinte:
         activity_meus_eventos.putExtra("paramsContratante", this.contratante);
         startActivity(activity_meus_eventos);
     }
@@ -250,6 +278,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
         if (id == R.id.contratante_inicio_menu_action_buscar) {
 
             Intent activity_busca = new Intent(this, ContratanteBuscaActivity.class);
+            //Preparando parametro para passar para activity seguinte:
             activity_busca.putExtra("paramsContratante", this.contratante);
             startActivity(activity_busca);
             return true;
@@ -284,6 +313,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
         } else if (id == R.id.contratante_inicio_drawer_menu_nav_favoritos) {
 
             Intent activity_favoritos = new Intent(this, ContratanteFavoritosActivity.class);
+            //Preparando parametro para passar para activity seguinte:
             activity_favoritos.putExtra("paramsContratante", this.contratante);
             startActivity(activity_favoritos);
 
@@ -374,15 +404,15 @@ public class ContratanteInicioActivity extends AppCompatActivity
         artista8.setNome("Artista8");
         artista9.setNome("Artista9");
 
-        artista1.setId_artista("codigo1");
-        artista2.setId_artista("codigo2");
-        artista3.setId_artista("codigo3");
-        artista4.setId_artista("codigo4");
-        artista5.setId_artista("codigo5");
-        artista6.setId_artista("codigo6");
-        artista7.setId_artista("codigo7");
-        artista8.setId_artista("codigo8");
-        artista9.setId_artista("codigo9");
+        artista1.setCpf("codigo1");
+        artista2.setCpf("codigo2");
+        artista3.setCpf("codigo3");
+        artista4.setCpf("codigo4");
+        artista5.setCpf("codigo5");
+        artista6.setCpf("codigo6");
+        artista7.setCpf("codigo7");
+        artista8.setCpf("codigo8");
+        artista9.setCpf("codigo9");
 
         artista1.setEstilo("estilo1");
         artista2.setEstilo("estilo2");

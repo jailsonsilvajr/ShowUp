@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class Conectar {
 
-    public static String url_servidor = "https://showupbr.com/appdroid/showup/php/";
+    public static String url_servidor = "https://showupbr.com/appdroid/showup/temp/";
 
     public static String postDados(String urlUsuario, String parametrosUsuario){
 

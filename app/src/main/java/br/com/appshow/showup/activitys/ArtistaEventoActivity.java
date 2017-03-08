@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import br.com.appshow.showup.R;
 import br.com.appshow.showup.entidades.Artista;
+import br.com.appshow.showup.entidades.EnderecoEvento;
 import br.com.appshow.showup.entidades.Evento;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -84,7 +85,12 @@ public class ArtistaEventoActivity extends AppCompatActivity
         TextView artista_evento_content_requisitos_evento = (TextView) findViewById(R.id.artista_evento_content_requisitos_evento);
 
         artista_evento_content_textview_nome_local.setText(this.evento.getNome());
-        artista_evento_content_textview_endereco_local.setText(this.evento.getEndereco());
+        String endereco = this.evento.getEndereco().getEstado() + ", ";
+        endereco += this.evento.getEndereco().getCidade() + ", ";
+        endereco += this.evento.getEndereco().getBairro() + ", ";
+        endereco += this.evento.getEndereco().getRua() + ", ";
+        endereco += this.evento.getEndereco().getNumero();
+        artista_evento_content_textview_endereco_local.setText(endereco);
         artista_evento_content_textview_descricao_evento.setText(this.evento.getDescricao());
         artista_evento_content_nome_evento.setText(this.evento.getNome());
         artista_evento_content_data_evento.setText(this.evento.getData());

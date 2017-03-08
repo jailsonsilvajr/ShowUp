@@ -65,7 +65,8 @@ public class ContratanteEventoActivity extends AppCompatActivity
         TextView contratante_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_evento_nav_header_textview_nome);
 
         contratante_evento_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        if(contratante.getUrl_foto_perfil().equals("")){
+
+        if(contratante.getUrl_foto_perfil() == null || contratante.getUrl_foto_perfil().equals("")){
 
             contratante_evento_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         }else{
@@ -74,13 +75,10 @@ public class ContratanteEventoActivity extends AppCompatActivity
                     .load(contratante.getUrl_foto_perfil())
                     .into(contratante_evento_nav_header_image_perfil);
         }
-        if(contratante.getNome().equals("")){
 
-            contratante_evento_nav_header_textview_nome.setText("Nome");
-        }else{
+        String nome_completo = this.contratante.getNome() + " " + this.contratante.getSobrenome();
+        contratante_evento_nav_header_textview_nome.setText(nome_completo);
 
-            contratante_evento_nav_header_textview_nome.setText(this.contratante.getNome());
-        }
         contratante_evento_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,16 +107,31 @@ public class ContratanteEventoActivity extends AppCompatActivity
         TextView contratante_evento_content_requisitos_evento = (TextView) findViewById(R.id.contratante_evento_content_requisitos_evento);
 
         contratante_evento_content_textview_nome_local.setText(this.evento.getLocal());
-        contratante_evento_content_textview_endereco_local.setText(this.evento.getEndereco());
+        String endereco = this.evento.getEndereco().getEstado() + ", ";
+        endereco += this.evento.getEndereco().getCidade() + ", ";
+        endereco += this.evento.getEndereco().getBairro() + ", ";
+        endereco += this.evento.getEndereco().getRua() + ", ";
+        endereco += this.evento.getEndereco().getNumero();
+        contratante_evento_content_textview_endereco_local.setText(endereco);
         contratante_evento_content_textview_descricao_evento.setText(this.evento.getDescricao());
         contratante_evento_content_nome_evento.setText(this.evento.getNome());
-        contratante_evento_content_data_evento.setText(this.evento.getData());
-        contratante_evento_content_hora_evento.setText(this.evento.getHorario());
+        String data = this.evento.getData().substring(8, 10) + "/";
+        data += this.evento.getData().substring(5, 7) + "/";
+        data += this.evento.getData().substring(0, 4);
+        contratante_evento_content_data_evento.setText(data);
+        String horario = "HORA: " + this.evento.getHorario_inicio() + "H às " + this.evento.getHorario_fim() + "H";
+        contratante_evento_content_hora_evento.setText(horario);
         contratante_evento_content_requisitos_evento.setText(this.evento.getRequisito());
 
-        Picasso.with(ContratanteEventoActivity.this)
-                .load(this.evento.getUrl_imagem_principal())
-                .into(contratante_evento_content_imageview_imagem);
+        if(this.evento.getUrl_imagem1() == null || evento.getUrl_imagem1().equals("")){
+
+            contratante_evento_content_imageview_imagem.setImageResource(R.drawable.temp_evento1);
+        }else{
+
+            Picasso.with(ContratanteEventoActivity.this)
+                    .load(this.evento.getUrl_imagem1())
+                    .into(contratante_evento_content_imageview_imagem);
+        }
         //--Fim de (2)
     }
 

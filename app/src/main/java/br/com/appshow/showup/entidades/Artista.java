@@ -7,38 +7,20 @@ import android.os.Parcelable;
  * Created by jailson on 03/02/17.
  */
 
-public class Artista implements Parcelable{
+public class Artista extends Usuario implements Parcelable{
 
-    private String id_artista;
-    private String nome;
-    private String estilo;
+    private String estilo_musical;
     private String site;
     private String descricao;
 
     public Artista(){}
 
-    public String getId_artista() {
-        return id_artista;
-    }
-
-    public void setId_artista(String id_artista) {
-        this.id_artista = id_artista;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getEstilo() {
-        return estilo;
+        return estilo_musical;
     }
 
     public void setEstilo(String estilo) {
-        this.estilo = estilo;
+        this.estilo_musical = estilo;
     }
 
     public String getSite() {
@@ -58,9 +40,15 @@ public class Artista implements Parcelable{
     }
 
     protected Artista(Parcel in) {
-        id_artista = in.readString();
-        nome = in.readString();
-        estilo = in.readString();
+
+        setCpf(in.readString());
+        setEmail(in.readString());
+        setNome(in.readString());
+        setSobrenome(in.readString());
+        setId_endereco(in.readInt());
+        setTelefone(in.readString());
+        setUrl_foto_perfil(in.readString());
+        estilo_musical = in.readString();
         site = in.readString();
         descricao = in.readString();
     }
@@ -85,9 +73,15 @@ public class Artista implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id_artista);
-        dest.writeString(nome);
-        dest.writeString(estilo);
+
+        dest.writeString(getCpf());
+        dest.writeString(getEmail());
+        dest.writeString(getNome());
+        dest.writeString(getSobrenome());
+        dest.writeInt(getId_endereco());
+        dest.writeString(getTelefone());
+        dest.writeString(getUrl_foto_perfil());
+        dest.writeString(estilo_musical);
         dest.writeString(site);
         dest.writeString(descricao);
     }

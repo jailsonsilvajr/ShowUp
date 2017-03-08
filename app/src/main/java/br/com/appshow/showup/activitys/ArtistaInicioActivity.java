@@ -52,7 +52,6 @@ public class ArtistaInicioActivity extends AppCompatActivity
     private EventosProximos eventosProximos;
     private EventosBuscados eventosBuscados;
     private Artista artista;
-    private Usuario user;
 
     String url = "";
     String parametros = "";
@@ -77,8 +76,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
         getSupportActionBar().setTitle("INÍCIO");
 
         Intent intent = getIntent();
-        this.user = intent.getParcelableExtra("paramsUsuario");
-        this.artista = user.getArtista();
+        this.artista = intent.getParcelableExtra("paramsArtista");
 
         //----------------------------------------------------------------------------//
 
@@ -197,9 +195,9 @@ public class ArtistaInicioActivity extends AppCompatActivity
         int min = calendar.get(Calendar.MINUTE);
 
         Evento evento = this.eventosProximos.getEventoByIndex(0);
-        int dia_evento = Integer.parseInt(evento.getDia());
-        int mes_evento = Integer.parseInt(evento.getMes());
-        int ano_evento = Integer.parseInt(evento.getAno());
+        int dia_evento = Integer.parseInt(evento.getData().substring(8, 10));
+        int mes_evento = Integer.parseInt(evento.getData().substring(5, 7));
+        int ano_evento = Integer.parseInt(evento.getData().substring(0, 4));
         int hora_evento = Integer.parseInt(evento.getHorario_inicio().substring(0, 2));
         int min_evento = Integer.parseInt(evento.getHorario_inicio().substring(3, 5));
 
@@ -383,9 +381,9 @@ public class ArtistaInicioActivity extends AppCompatActivity
             int hora = calendar.get(Calendar.HOUR_OF_DAY);
             int min = calendar.get(Calendar.MINUTE);
 
-            int dia_evento = Integer.parseInt(evento.getDia());
-            int mes_evento = Integer.parseInt(evento.getMes());
-            int ano_evento = Integer.parseInt(evento.getAno());
+            int dia_evento = Integer.parseInt(evento.getData().substring(8, 10));
+            int mes_evento = Integer.parseInt(evento.getData().substring(5, 7));
+            int ano_evento = Integer.parseInt(evento.getData().substring(0, 4));
             int hora_evento = Integer.parseInt(evento.getHorario_inicio().substring(0, 2));
             int min_evento = Integer.parseInt(evento.getHorario_inicio().substring(3, 5));
 
@@ -578,7 +576,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
         evento8.setNome("Centro de Convenções");
         evento9.setNome("Arena Liquidi Sky");
 
-        evento1.setEstado("Pernambuco");
+        /*evento1.setEstado("Pernambuco");
         evento2.setEstado("Pernambuco");
         evento3.setEstado("Pernambuco");
         evento4.setEstado("Pernambuco");
@@ -710,7 +708,7 @@ public class ArtistaInicioActivity extends AppCompatActivity
         evento6.setRequisito("Requisitos...\n"+"Requisitos...");
         evento7.setRequisito("Requisitos...\n"+"Requisitos...");
         evento8.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento9.setRequisito("Requisitos...\n"+"Requisitos...");
+        evento9.setRequisito("Requisitos...\n"+"Requisitos...");*/
 
         eventos.add(evento3); eventos.add(evento4); eventos.add(evento2); eventos.add(evento8); eventos.add(evento6);
         eventos.add(evento9); eventos.add(evento7); eventos.add(evento5); eventos.add(evento1);

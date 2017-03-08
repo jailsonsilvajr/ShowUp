@@ -81,8 +81,8 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()){
 
-            url = Conectar.url_servidor + "obter_evento_app_contratante.php?";
-            parametros = "id_contratante=" + this.contratante.getId_contratante();
+            url = Conectar.url_servidor + "obter_evento_contratante.php?";
+            parametros = "cpf=" + this.contratante.getCpf();
             new SolicitarDados().execute(url);
         }else{
 
@@ -98,7 +98,7 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
         TextView contratante_meus_eventos_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_meus_eventos_nav_header_textview_nome);
 
         contratante_meus_eventos_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        if(contratante.getUrl_foto_perfil().equals("")){
+        if(contratante.getUrl_foto_perfil() == null || contratante.getUrl_foto_perfil().equals("")){
 
             contratante_meus_eventos_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         }else{
@@ -107,13 +107,10 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
                     .load(contratante.getUrl_foto_perfil())
                     .into(contratante_meus_eventos_nav_header_image_perfil);
         }
-        if(contratante.getNome().equals("")){
 
-            contratante_meus_eventos_nav_header_textview_nome.setText("Nome");
-        }else{
+        String nome_completo = this.contratante.getNome() + " " + this.contratante.getSobrenome();
+        contratante_meus_eventos_nav_header_textview_nome.setText(nome_completo);
 
-            contratante_meus_eventos_nav_header_textview_nome.setText(this.contratante.getNome());
-        }
         contratante_meus_eventos_nav_header_button_configuracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -261,9 +258,15 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
             contratante_meus_eventos_list_item_textview_nome_evento.setText(evento.getNome());
             contratante_meus_eventos_list_item_button_evento.setImageResource(R.drawable.seta_menor);
 
-            Picasso.with(mContext) //Context
-                .load(evento.getUrl_imagem_redonda()) //URL/FILE
-                .into(contratante_meus_eventos_list_item_image_evento);//an ImageView Object to show the loaded image;*/
+            if(evento.getUrl_imagem1() == null || evento.getUrl_imagem1().equals("")){
+
+                contratante_meus_eventos_list_item_image_evento.setImageResource(R.drawable.temp_evento1);
+            }else{
+
+                Picasso.with(mContext) //Context
+                        .load(evento.getUrl_imagem1()) //URL/FILE
+                        .into(contratante_meus_eventos_list_item_image_evento);//an ImageView Object to show the loaded image;*/
+            }
 
             return rowView;
         }
@@ -285,6 +288,9 @@ public class ContratanteMeusEventosActivity extends AppCompatActivity
             if(token.equals("evento_erro")){
 
                 Toast.makeText(ContratanteMeusEventosActivity.this, "Não há eventos!", Toast.LENGTH_SHORT).show();
+            }else if(token.equals("conexao_erro")){
+
+                Toast.makeText(ContratanteMeusEventosActivity.this, "Erro no Servidor!", Toast.LENGTH_SHORT).show();
             }else{
 
                 ListView contratante_eventos_content_listview_evento = (ListView) findViewById(R.id.contratante_meus_eventos_content_listview_evento);

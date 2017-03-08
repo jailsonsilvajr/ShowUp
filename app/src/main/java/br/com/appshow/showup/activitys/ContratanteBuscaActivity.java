@@ -83,7 +83,7 @@ public class ContratanteBuscaActivity extends AppCompatActivity
         TextView contratante_busca_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_busca_nav_header_textview_nome);
 
         contratante_busca_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
-        if(contratante.getUrl_foto_perfil().equals("")){
+        if(contratante.getUrl_foto_perfil() == null || contratante.getUrl_foto_perfil().equals("")){
 
             contratante_busca_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         }else{

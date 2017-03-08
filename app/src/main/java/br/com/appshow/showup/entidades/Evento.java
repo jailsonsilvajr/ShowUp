@@ -11,46 +11,37 @@ public class Evento implements Parcelable {
 
     private String id_evento;
     private String nome;
-    private String local;
-    private String estado;
-    private String cidade;
-    private String bairro;
-    private String rua;
-    private String numero;
+    private String nome_local;
+    //private EnderecoEvento endereco_evento;
     private String descricao;
-    private String dia;
-    private String mes;
-    private String ano;
+    private String data;
     private String horario_inicio;
     private String horario_fim;
     private String equipamentos;
     private String requisitos;
-    private String url_imagem_principal;
-    private String url_imagem_secundaria;
-    private String url_imagem_redonda;
+    private String url_imagem1;
+    private String url_imagem2;
+    private String url_imagem3;
+
+    private EnderecoEvento[] endereco_evento;
 
     public Evento(){}
 
     protected Evento(Parcel in) {
         id_evento = in.readString();
         nome = in.readString();
-        local = in.readString();
-        estado = in.readString();
-        cidade = in.readString();
-        bairro = in.readString();
-        rua = in.readString();
-        numero = in.readString();
+        nome_local = in.readString();
+        //endereco_evento = (EnderecoEvento) in.readParcelable(EnderecoEvento.class.getClassLoader());
+        endereco_evento = in.createTypedArray(EnderecoEvento.CREATOR);
         descricao = in.readString();
-        dia = in.readString();
-        mes = in.readString();
-        ano = in.readString();
+        data = in.readString();
         horario_inicio = in.readString();
         horario_fim = in.readString();
         equipamentos = in.readString();
         requisitos = in.readString();
-        url_imagem_principal = in.readString();
-        url_imagem_secundaria = in.readString();
-        url_imagem_redonda = in.readString();
+        url_imagem1 = in.readString();
+        url_imagem2 = in.readString();
+        url_imagem3 = in.readString();
     }
 
     public static final Creator<Evento> CREATOR = new Creator<Evento>() {
@@ -73,30 +64,27 @@ public class Evento implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeString(id_evento);
         dest.writeString(nome);
-        dest.writeString(local);
-        dest.writeString(estado);
-        dest.writeString(cidade);
-        dest.writeString(bairro);
-        dest.writeString(rua);
-        dest.writeString(numero);
+        dest.writeString(nome_local);
+        //dest.writeParcelable(endereco_evento, flags);
+        dest.writeTypedArray(endereco_evento, flags);
         dest.writeString(descricao);
-        dest.writeString(dia);
-        dest.writeString(mes);
-        dest.writeString(ano);
+        dest.writeString(data);
         dest.writeString(horario_inicio);
         dest.writeString(horario_fim);
         dest.writeString(equipamentos);
         dest.writeString(requisitos);
-        dest.writeString(url_imagem_principal);
-        dest.writeString(url_imagem_secundaria);
-        dest.writeString(url_imagem_redonda);
+        dest.writeString(url_imagem1);
+        dest.writeString(url_imagem2);
+        dest.writeString(url_imagem3);
     }
 
-    public String getEndereco(){
+    public EnderecoEvento getEndereco(){
 
-        return cidade + ", " + bairro + ", " + rua + ", " + numero;
+        //return endereco_evento;
+        return endereco_evento[0];
     }
 
     public String getHorario(){
@@ -106,7 +94,7 @@ public class Evento implements Parcelable {
 
     public String getData(){
 
-        return "DIA: " + dia + "/" + mes + "/" + ano;
+        return data;
     }
 
     public String getId_evento() {
@@ -126,51 +114,11 @@ public class Evento implements Parcelable {
     }
 
     public String getLocal() {
-        return local;
+        return nome_local;
     }
 
     public void setLocal(String local) {
-        this.local = local;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
+        this.nome_local = local;
     }
 
     public String getDescricao() {
@@ -179,30 +127,6 @@ public class Evento implements Parcelable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
-
-    public String getMes() {
-        return mes;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
-        this.ano = ano;
     }
 
     public String getHorario_inicio() {
@@ -237,27 +161,27 @@ public class Evento implements Parcelable {
         this.requisitos = requisito;
     }
 
-    public String getUrl_imagem_principal() {
-        return url_imagem_principal;
+    public String getUrl_imagem1() {
+        return url_imagem1;
     }
 
-    public void setUrl_imagem_principal(String url_imagem_principal) {
-        this.url_imagem_principal = url_imagem_principal;
+    public void setUrl_imagem1(String url_imagem1) {
+        this.url_imagem1 = url_imagem1;
     }
 
-    public String getUrl_imagem_secundaria() {
-        return url_imagem_secundaria;
+    public String getUrl_imagem2() {
+        return url_imagem2;
     }
 
-    public void setUrl_imagem_secundaria(String url_imagem_secundaria) {
-        this.url_imagem_secundaria = url_imagem_secundaria;
+    public void setUrl_imagem2(String url_imagem2) {
+        this.url_imagem2 = url_imagem2;
     }
 
-    public String getUrl_imagem_redonda() {
-        return url_imagem_redonda;
+    public String getUrl_imagem3() {
+        return url_imagem3;
     }
 
-    public void setUrl_imagem_redonda(String url_imagem_redonda) {
-        this.url_imagem_redonda = url_imagem_redonda;
+    public void setUrl_imagem3(String url_imagem3) {
+        this.url_imagem3 = url_imagem3;
     }
 }

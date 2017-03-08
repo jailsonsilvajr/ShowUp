@@ -55,7 +55,23 @@
             android:inputType="text"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:id="@+id/contratante_alterar_perfil_content_edittext_sobrenome"
+            android:background="@drawable/borda_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sobrenome"
+            android:textColorHint="@color/textColorSecundary"
+            android:textColor="@color/textColorSecundary"
+            android:maxLines="1"
+            android:inputType="text"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginTop="10dp"/>
 
         <EditText
             android:id="@+id/contratante_alterar_perfil_content_edittext_email"
@@ -73,11 +89,11 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/contratante_alterar_perfil_content_edittext_cpf_cnpj"
+            android:id="@+id/contratante_alterar_perfil_content_edittext_cpf"
             android:background="@drawable/borda_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CPF/CNPJ"
+            android:hint="CPF"
             android:textColorHint="@color/textColorSecundary"
             android:textColor="@color/textColorSecundary"
             android:maxLines="1"
@@ -88,41 +104,11 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/contratante_alterar_perfil_content_edittext_cep"
+            android:id="@+id/contratante_alterar_perfil_content_edittext_telefone"
             android:background="@drawable/borda_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CEP"
-            android:textColorHint="@color/textColorSecundary"
-            android:textColor="@color/textColorSecundary"
-            android:maxLines="1"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/contratante_alterar_perfil_content_edittext_nascimento"
-            android:background="@drawable/borda_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Data de Nascimento"
-            android:textColorHint="@color/textColorSecundary"
-            android:textColor="@color/textColorSecundary"
-            android:maxLines="1"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:id="@+id/contratante_alterar_perfil_content_edittext_celular"
-            android:background="@drawable/borda_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Número do Celular"
+            android:hint="Telefone"
             android:textColorHint="@color/textColorSecundary"
             android:textColor="@color/textColorSecundary"
             android:maxLines="1"

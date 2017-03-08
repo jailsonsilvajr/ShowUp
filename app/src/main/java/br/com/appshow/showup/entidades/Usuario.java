@@ -1,66 +1,82 @@
 package br.com.appshow.showup.entidades;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by jailson on 05/02/17.
  */
 
-public class Usuario implements Parcelable {
+public class Usuario{
 
-    private Artista artista;
-    private Contratante contratante;
+    private String cpf;
+    private String email;
+    private String nome;
+    private String sobrenome;
+    private int id_endereco;
+    private String telefone;
+    private String url_foto_perfil;
 
-    public Usuario(Artista artista, Contratante contratante){
+    //private EnderecoUsuario[] enderecoUsuario;
 
-        this.artista = artista;
-        this.contratante = contratante;
+    public String getCpf() {
+        return cpf;
     }
 
-    public Artista getArtista() {
-        return artista;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void setArtista(Artista artista) {
-        this.artista = artista;
+    public String getEmail() {
+        return email;
     }
 
-    public Contratante getContratante() {
-        return contratante;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setContratante(Contratante contratante) {
-        this.contratante = contratante;
+    public String getNome() {
+        return nome;
     }
 
-    protected Usuario(Parcel in) {
-
-        artista = (Artista) in.readParcelable(Artista.class.getClassLoader());
-        contratante = (Contratante) in.readParcelable(Contratante.class.getClassLoader());
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
-
-        @Override
-        public Usuario createFromParcel(Parcel in) {
-            return new Usuario(in);
-        }
-
-        @Override
-        public Usuario[] newArray(int size) {
-            return new Usuario[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(artista, flags);
-        dest.writeParcelable(contratante, flags);
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
+
+    public int getId_endereco() {
+        return id_endereco;
+    }
+
+    public void setId_endereco(int id_endereco) {
+        this.id_endereco = id_endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getUrl_foto_perfil() {
+        return url_foto_perfil;
+    }
+
+    public void setUrl_foto_perfil(String url_foto_perfil) {
+        this.url_foto_perfil = url_foto_perfil;
+    }
+
+    /*public EnderecoUsuario[] getEnderecoUsuario() {
+        return enderecoUsuario;
+    }
+
+    public void setEnderecoUsuario(EnderecoUsuario[] enderecoUsuario) {
+        this.enderecoUsuario = enderecoUsuario;
+    }*/
 }

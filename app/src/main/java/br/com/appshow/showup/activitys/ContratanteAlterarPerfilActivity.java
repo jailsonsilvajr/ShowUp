@@ -52,11 +52,10 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
 
     private CircleImageView contratante_alterar_perfil_content_image_perfil;
     private EditText contratante_alterar_perfil_content_edittext_nome;
+    private  EditText contratante_alterar_perfil_content_edittext_sobrenome;
     private EditText contratante_alterar_perfil_content_edittext_email;
-    private EditText contratante_alterar_perfil_content_edittext_cpf_cnpj;
-    private EditText contratante_alterar_perfil_content_edittext_cep;
-    private EditText contratante_alterar_perfil_content_edittext_nascimento;
-    private EditText contratante_alterar_perfil_content_edittext_celular;
+    private EditText contratante_alterar_perfil_content_edittext_cpf;
+    private EditText contratante_alterar_perfil_content_edittext_telefone;
     private Button contratante_alterar_perfil_content_button_alterar;
 
     private static final int IMG_CAM = 1;
@@ -115,7 +114,7 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
         //Conf. background do menu lateral:
         contratante_alterar_perfil_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
         //Conf. imagem do perfil no menu lateral:
-        if(contratante.getUrl_foto_perfil().equals("")){
+        if(contratante.getUrl_foto_perfil() == null || contratante.getUrl_foto_perfil().equals("")){
 
             contratante_alterar_perfil_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
         }else{
@@ -145,14 +144,13 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
         //--(2) Conf. as views:
         contratante_alterar_perfil_content_image_perfil = (CircleImageView) findViewById(R.id.contratante_alterar_perfil_image_perfil);
         contratante_alterar_perfil_content_edittext_nome = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_nome);
+        contratante_alterar_perfil_content_edittext_sobrenome = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_sobrenome);
         contratante_alterar_perfil_content_edittext_email = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_email);
-        contratante_alterar_perfil_content_edittext_cpf_cnpj = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_cpf_cnpj);
-        contratante_alterar_perfil_content_edittext_cep = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_cep);
-        contratante_alterar_perfil_content_edittext_nascimento = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_nascimento);
-        contratante_alterar_perfil_content_edittext_celular = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_celular);
+        contratante_alterar_perfil_content_edittext_cpf = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_cpf);
+        contratante_alterar_perfil_content_edittext_telefone = (EditText) findViewById(R.id.contratante_alterar_perfil_content_edittext_telefone);
         contratante_alterar_perfil_content_button_alterar = (Button) findViewById(R.id.contratante_alterar_perfil_content_button_alterar);
         //Adicionar a foto do perfil:
-        if(contratante.getUrl_foto_perfil().equals("")){
+        if(contratante.getUrl_foto_perfil() == null || contratante.getUrl_foto_perfil().equals("")){
 
             contratante_alterar_perfil_content_image_perfil.setImageResource(R.drawable.foto_perfil);
         }else{
@@ -163,16 +161,14 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
         }
         //Adicionar nome do perfil:
         contratante_alterar_perfil_content_edittext_nome.setText(contratante.getNome());
+        //Adicionar sobrenome do perfil:
+        contratante_alterar_perfil_content_edittext_sobrenome.setText(contratante.getSobrenome());
         //Adicionar email do perfil:
         contratante_alterar_perfil_content_edittext_email.setText(contratante.getEmail());
         //Adicionar cpf/cnpj do perfil:
-        contratante_alterar_perfil_content_edittext_cpf_cnpj.setText(contratante.getCpf_cnpj());
-        //Adicionar cep do perfil:
-        contratante_alterar_perfil_content_edittext_cep.setText(contratante.getCep());
-        //Adicionar nascimento do perfil:
-        contratante_alterar_perfil_content_edittext_nascimento.setText(contratante.getNascimento());
+        contratante_alterar_perfil_content_edittext_cpf.setText(contratante.getCpf());
         //Adicionar celular do perfil:
-        contratante_alterar_perfil_content_edittext_celular.setText(contratante.getNumero_celular());
+        contratante_alterar_perfil_content_edittext_telefone.setText(contratante.getTelefone());
 
         //Adicionar ação ao clicar na foto do perfil:
         contratante_alterar_perfil_content_image_perfil.setOnClickListener(new View.OnClickListener() {
@@ -198,14 +194,14 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
 
         enableViews(false);
 
-        url = Conectar.url_servidor + "alterar_perfil_contratante_app.php?";
-        parametros = "id_contratante=" + contratante.getId_contratante();
-        parametros += "&name=" + contratante_alterar_perfil_content_edittext_nome.getText().toString();
+        url = Conectar.url_servidor + "alterar_perfil_contratante.php?";
+        parametros = "";
+        parametros += "cpf_atual=" + contratante.getCpf();
+        parametros += "&cpf_novo=" + contratante_alterar_perfil_content_edittext_cpf.getText().toString();
+        parametros += "&nome=" + contratante_alterar_perfil_content_edittext_nome.getText().toString();
+        parametros += "&sobrenome=" + contratante_alterar_perfil_content_edittext_sobrenome.getText().toString();
         parametros += "&email=" + contratante_alterar_perfil_content_edittext_email.getText().toString();
-        parametros += "&cpf_cnpj=" + contratante_alterar_perfil_content_edittext_cpf_cnpj.getText().toString();
-        parametros += "&cep=" + contratante_alterar_perfil_content_edittext_cep.getText().toString();
-        parametros += "&data=" + contratante_alterar_perfil_content_edittext_nascimento.getText().toString();
-        parametros += "&numero_celular=" + contratante_alterar_perfil_content_edittext_celular.getText().toString();
+        parametros += "&telefone=" + contratante_alterar_perfil_content_edittext_telefone.getText().toString();
         if(image.getBitmap() != null){
 
             parametros += "&img_mime=" + image.getMime();
@@ -232,10 +228,8 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
         contratante_alterar_perfil_content_image_perfil.setEnabled(enable);
         contratante_alterar_perfil_content_edittext_nome.setEnabled(enable);
         contratante_alterar_perfil_content_edittext_email.setEnabled(enable);
-        contratante_alterar_perfil_content_edittext_cpf_cnpj.setEnabled(enable);
-        contratante_alterar_perfil_content_edittext_cep.setEnabled(enable);
-        contratante_alterar_perfil_content_edittext_nascimento.setEnabled(enable);
-        contratante_alterar_perfil_content_edittext_celular.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_cpf.setEnabled(enable);
+        contratante_alterar_perfil_content_edittext_telefone.setEnabled(enable);
         contratante_alterar_perfil_content_button_alterar.setEnabled(enable);
         contratante_alterar_perfil_content_button_alterar.setText(enable ? "ALTERAR" : "ALTERANDO...");
     }
@@ -385,7 +379,7 @@ public class ContratanteAlterarPerfilActivity extends AppCompatActivity
 
         protected void onPostExecute(String result){
 
-            //Toast.makeText(ContratanteAlterarPerfilActivity.this, result, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ContratanteAlterarPerfilActivity.this, result, Toast.LENGTH_SHORT).show();
             enableViews(true);
             contratante_alterar_parfil_app_bar_progressBar.setVisibility(View.GONE);
         }

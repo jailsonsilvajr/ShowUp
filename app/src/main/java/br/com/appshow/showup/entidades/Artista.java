@@ -13,6 +13,8 @@ public class Artista extends Usuario implements Parcelable{
     private String site;
     private String descricao;
 
+    private EnderecoUsuario[] endereco_usuario;
+
     public Artista(){}
 
     public String getEstilo() {
@@ -39,6 +41,11 @@ public class Artista extends Usuario implements Parcelable{
         this.descricao = descricao;
     }
 
+    public EnderecoUsuario getEndereco(){
+
+        return endereco_usuario[0];
+    }
+
     protected Artista(Parcel in) {
 
         setCpf(in.readString());
@@ -51,6 +58,8 @@ public class Artista extends Usuario implements Parcelable{
         estilo_musical = in.readString();
         site = in.readString();
         descricao = in.readString();
+
+        endereco_usuario = in.createTypedArray(EnderecoUsuario.CREATOR);
     }
 
     public static final Creator<Artista> CREATOR = new Creator<Artista>() {
@@ -84,5 +93,7 @@ public class Artista extends Usuario implements Parcelable{
         dest.writeString(estilo_musical);
         dest.writeString(site);
         dest.writeString(descricao);
+
+        dest.writeTypedArray(endereco_usuario, flags);
     }
 }

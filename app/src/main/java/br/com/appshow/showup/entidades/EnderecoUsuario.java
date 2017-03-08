@@ -34,7 +34,7 @@ public class EnderecoUsuario implements Parcelable{
         complemento = in.readString();
     }
 
-    public static final Parcelable.Creator<EnderecoUsuario> CREATOR = new Parcelable.Creator<EnderecoUsuario>() {
+    public static final Creator<EnderecoUsuario> CREATOR = new Creator<EnderecoUsuario>() {
 
         @Override
         public EnderecoUsuario createFromParcel(Parcel in) {

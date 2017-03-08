@@ -2,6 +2,9 @@ package br.com.appshow.showup.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,13 +24,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.lucasr.twowayview.TwoWayView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import br.com.appshow.showup.R;
+import br.com.appshow.showup.conexao.Conectar;
 import br.com.appshow.showup.entidades.Artista;
 import br.com.appshow.showup.entidades.Contratante;
 import br.com.appshow.showup.entidades.Usuario;
@@ -42,7 +50,8 @@ public class ContratanteInicioActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Contratante contratante;
-    private ArtistasProximos artistasProximos;
+    //private ArtistasProximos artistasProximos;
+    private ArrayList<Artista> artistasProximos;
 
     private View hView;
     private ImageView imageView_nav_header_background;
@@ -61,6 +70,9 @@ public class ContratanteInicioActivity extends AppCompatActivity
     private ImageView button_criar_evento;
     private ImageView button_evento_urgente;
     private ImageView button_meus_eventos;
+
+    private String url = "";
+    private String parametros = "";
 
 
     @Override
@@ -88,7 +100,19 @@ public class ContratanteInicioActivity extends AppCompatActivity
         //----------------------------------------------------------------------------//
 
         //--(0) Populando array de artisas: FAZER UMA CHAMADA AO BD PARA ENCONTRAR OS ARTISTAS!!
-        this.artistasProximos = new ArtistasProximos(popularArrayArtista());
+        //this.artistasProximos = new ArtistasProximos(popularArrayArtista());
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()){
+
+            url = Conectar.url_servidor + "obter_artistas_proximos.php?";
+            String cidade = "Recife";
+            parametros = "cidade=" + cidade;
+            new SolicitarDados().execute(url);
+        }else{
+
+            Toast.makeText(this, "Nenhuma conexão foi encontrada!", Toast.LENGTH_SHORT).show();
+        }
         //--Fim de (0)
 
         //--(1) Configurando menu lateral:
@@ -138,7 +162,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
 
         //--(2) Configurando a TwoWayView (ListView lateral):
         twoWayView = (TwoWayView) findViewById(R.id.contratante_inicio_content_twoWayView);
-        twoWayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*twoWayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -147,13 +171,13 @@ public class ContratanteInicioActivity extends AppCompatActivity
         });
 
         ArrayList<Artista> subArrayArtista = new ArrayList<Artista>(); //Para retirar o primeiro artista que já aparece como principal
-        for(int i = 1; i < this.artistasProximos.getArrayArtista().size(); i++){
+        for(int i = 1; i < this.artistasProximos.size(); i++){
 
-            subArrayArtista.add(this.artistasProximos.getArrayArtista().get(i));
+            subArrayArtista.add(this.artistasProximos.get(i));
         }
 
         adapterTwoWayView = new AdapterTwoWayView(this, subArrayArtista);
-        twoWayView.setAdapter(adapterTwoWayView);
+        twoWayView.setAdapter(adapterTwoWayView);*/
         //--Fim de (2)
 
         //--(3) Configurando o button seta que acessa artista:
@@ -174,9 +198,9 @@ public class ContratanteInicioActivity extends AppCompatActivity
         textView_nome_artista_principal = (TextView) findViewById(R.id.contratante_inicio_content_textview_nome_artista);
         textView_estilo_artista_principal = (TextView) findViewById(R.id.contratante_inicio_content_textview_estilo_artista);
 
-        imageView_artista_principal.setImageResource(R.drawable.temp_evento1);
-        textView_nome_artista_principal.setText(this.artistasProximos.getArtistaByIndex(0).getNome());
-        textView_estilo_artista_principal.setText(this.artistasProximos.getArtistaByIndex(0).getEstilo());
+        /*imageView_artista_principal.setImageResource(R.drawable.temp_evento1);
+        textView_nome_artista_principal.setText(this.artistasProximos.get(0).getNome());
+        textView_estilo_artista_principal.setText(this.artistasProximos.get(0).getEstilo());*/
         //--Fim de (4)
 
         //--Configurando buttons de criar evento, evento urgente e meus eventos:
@@ -207,6 +231,114 @@ public class ContratanteInicioActivity extends AppCompatActivity
         });
     }
 
+    public class AdapterTwoWayView extends BaseAdapter {
+
+        private Context mContext;
+        private LayoutInflater mInflater;
+        private ArrayList<Artista> mDataSource;
+
+        public AdapterTwoWayView(Context context, ArrayList<Artista> itens){
+
+            mContext = context;
+            mDataSource = itens;
+            mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public int getCount() {
+
+            return mDataSource.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+
+            return mDataSource.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            // Get view for row item
+            View rowView = mInflater.inflate(R.layout.contratante_inicio_list_item_twowayview, parent, false);
+
+            TextView contratante_inicio_list_item_twowayview_nome_artista = (TextView) rowView.findViewById(R.id.contratante_inicio_list_item_twowayview_nome_artista);
+            TextView contratante_inicio_list_item_twowayview_estilo = (TextView) rowView.findViewById(R.id.contratante_inicio_list_item_twowayview_estilo);
+            ImageView contratante_inicio_list_item_twowayview_image = (ImageView) rowView.findViewById(R.id.contratante_inicio_list_item_twowayview_image);
+
+            Artista artista = (Artista) getItem(position);
+            contratante_inicio_list_item_twowayview_nome_artista.setText(artista.getNome());
+            contratante_inicio_list_item_twowayview_estilo.setText(artista.getEstilo());
+            contratante_inicio_list_item_twowayview_image.setImageResource(R.drawable.temp_evento2);
+
+            /*Picasso.with(mContext) //Context
+                .load("") //URL/FILE
+                .into(proxEventoImageView);//an ImageView Object to show the loaded image;*/
+
+            return rowView;
+        }
+    }
+
+    private class SolicitarDados extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... urls){
+
+            return Conectar.postDados(urls[0], parametros);
+        }
+
+        protected void onPostExecute(String result){
+
+            //Toast.makeText(ContratanteInicioActivity.this, result, Toast.LENGTH_SHORT).show();
+            StringTokenizer str = new StringTokenizer(result);
+            String token = str.nextToken();
+            if(token.equals("erro_cidade_nao_existe")){
+
+                Toast.makeText(ContratanteInicioActivity.this, "Não existe artistas perto de você.", Toast.LENGTH_LONG).show();
+            }else if(token.equals("conexao_erro")){
+
+                Toast.makeText(ContratanteInicioActivity.this, "Erro no Servidor!", Toast.LENGTH_LONG).show();
+            }else{
+
+                Gson gson = new Gson();
+                Artista[] artista_array = gson.fromJson(result, Artista[].class);
+                List artista_lista = Arrays.asList(artista_array);
+                artistasProximos = new ArrayList<>(artista_lista);
+
+                twoWayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        open_activity_artista(i+1);//(i+1) Para retirar o primeiro artista que já aparece como principal
+                    }
+                });
+
+                ArrayList<Artista> subArrayArtista = new ArrayList<Artista>(); //Para retirar o primeiro artista que já aparece como principal
+                for(int i = 1; i < artistasProximos.size(); i++){
+
+                    subArrayArtista.add(artistasProximos.get(i));
+                }
+
+                adapterTwoWayView = new AdapterTwoWayView(ContratanteInicioActivity.this, subArrayArtista);
+                twoWayView.setAdapter(adapterTwoWayView);
+
+                imageView_artista_principal.setImageResource(R.drawable.temp_evento1);
+                textView_nome_artista_principal.setText(artistasProximos.get(0).getNome());
+                textView_estilo_artista_principal.setText(artistasProximos.get(0).getEstilo());
+            }
+        }
+    }
+
     public void open_activity_alterar_perfil(){
 
         Intent activity_alterar_perfil = new Intent(this, ContratanteAlterarPerfilActivity.class);
@@ -228,7 +360,7 @@ public class ContratanteInicioActivity extends AppCompatActivity
         Intent activity_artista = new Intent(this, ContratanteArtistaActivity.class);
         //Preparando parametros para passar para activity seguinte:
         activity_artista.putExtra("paramsContratante", this.contratante);
-        activity_artista.putExtra("paramsArtista", this.artistasProximos.getArtistaByIndex(position));
+        activity_artista.putExtra("paramsArtista", this.artistasProximos.get(position));
         startActivity(activity_artista);
     }
 
@@ -324,60 +456,6 @@ public class ContratanteInicioActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.contratante_inicio_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public class AdapterTwoWayView extends BaseAdapter {
-
-        private Context mContext;
-        private LayoutInflater mInflater;
-        private ArrayList<Artista> mDataSource;
-
-        public AdapterTwoWayView(Context context, ArrayList<Artista> itens){
-
-            mContext = context;
-            mDataSource = itens;
-            mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-
-            return mDataSource.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-
-            return mDataSource.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            // Get view for row item
-            View rowView = mInflater.inflate(R.layout.contratante_inicio_list_item_twowayview, parent, false);
-
-            TextView contratante_inicio_list_item_twowayview_nome_artista = (TextView) rowView.findViewById(R.id.contratante_inicio_list_item_twowayview_nome_artista);
-            TextView contratante_inicio_list_item_twowayview_estilo = (TextView) rowView.findViewById(R.id.contratante_inicio_list_item_twowayview_estilo);
-            ImageView contratante_inicio_list_item_twowayview_image = (ImageView) rowView.findViewById(R.id.contratante_inicio_list_item_twowayview_image);
-
-            Artista artista = (Artista) getItem(position);
-            contratante_inicio_list_item_twowayview_nome_artista.setText(artista.getNome());
-            contratante_inicio_list_item_twowayview_estilo.setText(artista.getEstilo());
-            contratante_inicio_list_item_twowayview_image.setImageResource(R.drawable.temp_evento2);
-
-            /*Picasso.with(mContext) //Context
-                .load("") //URL/FILE
-                .into(proxEventoImageView);//an ImageView Object to show the loaded image;*/
-
-            return rowView;
-        }
     }
 
     public ArrayList<Artista> popularArrayArtista(){

@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.com.appshow.showup.entidades.EnderecoEvento;
 import br.com.appshow.showup.entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -553,165 +554,38 @@ public class ArtistaInicioActivity extends AppCompatActivity
 
         ArrayList<Evento> eventos = new ArrayList<Evento>();
 
-        Evento evento1 = new Evento();
-        Evento evento2 = new Evento();
-        Evento evento3 = new Evento();
-        Evento evento4 = new Evento();
-        Evento evento5 = new Evento();
-        Evento evento6 = new Evento();
-        Evento evento7 = new Evento();
-        Evento evento8 = new Evento();
-        Evento evento9 = new Evento();
+        Evento evento = new Evento();
 
-        evento1.setId_evento("1"); evento2.setId_evento("2"); evento3.setId_evento("3"); evento4.setId_evento("4"); evento5.setId_evento("5");
-        evento6.setId_evento("6"); evento7.setId_evento("7"); evento8.setId_evento("8"); evento9.setId_evento("9");
+        evento.setId_evento("1");
+        evento.setNome("NomeDoEvento");
+        evento.setLocal("NomeDoLocal");
+        evento.setDescricao("DescricaoDoEvento");
+        evento.setData("2017/04/01");
+        evento.setHorario_inicio("19:00");
+        evento.setHorario_fim("23:59");
+        evento.setEquipamentos("EquipamentosDoEvento");
+        evento.setRequisito("RequisitosDoEvento");
+        evento.setUrl_imagem1(null);
+        evento.setUrl_imagem2(null);
+        evento.setUrl_imagem3(null);
 
-        evento1.setNome("Cais do Alfândega");
-        evento2.setNome("Preto Velho");
-        evento3.setNome("Espaço Cultural Xinxim da Baiana");
-        evento4.setNome("Roof Tebas");
-        evento5.setNome("Preto Velho");
-        evento6.setNome("Sétima Arte");
-        evento7.setNome("Centro de Convenções");
-        evento8.setNome("Centro de Convenções");
-        evento9.setNome("Arena Liquidi Sky");
+        EnderecoEvento enderecoEvento = new EnderecoEvento();
+        enderecoEvento.setCep("54515-580");
+        enderecoEvento.setId_endereco(1);
+        enderecoEvento.setPais("Brasil");
+        enderecoEvento.setEstado("Pernambuco");
+        enderecoEvento.setCidade("Recife");
+        enderecoEvento.setCep("Ipsep");
+        enderecoEvento.setRua("Rua 04");
+        enderecoEvento.setNumero(31);
+        enderecoEvento.setComplemento("Perto da Padaria");
 
-        /*evento1.setEstado("Pernambuco");
-        evento2.setEstado("Pernambuco");
-        evento3.setEstado("Pernambuco");
-        evento4.setEstado("Pernambuco");
-        evento5.setEstado("Pernambuco");
-        evento6.setEstado("Pernambuco");
-        evento7.setEstado("Pernambuco");
-        evento8.setEstado("Pernambuco");
-        evento9.setEstado("Pernambuco");
+        evento.setEndereco_evento(enderecoEvento);
 
-        evento1.setCidade("Recife");
-        evento2.setCidade("Olinda");
-        evento3.setCidade("Olinda");
-        evento4.setCidade("Recife");
-        evento5.setCidade("Olinda");
-        evento6.setCidade("Recife");
-        evento7.setCidade("Olinda");
-        evento8.setCidade("Olinda");
-        evento9.setCidade("Recife");
+        for(int i = 0; i < 10; i++){
 
-        evento1.setBairro("Cais da Alfândega");
-        evento2.setBairro("Alto da Sé");
-        evento3.setBairro("Bairro");
-        evento4.setBairro("São José");
-        evento5.setBairro("Bairro");
-        evento6.setBairro("Bairro");
-        evento7.setBairro("Bairro");
-        evento8.setBairro("Salgadinho");
-        evento9.setBairro("Guabiraba");
-
-        evento1.setRua("Cais da Alfândega");
-        evento2.setRua("Rua Bispo Coutinho");
-        evento3.setRua("Avenida Sigismundo Gonçalves");
-        evento4.setRua("Rua da Concórdia");
-        evento5.setRua("Rua do Farol");
-        evento6.setRua("Rua Capitao Lima");
-        evento7.setRua("Rua");
-        evento8.setRua("Avenida Professor Andrade Bezerra");
-        evento9.setRua("R. Cataguáses");
-
-        evento1.setNumero("s/n");
-        evento2.setNumero("681");
-        evento3.setNumero("742");
-        evento4.setNumero("943");
-        evento5.setNumero("218");
-        evento6.setNumero("195");
-        evento7.setNumero("s/n");
-        evento8.setNumero("s/n");
-        evento9.setNumero("100000");
-
-        evento1.setDescricao("A 22ª edição do Festival Rec-Beat, vai acontecer no Cais da Alfândega, entre 25 e 28 de fevereiro, durante o carnaval.");
-        evento2.setDescricao("Enquanto o dia 25 de fevereiro não chega, já estamos ansiosos e preparando nossa tradicional Prévia, a concentração marca o início das comemorações dos 10 anos do bloco.");
-        evento3.setDescricao("O carnaval tá na porta, batendo, tocando a campanhia, já fantasiado, pronto para os braços de Momo. Pra celecrar essa chegada a Doce Libido de fevereiro vem se manifestar no salão! Não gressive não!!! Tá chegando a hora de envernizar a noite toda e sair da pista brilhando, joiada, linda pra cair no carnaval.");
-        evento4.setDescricao("ESSE BREGA TÁ MASSA, TÁ PEGANDO FOGO...\n" +
-                "É nele que eu vou desandar de novo!\n" +
-                "\n" +
-                "A bregalize já deu onda... e nesse passo envolvente pra ninguém ficar parado, a gente volta num clima brega astral de carnaval!");
-        evento5.setDescricao("Temos o prazer de convidar todos os amigos, familiares, foliões e o mundo todo para curtir nossos 10 anos de carnaval.\n" +
-                "É felicidade demais!");
-        evento6.setDescricao("E quem disse que em Recife não tem pré carnaval bebean? Em fevereiro vai rolar a FREAKS reunindo um time de Djs de peso e um publico close nesse carnaval !! Vai rolar muito pop , indie\\ rock, black music , funk e o melhor VAI SER OPEN BAR !!!");
-        evento7.setDescricao("A maior prévia de carnaval do Brasil, já esta com sua nova edição, Olinda Beer 2017, confirmada. O evento irá ocorrer no centro de convenções de Pernambuco no dia 19 de fevereiro.");
-        evento8.setDescricao("Uma das prévias mais tradicionais e irreverentes do carnaval, vem este ano com nova data (10 de fevereiro).");
-        evento9.setDescricao("Esqueça tudo o que você sabe sobre carnaval: A Liquid Sky vai te levar a um novo conceito!");
-
-        evento1.setNome("Festival Rec-Beat 2017");
-        evento2.setNome("Prévia - Esses Boy Tão Muito Doido");
-        evento3.setNome("Doce Libido");
-        evento4.setNome("Bregalize");
-        evento5.setNome("Esses Boy Tão Muito Doido");
-        evento6.setNome("Freaks! Carnaval Edition");
-        evento7.setNome("Olinda Beer");
-        evento8.setNome("Enquanto isso na Sala da Justiça");
-        evento9.setNome("Liquid Sky");
-
-        evento1.setDia("16");
-        evento2.setDia("04");
-        evento3.setDia("03");
-        evento4.setDia("16");
-        evento5.setDia("25");
-        evento6.setDia("11");
-        evento7.setDia("19");
-        evento8.setDia("10");
-        evento9.setDia("18");
-
-        evento1.setMes("02");
-        evento2.setMes("03");
-        evento3.setMes("03");
-        evento4.setMes("02");
-        evento5.setMes("02");
-        evento6.setMes("03");
-        evento7.setMes("02");
-        evento8.setMes("03");
-        evento9.setMes("02");
-
-        evento1.setAno("2017");
-        evento2.setAno("2018");
-        evento3.setAno("2017");
-        evento4.setAno("2017");
-        evento5.setAno("2017");
-        evento6.setAno("2017");
-        evento7.setAno("2017");
-        evento8.setAno("2017");
-        evento9.setAno("2017");
-
-        evento1.setHorario_inicio("19:30");
-        evento2.setHorario_inicio("10:00");
-        evento3.setHorario_inicio("22:25");
-        evento4.setHorario_inicio("18:00");
-        evento5.setHorario_inicio("09:00");
-        evento6.setHorario_inicio("23:00");
-        evento7.setHorario_inicio("09:00");
-        evento8.setHorario_inicio("22:00");
-        evento9.setHorario_inicio("22:00");
-
-        evento1.setHorario_fim("01:30");
-        evento2.setHorario_fim("16:20");
-        evento3.setHorario_fim("05:00");
-        evento4.setHorario_fim("01:00");
-        evento5.setHorario_fim("15:00");
-        evento6.setHorario_fim("05:00");
-        evento7.setHorario_fim("22:00");
-        evento8.setHorario_fim("05:00");
-        evento9.setHorario_fim("16:00");
-
-        evento1.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento2.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento3.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento4.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento5.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento6.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento7.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento8.setRequisito("Requisitos...\n"+"Requisitos...");
-        evento9.setRequisito("Requisitos...\n"+"Requisitos...");*/
-
-        eventos.add(evento3); eventos.add(evento4); eventos.add(evento2); eventos.add(evento8); eventos.add(evento6);
-        eventos.add(evento9); eventos.add(evento7); eventos.add(evento5); eventos.add(evento1);
+            eventos.add(evento);
+        }
 
         return eventos;
     }

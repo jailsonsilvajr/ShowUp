@@ -21,8 +21,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/contratante_favoritos_nav_header"
+        app:headerLayout="@layout/contratante_inicio_nav_header"
         app:itemIconTint="@color/textColorPrimary"
-        app:menu="@menu/contratante_favoritos_drawer" />
+        app:menu="@menu/contratante_inicio_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

@@ -55,10 +55,10 @@ public class ArtistaPromovaSeActivity extends AppCompatActivity
 
         //--(1) Configurando menu lateral:
         View hView =  navigationView.getHeaderView(0);
-        ImageView artista_promovase_nav_header_image_background = (ImageView) hView.findViewById(R.id.artista_promovase_nav_header_image_background);
-        Button artista_promovase_nav_header_button_configuracao = (Button) hView.findViewById(R.id.artista_promovase_nav_header_button_configuracao);
-        CircleImageView artista_promovase_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.artista_promovase_nav_header_image_perfil);
-        TextView artista_promovase_nav_header_textview_nome = (TextView) hView.findViewById(R.id.artista_promovase_nav_header_textview_nome);
+        ImageView artista_promovase_nav_header_image_background = (ImageView) hView.findViewById(R.id.artista_inicio_nav_header_image_background);
+        Button artista_promovase_nav_header_button_configuracao = (Button) hView.findViewById(R.id.artista_inicio_nav_header_button_configuracao);
+        CircleImageView artista_promovase_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.artista_inicio_nav_header_image_perfil);
+        TextView artista_promovase_nav_header_textview_nome = (TextView) hView.findViewById(R.id.artista_inicio_nav_header_textview_nome);
 
         artista_promovase_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
         artista_promovase_nav_header_image_perfil.setImageResource(R.drawable.foto_perfil);
@@ -119,15 +119,15 @@ public class ArtistaPromovaSeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.artista_promovase_drawer_menu_nav_pagina_inicial) {
+        if (id == R.id.artista_inicio_drawer_menu_nav_pagina_inicial) {
             return true;
-        } if (id == R.id.artista_promovase_drawer_menu_nav_agenda) {
+        } if (id == R.id.artista_inicio_drawer_menu_nav_agenda) {
             return true;
-        } if (id == R.id.artista_promovase_drawer_menu_nav_promova) {
+        } if (id == R.id.artista_inicio_drawer_menu_nav_promova) {
             return true;
-        } if (id == R.id.artista_promovase_drawer_menu_nav_historico) {
+        } if (id == R.id.artista_inicio_drawer_menu_nav_historico) {
             return true;
-        } if (id == R.id.artista_promovase_drawer_menu_nav_sair) {
+        } if (id == R.id.artista_inicio_drawer_menu_nav_sair) {
             return true;
         }
 
@@ -140,15 +140,15 @@ public class ArtistaPromovaSeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.artista_promovase_drawer_menu_nav_pagina_inicial) {
+        if (id == R.id.artista_inicio_drawer_menu_nav_pagina_inicial) {
 
-        } else if (id == R.id.artista_promovase_drawer_menu_nav_agenda) {
+        } else if (id == R.id.artista_inicio_drawer_menu_nav_agenda) {
 
-        } else if (id == R.id.artista_promovase_drawer_menu_nav_promova) {
+        } else if (id == R.id.artista_inicio_drawer_menu_nav_promova) {
 
-        } else if (id == R.id.artista_promovase_drawer_menu_nav_historico) {
+        } else if (id == R.id.artista_inicio_drawer_menu_nav_historico) {
 
-        } else if (id == R.id.artista_promovase_drawer_menu_nav_sair) {
+        } else if (id == R.id.artista_inicio_drawer_menu_nav_sair) {
 
         }
 

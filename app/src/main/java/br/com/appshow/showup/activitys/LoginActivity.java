@@ -15,7 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -121,27 +123,27 @@ public class LoginActivity extends AppCompatActivity {
 
                 String token2 = str.nextToken();
 
+                //Toast.makeText(getApplicationContext(), token2, Toast.LENGTH_LONG).show();
+
                 if(token1.equals("artista")){
 
                     Gson gson = new Gson();
-                    Artista[] artista_array = gson.fromJson(token2, Artista[].class);
-
-                    List artista_lista = Arrays.asList(artista_array);
-                    ArrayList<Artista> artista = new ArrayList(artista_lista);
+                    JsonReader reader = new JsonReader(new StringReader(token2));
+                    reader.setLenient(true);
+                    Artista artista = gson.fromJson(reader, Artista.class);
 
                     Intent artista_inicial_activity = new Intent(LoginActivity.this, ArtistaInicioActivity.class);
-                    artista_inicial_activity.putExtra("paramsArtista", artista.get(0));
+                    artista_inicial_activity.putExtra("paramsArtista", artista);
                     startActivity(artista_inicial_activity);
                 }else{
 
                     Gson gson = new Gson();
-                    Contratante[] contratante_array = gson.fromJson(token2, Contratante[].class);
-
-                    List contratante_lista = Arrays.asList(contratante_array);
-                    ArrayList<Contratante> contratante = new ArrayList(contratante_lista);
+                    JsonReader reader = new JsonReader(new StringReader(token2));
+                    reader.setLenient(true);
+                    Contratante contratante = gson.fromJson(reader, Contratante.class);
 
                     Intent contratante_inicial_activity = new Intent(LoginActivity.this, ContratanteInicioActivity.class);
-                    contratante_inicial_activity.putExtra("paramsContratante", contratante.get(0));
+                    contratante_inicial_activity.putExtra("paramsContratante", contratante);
                     startActivity(contratante_inicial_activity);
                 }
             }

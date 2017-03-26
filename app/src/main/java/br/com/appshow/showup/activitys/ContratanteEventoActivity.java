@@ -59,10 +59,10 @@ public class ContratanteEventoActivity extends AppCompatActivity
 
         //--(1) Configurando menu lateral:
         View hView =  navigationView.getHeaderView(0);
-        ImageView contratante_evento_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_evento_nav_header_image_background);
-        Button contratante_evento_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_evento_nav_header_button_configuracao);
-        CircleImageView contratante_evento_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_evento_nav_header_image_perfil);
-        TextView contratante_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_evento_nav_header_textview_nome);
+        ImageView contratante_evento_nav_header_image_background = (ImageView) hView.findViewById(R.id.contratante_inicio_nav_header_image_background);
+        Button contratante_evento_nav_header_button_configuracao = (Button) hView.findViewById(R.id.contratante_inicio_nav_header_button_configuracao);
+        CircleImageView contratante_evento_nav_header_image_perfil = (CircleImageView) hView.findViewById(R.id.contratante_inicio_nav_header_image_perfil);
+        TextView contratante_evento_nav_header_textview_nome = (TextView) hView.findViewById(R.id.contratante_inicio_nav_header_textview_nome);
 
         contratante_evento_nav_header_image_background.setImageResource(R.drawable.temp_background_menu_lateral);
 
@@ -173,15 +173,15 @@ public class ContratanteEventoActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.contratante_evento_drawer_menu_nav_pagina_inicial) {
+        if (id == R.id.contratante_inicio_drawer_menu_nav_pagina_inicial) {
             return true;
-        } if (id == R.id.contratante_evento_drawer_menu_nav_mensagens) {
+        } if (id == R.id.contratante_inicio_drawer_menu_nav_mensagens) {
             return true;
-        } if (id == R.id.contratante_evento_drawer_menu_nav_eventos) {
+        } if (id == R.id.contratante_inicio_drawer_menu_nav_eventos) {
             return true;
-        } if (id == R.id.contratante_evento_drawer_menu_nav_favoritos) {
+        } if (id == R.id.contratante_inicio_drawer_menu_nav_favoritos) {
             return true;
-        } if (id == R.id.contratante_evento_drawer_menu_nav_sair) {
+        } if (id == R.id.contratante_inicio_drawer_menu_nav_sair) {
             return true;
         }
 
@@ -194,18 +194,18 @@ public class ContratanteEventoActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.contratante_evento_drawer_menu_nav_pagina_inicial) {
+        if (id == R.id.contratante_inicio_drawer_menu_nav_pagina_inicial) {
 
-        } else if (id == R.id.contratante_evento_drawer_menu_nav_mensagens) {
+        } else if (id == R.id.contratante_inicio_drawer_menu_nav_mensagens) {
 
-        } else if (id == R.id.contratante_evento_drawer_menu_nav_eventos) {
+        } else if (id == R.id.contratante_inicio_drawer_menu_nav_eventos) {
 
-        } else if (id == R.id.contratante_evento_drawer_menu_nav_favoritos) {
+        } else if (id == R.id.contratante_inicio_drawer_menu_nav_favoritos) {
 
             Intent activity_favoritos = new Intent(this, ContratanteFavoritosActivity.class);
             activity_favoritos.putExtra("paramsContratante", this.contratante);
             startActivity(activity_favoritos);
-        } else if (id == R.id.contratante_evento_drawer_menu_nav_sair) {
+        } else if (id == R.id.contratante_inicio_drawer_menu_nav_sair) {
 
         }
 

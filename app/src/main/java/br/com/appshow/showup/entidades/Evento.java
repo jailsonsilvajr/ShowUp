@@ -12,7 +12,7 @@ public class Evento implements Parcelable {
     private String id_evento;
     private String nome;
     private String nome_local;
-    //private EnderecoEvento endereco_evento;
+    private EnderecoEvento endereco_evento;
     private String descricao;
     private String data;
     private String horario_inicio;
@@ -23,16 +23,13 @@ public class Evento implements Parcelable {
     private String url_imagem2;
     private String url_imagem3;
 
-    private EnderecoEvento[] endereco_evento;
-
     public Evento(){}
 
     protected Evento(Parcel in) {
         id_evento = in.readString();
         nome = in.readString();
         nome_local = in.readString();
-        //endereco_evento = (EnderecoEvento) in.readParcelable(EnderecoEvento.class.getClassLoader());
-        endereco_evento = in.createTypedArray(EnderecoEvento.CREATOR);
+        endereco_evento = in.readParcelable(EnderecoEvento.class.getClassLoader());
         descricao = in.readString();
         data = in.readString();
         horario_inicio = in.readString();
@@ -68,8 +65,7 @@ public class Evento implements Parcelable {
         dest.writeString(id_evento);
         dest.writeString(nome);
         dest.writeString(nome_local);
-        //dest.writeParcelable(endereco_evento, flags);
-        dest.writeTypedArray(endereco_evento, flags);
+        dest.writeParcelable(endereco_evento, flags);
         dest.writeString(descricao);
         dest.writeString(data);
         dest.writeString(horario_inicio);
@@ -83,8 +79,7 @@ public class Evento implements Parcelable {
 
     public EnderecoEvento getEndereco(){
 
-        //return endereco_evento;
-        return endereco_evento[0];
+        return endereco_evento;
     }
 
     public String getHorario(){
@@ -95,6 +90,11 @@ public class Evento implements Parcelable {
     public String getData(){
 
         return data;
+    }
+
+    public void setData(String data){
+
+        this.data = data;
     }
 
     public String getId_evento() {
@@ -119,6 +119,14 @@ public class Evento implements Parcelable {
 
     public void setLocal(String local) {
         this.nome_local = local;
+    }
+
+    public EnderecoEvento getEndereco_evento() {
+        return endereco_evento;
+    }
+
+    public void setEndereco_evento(EnderecoEvento endereco_evento) {
+        this.endereco_evento = endereco_evento;
     }
 
     public String getDescricao() {

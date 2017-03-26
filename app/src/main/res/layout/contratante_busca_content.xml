@@ -53,14 +53,14 @@
                     android:layout_margin="8dp"
                     android:spinnerMode="dropdown" />
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_margin="8dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:src="@drawable/icon_menu_buscar" />
+                    android:src="@drawable/icon_menu_buscar" />-->
 
             </RelativeLayout>
 
@@ -87,14 +87,14 @@
                     android:layout_margin="8dp"
                     android:spinnerMode="dropdown" />
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_margin="8dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:src="@drawable/icon_menu_buscar" />
+                    android:src="@drawable/icon_menu_buscar" />-->
 
             </RelativeLayout>
 
